@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>170516 15:34:44 [Note] --secure-file-priv is set to NULL. Operations related to importing and exporting data are disabled&#13;</para>
+  <para>170516 15:34:44 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe (mysqld 5.5.53) starting as process 3132 ...&#13;</para>
+  <para>170516 15:34:44 [Note] Plugin 'FEDERATED' is disabled.&#13;</para>
+  <para>170516 15:34:44 InnoDB: The InnoDB memory heap is disabled&#13;</para>
+  <para>170516 15:34:44 InnoDB: Mutexes and rw_locks use Windows interlocked functions&#13;</para>
+  <para>170516 15:34:44 InnoDB: Compressed tables use zlib 1.2.3&#13;</para>
+  <para>170516 15:34:44 InnoDB: Initializing buffer pool, size = 128.0M&#13;</para>
+  <para>170516 15:34:44 InnoDB: Completed initialization of buffer pool&#13;</para>
+  <para>170516 15:34:44 InnoDB: highest supported file format is Barracuda.&#13;</para>
+  <para>170516 15:34:45  InnoDB: Waiting for the background threads to start&#13;</para>
+  <para>170516 15:34:46 InnoDB: 5.5.53 started; log sequence number 1595675&#13;</para>
+  <para>170516 15:34:46 [Note] Server hostname (bind-address): '0.0.0.0'; port: 3306&#13;</para>
+  <para>170516 15:34:46 [Note]   - '0.0.0.0' resolves to '0.0.0.0';&#13;</para>
+  <para>170516 15:34:46 [Note] Server socket created on IP: '0.0.0.0'.&#13;</para>
+  <para>170516 15:34:46 [Note] Event Scheduler: Loaded 0 events&#13;</para>
+  <para>170516 15:34:46 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: ready for connections.&#13;</para>
+  <para>Version: '5.5.53'  socket: ''  port: 3306  MySQL Community Server (GPL)&#13;</para>
+  <para>170516 15:35:05 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: Normal shutdown&#13;</para>
+  <para>&#13;</para>
+  <para>170516 15:35:05 [Note] Event Scheduler: Purging the queue. 0 events&#13;</para>
+  <para>170516 15:35:05  InnoDB: Starting shutdown...&#13;</para>
+  <para>170516 15:35:05  InnoDB: Shutdown completed; log sequence number 1595675&#13;</para>
+  <para>170516 15:35:05 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: Shutdown complete&#13;</para>
+  <para>&#13;</para>
+</article>

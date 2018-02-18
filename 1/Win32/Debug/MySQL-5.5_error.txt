@@ -1,0 +1,24 @@
+170516 15:34:44 [Note] --secure-file-priv is set to NULL. Operations related to importing and exporting data are disabled
+170516 15:34:44 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe (mysqld 5.5.53) starting as process 3132 ...
+170516 15:34:44 [Note] Plugin 'FEDERATED' is disabled.
+170516 15:34:44 InnoDB: The InnoDB memory heap is disabled
+170516 15:34:44 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+170516 15:34:44 InnoDB: Compressed tables use zlib 1.2.3
+170516 15:34:44 InnoDB: Initializing buffer pool, size = 128.0M
+170516 15:34:44 InnoDB: Completed initialization of buffer pool
+170516 15:34:44 InnoDB: highest supported file format is Barracuda.
+170516 15:34:45  InnoDB: Waiting for the background threads to start
+170516 15:34:46 InnoDB: 5.5.53 started; log sequence number 1595675
+170516 15:34:46 [Note] Server hostname (bind-address): '0.0.0.0'; port: 3306
+170516 15:34:46 [Note]   - '0.0.0.0' resolves to '0.0.0.0';
+170516 15:34:46 [Note] Server socket created on IP: '0.0.0.0'.
+170516 15:34:46 [Note] Event Scheduler: Loaded 0 events
+170516 15:34:46 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: ready for connections.
+Version: '5.5.53'  socket: ''  port: 3306  MySQL Community Server (GPL)
+170516 15:35:05 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: Normal shutdown
+
+170516 15:35:05 [Note] Event Scheduler: Purging the queue. 0 events
+170516 15:35:05  InnoDB: Starting shutdown...
+170516 15:35:05  InnoDB: Shutdown completed; log sequence number 1595675
+170516 15:35:05 [Note] c:\openserver\modules\database\MySQL-5.5\bin\mysqld.exe: Shutdown complete
+
