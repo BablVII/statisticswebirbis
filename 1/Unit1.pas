@@ -52,7 +52,7 @@ begin
   Collection := TCollection.Create(TMessengge);
   Oneltem := Collection.Add as TMessengge;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
+  AssignFile(f1, 'F:\statisticswebirbis\1\Win32\Debug\access.log'); //
   reset(f1); //
 
   // создаем объект Excel
@@ -73,6 +73,8 @@ begin
 
   for i := 1 to 400000 do
   begin
+
+
     readln(f1, a); //
     reg := TregExpr.Create;
     reg2 := TregExpr.Create;
@@ -135,7 +137,7 @@ begin
       until not reg5.ExecNext;
     reg5.Free;
     reg5 := nil;
-   memo1.Lines.Add('i');
+   memo1.Lines.Add(inttostr(i));
   end;
 
   // отключаем все предупреждения Excel
@@ -144,11 +146,11 @@ begin
   // обработка исключения при сохраннении файла
   try
     // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel9795);
+    ExlApp.Workbooks[1].saveas('E:\1.xls', xlExcel9795);
     Showmessage('Done');
   except
     // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel8);
+    ExlApp.Workbooks[1].saveas('E:\1.xls', xlExcel8);
     Showmessage('Done');
   end;
 
