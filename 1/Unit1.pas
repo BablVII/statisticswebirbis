@@ -52,7 +52,7 @@ begin
   Collection := TCollection.Create(TMessengge);
   Oneltem := Collection.Add as TMessengge;
 
-  AssignFile(f1, 'F:\statisticswebirbis\1\Win32\Debug\access.log'); //
+  AssignFile(f1, 'G:\stat1\Win32\Debug\access.log'); //
   reset(f1); //
 
   // создаем объект Excel
@@ -71,7 +71,7 @@ begin
   // задаем имя листу
   Sheet.name := 'Данные_из_Delphi';
 
-  for i := 1 to 400000 do
+  for i := 1 to 10 do
   begin
 
 
@@ -146,11 +146,11 @@ begin
   // обработка исключения при сохраннении файла
   try
     // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('E:\1.xls', xlExcel9795);
+    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel9795);
     Showmessage('Done');
   except
     // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('E:\1.xls', xlExcel8);
+    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel8);
     Showmessage('Done');
   end;
 
