@@ -21,8 +21,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Xls_Save;
   private
-    Collection: TCollection;
-    Oneltem: TMessengge;
+
+
   public
     { Public declarations }
   end;
@@ -41,18 +41,17 @@ const
   xlExcel8 = 56;
 
 var
-  MyStringList: TStringList;
-  i, k, r, c, l, m: integer;
+
+  i: integer;
   reg, reg2, reg3, reg4, reg5: TregExpr;
   f1: TextFile;
   a: ShortString;
   ExlApp, Sheet: OLEVariant;
 
 begin
-  Collection := TCollection.Create(TMessengge);
-  Oneltem := Collection.Add as TMessengge;
 
-  AssignFile(f1, 'G:\stat1\Win32\Debug\access.log'); //
+
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
   reset(f1); //
 
   // создаем объект Excel
@@ -96,7 +95,6 @@ begin
 
     if reg.Exec(a) then //
       repeat
-        {Oneltem.ip := reg.Match[0];  }
         Sheet.cells[i, 1] := reg.Match[0];
       until not reg.ExecNext;
     reg.Free;
@@ -104,8 +102,6 @@ begin
 
     if reg2.Exec(a) then
       repeat
-        {Oneltem := Collection.Insert(i) as TMessengge;
-        Oneltem.date := reg2.Match[0]; }
         Sheet.cells[i, 2] := reg2.Match[0];
       until not reg2.ExecNext;
     reg2.Free;
@@ -113,8 +109,6 @@ begin
 
     if reg3.Exec(a) then
       repeat
-        {Oneltem := Collection.Insert(i) as TMessengge;
-        Oneltem.url := reg3.Match[0]; }
         Sheet.cells[i, 3] := reg3.Match[0];
       until not reg3.ExecNext;
     reg3.Free;
@@ -122,8 +116,6 @@ begin
 
     if reg4.Exec(a) then
       repeat
-        {Oneltem := Collection.Insert(i) as TMessengge;
-        Oneltem.code := reg4.Match[0];  }
         Sheet.cells[i, 4] := reg4.Match[0];
       until not reg4.ExecNext;
     reg4.Free;
@@ -131,8 +123,6 @@ begin
 
     if reg5.Exec(a) then
       repeat
-        {Oneltem := Collection.Insert(i) as TMessengge;
-        Oneltem.size := reg5.Match[0]; }
         Sheet.cells[i, 5] := reg5.Match[0];
       until not reg5.ExecNext;
     reg5.Free;
@@ -146,11 +136,11 @@ begin
   // обработка исключения при сохраннении файла
   try
     // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel9795);
+    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel9795);
     Showmessage('Done');
   except
     // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel8);
+    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel8);
     Showmessage('Done');
   end;
 
@@ -183,7 +173,7 @@ begin
   finally
     Ini.Free;
   end;
-  Collection.Free;
+
   // Str1.Free;
   // Reader1.Free;
 end;
