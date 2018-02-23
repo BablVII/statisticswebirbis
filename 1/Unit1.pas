@@ -16,12 +16,12 @@ type
     StatusBar1: TStatusBar;
     Button1: TButton;
     SaveDialog1: TSaveDialog;
+    ProgressBar1: TProgressBar;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure Xls_Save;
   private
-
 
   public
     { Public declarations }
@@ -30,6 +30,7 @@ type
 var
   Form1: TForm1;
   SearchRec: TSearchRec;
+  Messengge: TMessengge;
 
 implementation
 
@@ -41,8 +42,8 @@ const
   xlExcel8 = 56;
 
 var
-
-  i: integer;
+  MyStringList: TStringList;
+  i, k, r, c, l, m: integer;
   reg, reg2, reg3, reg4, reg5: TregExpr;
   f1: TextFile;
   a: ShortString;
@@ -50,106 +51,57 @@ var
 
 begin
 
-
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
+  AssignFile(f1, 'E:\statisticswebirbis\1\Win32\Debug\access.log'); //
   reset(f1); //
 
-  // создаем объект Excel
-  ExlApp := CreateOleObject('Excel.Application');
+  { // создаем объект Excel
+    ExlApp := CreateOleObject('Excel.Application');
 
-  // делаем окно Excel невидимым
-  ExlApp.Visible := false;
+    // делаем окно Excel невидимым
+    ExlApp.Visible := false;
 
-  // создаем книгу для экспорта
-  ExlApp.Workbooks.Add;
+    // создаем книгу для экспорта
+    ExlApp.Workbooks.Add;
 
-  // создаем объект Sheet(страница) и указываем номер листа (1)
-  // в книге, в который будем осуществлять экспорт
-  Sheet := ExlApp.Workbooks[1].WorkSheets[1];
+    // создаем объект Sheet(страница) и указываем номер листа (1)
+    // в книге, в который будем осуществлять экспорт
+    Sheet := ExlApp.Workbooks[1].WorkSheets[1];
 
-  // задаем имя листу
-  Sheet.name := 'Данные_из_Delphi';
+    // задаем имя листу
+    Sheet.name := 'Данные_из_Delphi'; }
 
   for i := 1 to 10 do
   begin
 
-
     readln(f1, a); //
-    reg := TregExpr.Create;
-    reg2 := TregExpr.Create;
-    reg3 := TregExpr.Create;
-    reg4 := TregExpr.Create;
-    reg5 := TregExpr.Create;
+    Memo1.lines.Add(Messengge.MyAddIp('^(.*?) ', a, i));
+    Memo1.lines.Add(Messengge.MyAddIp(' - - (.*?) ', a, i));
+    Memo1.lines.Add(Messengge.MyAddIp('"(.*?)"', a, i));
+    Memo1.lines.Add(Messengge.MyAddIp('" (.*?) ', a, i));
+    Memo1.lines.Add(Messengge.MyAddIp('" 200 (.*?)$', a, i));
 
-    reg.InputString := a;
-    reg2.InputString := a;
-    reg3.InputString := a;
-    reg4.InputString := a;
-    reg5.InputString := a;
-
-    reg.Expression := '^(.*?) ';
-    reg2.Expression := ' - - (.*?) ';
-    reg3.Expression := '"(.*?)"';
-    reg4.Expression := '" (.*?) ';
-    reg5.Expression := '" 200 (.*?)$';
-
-    if reg.Exec(a) then //
-      repeat
-        Sheet.cells[i, 1] := reg.Match[0];
-      until not reg.ExecNext;
-    reg.Free;
-    reg := nil;
-
-    if reg2.Exec(a) then
-      repeat
-        Sheet.cells[i, 2] := reg2.Match[0];
-      until not reg2.ExecNext;
-    reg2.Free;
-    reg2 := nil;
-
-    if reg3.Exec(a) then
-      repeat
-        Sheet.cells[i, 3] := reg3.Match[0];
-      until not reg3.ExecNext;
-    reg3.Free;
-    reg3 := nil;
-
-    if reg4.Exec(a) then
-      repeat
-        Sheet.cells[i, 4] := reg4.Match[0];
-      until not reg4.ExecNext;
-    reg4.Free;
-    reg4 := nil;
-
-    if reg5.Exec(a) then
-      repeat
-        Sheet.cells[i, 5] := reg5.Match[0];
-      until not reg5.ExecNext;
-    reg5.Free;
-    reg5 := nil;
-   memo1.Lines.Add(inttostr(i));
   end;
 
-  // отключаем все предупреждения Excel
-  ExlApp.DisplayAlerts := false;
+  { // отключаем все предупреждения Excel
+    ExlApp.DisplayAlerts := false;
 
-  // обработка исключения при сохраннении файла
-  try
+    // обработка исключения при сохраннении файла
+    try
     // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel9795);
+    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel9795);
     Showmessage('Done');
-  except
+    except
     // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\1.xls', xlExcel8);
+    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel8);
     Showmessage('Done');
-  end;
+    end;
 
-  // закрываем приложение Excel
-  ExlApp.Quit;
+    // закрываем приложение Excel
+    ExlApp.Quit;
 
-  // очищаем выделенную память
-  ExlApp := Unassigned;
-  Sheet := Unassigned;
+    // очищаем выделенную память
+    ExlApp := Unassigned;
+    Sheet := Unassigned; }
 
   CloseFile(f1);
 
@@ -182,6 +134,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   Ini: TIniFile;
 begin
+  Messengge := TMessengge.Create;
   Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
   try
     Top := Ini.ReadInteger('Form', 'Top', 100);

@@ -3,48 +3,30 @@ unit UMessengge;
 interface
 
 uses
-  SysUtils, Classes;
+  // SysUtils,
+  RegExpr, Classes, Vcl.Forms;
 
 type
-  TMessengge = class(TCollectionItem)
+  TMessengge = class
   public
-    ip: string;
-      date: string;
-      url: string;  
-      code: string;
-      size: string; 
-  //    property ip: string read Fip write Fip;
-    //constructor Create(Collection: TCollection); override;
-    //destructor Destroy; override;
-  end;
 
-  TMyCollection = class(TCollection)
-  private
-    function GetMessengge(Index: Integer): TMessengge;
-    procedure SetMessengge(Index: Integer; Value: TMessengge);
-  public
-    function Add: TMessengge;
-    property Items[Index: Integer]: TMessengge read GetMessengge
-      write SetMessengge; default;
+    function MyAddIp(MyExpression: string; MyA: string; MyI: integer):string;
   end;
 
 implementation
 
-{ TMyCollection }
+{ TMessengge }
 
-function TMyCollection.Add: TMessengge;
+function TMessengge.MyAddIp(MyExpression, MyA: string; MyI: integer): string;
+var
+  reg: TregExpr;
 begin
-  Result := TMessengge(inherited Add);
-end;
-
-function TMyCollection.GetMessengge(Index: Integer): TMessengge;
-begin
-  Result := TMessengge(inherited Items[Index]);
-end;
-
-procedure TMyCollection.SetMessengge(Index: Integer; Value: TMessengge);
-begin
-  Items[Index].Assign(Value);
+  reg := TregExpr.Create;
+  reg.InputString := MyA;
+  reg.Expression := MyExpression;
+  reg.Exec(MyA);
+  result := reg.Match[0];
+  reg := nil;
 end;
 
 end.
