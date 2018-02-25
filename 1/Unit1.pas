@@ -7,21 +7,24 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, IniFiles, Data.DB,
   Data.Win.ADODB, Vcl.ComCtrls,
-  RegExpr, UMessengge, ComObj, Vcl.Grids;
+  RegExpr, UMessengge, ComObj, Vcl.Grids, Data.DBXMySQL, Data.SqlExpr,
+  Vcl.DBGrids;
 
 type
   TForm1 = class(TForm)
-
-    Memo1: TMemo;
     StatusBar1: TStatusBar;
     Button1: TButton;
-    SaveDialog1: TSaveDialog;
     ProgressBar1: TProgressBar;
     ADOConnection1: TADOConnection;
+    ADOQuery1: TADOQuery;
+    DataSource1: TDataSource;
+    ADOTable1: TADOTable;
+    DBGrid1: TDBGrid;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button1Click(Sender: TObject);
-    procedure Xls_Save;
+    procedure Button1Clic(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
 
   public
@@ -37,17 +40,14 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.Xls_Save;
-const
-  xlExcel9795 = $0000002B;
-  xlExcel8 = 56;
+procedure TForm1.Button1Clic(Sender: TObject);
 
 var
   MyStringList: TStringList;
   i, k, r, c, l, m: integer;
   reg, reg2, reg3, reg4, reg5: TregExpr;
   f1: TextFile;
-  a: ShortString;
+  a1, a2, a3, a4, a5, a: ShortString;
   ExlApp, Sheet: OLEVariant;
 
 begin
@@ -55,22 +55,39 @@ begin
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
   reset(f1);
 
-  for i := 1 to 2 do
+  for i := 1 to 10 do
   begin
     readln(f1, a);
-    Memo1.lines.Add(Messengge.MyAddIp('^(.*?) ', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp('- - \[(.*?) ', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp('"(.*?)"', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp('" (.*?) ', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp('" \d+ (.*?)$', a, i));
+    ProgressBar1.Max := i;
+    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+    a1 := Messengge.MyAddIp('^(.*?) ', a, i);
+    a2 := Messengge.MyAddIp('- - \[(.*?) ', a, i);
+    a3 := Messengge.MyAddIp('"(.*?)"', a, i);
+    a4 := Messengge.MyAddIp('" (.*?) ', a, i);
+    a5 := Messengge.MyAddIp('" \d+ (.*?)$', a, i);
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('insert into stable(ip, date, url, code, size) values("' +
+      a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
+    ADOQuery1.ExecSQL;
+
+    { Memo1.lines.Add(Messengge.MyAddIp('- - \[(.*?) ', a, i));
+      Memo1.lines.Add(Messengge.MyAddIp('"(.*?)"', a, i));
+      Memo1.lines.Add(Messengge.MyAddIp('" (.*?) ', a, i));
+      Memo1.lines.Add(Messengge.MyAddIp('" \d+ (.*?)$', a, i)); }
   end;
   CloseFile(f1);
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Button2Click(Sender: TObject);
+var i:integer;
 begin
-  Xls_Save;
+  for i := 1 to 10 do
+  begin
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select * from stable;');
+  ADOQuery1.active:=true;
+  end;
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
