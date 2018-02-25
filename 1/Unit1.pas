@@ -17,6 +17,7 @@ type
     Button1: TButton;
     SaveDialog1: TSaveDialog;
     ProgressBar1: TProgressBar;
+    ADOConnection1: TADOConnection;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -51,58 +52,18 @@ var
 
 begin
 
-  AssignFile(f1, 'E:\statisticswebirbis\1\Win32\Debug\access.log'); //
-  reset(f1); //
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
+  reset(f1);
 
-  { // создаем объект Excel
-    ExlApp := CreateOleObject('Excel.Application');
-
-    // делаем окно Excel невидимым
-    ExlApp.Visible := false;
-
-    // создаем книгу для экспорта
-    ExlApp.Workbooks.Add;
-
-    // создаем объект Sheet(страница) и указываем номер листа (1)
-    // в книге, в который будем осуществлять экспорт
-    Sheet := ExlApp.Workbooks[1].WorkSheets[1];
-
-    // задаем имя листу
-    Sheet.name := 'Данные_из_Delphi'; }
-
-  for i := 1 to 10 do
+  for i := 1 to 2 do
   begin
-
-    readln(f1, a); //
+    readln(f1, a);
     Memo1.lines.Add(Messengge.MyAddIp('^(.*?) ', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp(' - - (.*?) ', a, i));
+    Memo1.lines.Add(Messengge.MyAddIp('- - \[(.*?) ', a, i));
     Memo1.lines.Add(Messengge.MyAddIp('"(.*?)"', a, i));
     Memo1.lines.Add(Messengge.MyAddIp('" (.*?) ', a, i));
-    Memo1.lines.Add(Messengge.MyAddIp('" 200 (.*?)$', a, i));
-
+    Memo1.lines.Add(Messengge.MyAddIp('" \d+ (.*?)$', a, i));
   end;
-
-  { // отключаем все предупреждения Excel
-    ExlApp.DisplayAlerts := false;
-
-    // обработка исключения при сохраннении файла
-    try
-    // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel9795);
-    Showmessage('Done');
-    except
-    // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('G:\statisticswebirbis\1.xls', xlExcel8);
-    Showmessage('Done');
-    end;
-
-    // закрываем приложение Excel
-    ExlApp.Quit;
-
-    // очищаем выделенную память
-    ExlApp := Unassigned;
-    Sheet := Unassigned; }
-
   CloseFile(f1);
 
 end;

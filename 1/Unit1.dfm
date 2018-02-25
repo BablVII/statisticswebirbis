@@ -29,7 +29,6 @@ object Form1: TForm1
     Width = 530
     Height = 19
     Panels = <>
-    ExplicitWidth = 485
   end
   object Button1: TButton
     Left = 352
@@ -50,5 +49,9 @@ object Form1: TForm1
   object SaveDialog1: TSaveDialog
     Left = 376
     Top = 88
+  end
+  object ADOConnection1: TADOConnection
+    Left = 384
+    Top = 200
   end
 end

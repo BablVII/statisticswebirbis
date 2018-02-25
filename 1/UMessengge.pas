@@ -25,7 +25,7 @@ begin
   reg.InputString := MyA;
   reg.Expression := MyExpression;
   reg.Exec(MyA);
-  result := reg.Match[0];
+  result := reg.Match[1];
   reg := nil;
 end;
 
