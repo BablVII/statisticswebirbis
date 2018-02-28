@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 426
-  ClientWidth = 591
-  Color = clHighlightText
+  ClientWidth = 584
+  Color = cl3DLight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,26 +15,19 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 31
-    Height = 13
-    Caption = 'Label1'
-  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 407
-    Width = 591
+    Width = 584
     Height = 19
     Panels = <>
-    ExplicitTop = 388
+    ExplicitWidth = 591
   end
   object DBGrid1: TDBGrid
-    Left = 8
-    Top = 55
+    Left = 0
+    Top = 74
     Width = 583
-    Height = 326
+    Height = 155
     DataSource = DataSource1
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -47,7 +40,7 @@ object Form1: TForm1
   object ProgressBar1: TProgressBar
     Left = 0
     Top = 407
-    Width = 591
+    Width = 583
     Height = 19
     TabOrder = 2
     Visible = False
@@ -90,11 +83,37 @@ object Form1: TForm1
     TabOrder = 6
     OnClick = Button3Click
   end
+  object Panel1: TPanel
+    Left = 8
+    Top = 254
+    Width = 575
+    Height = 139
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 7
+    object Label1: TLabel
+      Left = 230
+      Top = 3
+      Width = 60
+      Height = 13
+      Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    end
+    object combobox: TComboBox
+      Left = 16
+      Top = 38
+      Width = 145
+      Height = 21
+      TabOrder = 0
+      Items.Strings = (
+        #1053#1077#1076#1077#1083#1103
+        #1052#1077#1089#1103#1094' '
+        #1043#1086#1076)
+    end
+  end
   object ADOConnection1: TADOConnection
     LoginPrompt = False
     Provider = 'MSDASQL.1'
-    Left = 72
-    Top = 344
+    Left = 40
   end
   object ADOQuery1: TADOQuery
     AutoCalcFields = False
@@ -106,18 +125,17 @@ object Form1: TForm1
     SQL.Strings = (
       ' select * from stable; ')
     Left = 8
-    Top = 344
   end
   object DataSource1: TDataSource
     DataSet = ADOQuery1
-    Left = 136
-    Top = 344
+    Left = 8
+    Top = 32
   end
   object ADOTable1: TADOTable
     Connection = ADOConnection1
     CursorType = ctStatic
     TableName = 'stable'
-    Left = 176
-    Top = 344
+    Left = 40
+    Top = 32
   end
 end

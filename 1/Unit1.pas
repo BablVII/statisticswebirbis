@@ -24,6 +24,8 @@ type
     Label1: TLabel;
     Button4: TButton;
     Button3: TButton;
+    combobox: TComboBox;
+    Panel1: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -38,7 +40,7 @@ type
   end;
 
 const
-  col = 1100;
+  col = 5000;
 
 var
   Form1: TForm1;
@@ -82,7 +84,7 @@ procedure TForm1.Button2Click(Sender: TObject);
 
 begin
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from stable;');
+  ADOQuery1.SQL.Add('select URL from stable;');
   ADOQuery1.active := true;
   DBGrid1.Visible := true;
   Label1.caption := inttostr(DBGrid1.DataSource.DataSet.RecordCount);
@@ -129,6 +131,7 @@ begin
     'Provider=MSDASQL.1;Persist Security Info=False;User ID=root;Extended Properties="DSN=statistic;UID=root;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
   ADOConnection1.Connected := true;
   //
+
   Messengge := TMessengge.Create;
   Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
   try
