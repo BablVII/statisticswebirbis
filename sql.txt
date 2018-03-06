@@ -10,4 +10,9 @@ DESCRIBE stable;
 alter table stable CHANGE ip ip varchar(30);
 SELECT @@datadir; путь базы;
 drop table stable;
-
+ ('insert ignore into stable(ip, date, url, code, size) values("' +
+      Messengge.MyAddIp('^(.*?) ', a, i) + '", "' +
+      Messengge.MyAddIp('- - \[(.*?) ', a, i) + '", "' +
+      Messengge.MyAddIp('"(.*?)"', a, i) + '", "' +
+      Messengge.MyAddIp('" (.*?) ', a, i) + '", "' +
+      Messengge.MyAddIp('" \d+ (.*?)$', a, i) + '")');

@@ -15,13 +15,33 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 243
+    Width = 85
+    Height = 13
+    Caption = #1057#1090#1088#1086#1082' '#1074' '#1090#1072#1073#1083#1080#1094#1077
+  end
+  object Label2: TLabel
+    Left = 238
+    Top = 242
+    Width = 5
+    Height = 13
+    Caption = '?'
+  end
+  object Label3: TLabel
+    Left = 184
+    Top = 315
+    Width = 157
+    Height = 13
+    Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1086#1073#1088#1072#1097#1077#1085#1080#1081
+  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 407
     Width = 584
     Height = 19
     Panels = <>
-    ExplicitWidth = 591
   end
   object DBGrid1: TDBGrid
     Left = 0
@@ -83,32 +103,27 @@ object Form1: TForm1
     TabOrder = 6
     OnClick = Button3Click
   end
-  object Panel1: TPanel
-    Left = 8
-    Top = 254
-    Width = 575
-    Height = 139
-    Color = clWhite
-    ParentBackground = False
+  object Button5: TButton
+    Left = 119
+    Top = 235
+    Width = 113
+    Height = 30
+    Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1090#1088#1086#1082
     TabOrder = 7
-    object Label1: TLabel
-      Left = 230
-      Top = 3
-      Width = 60
-      Height = 13
-      Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
-    end
-    object combobox: TComboBox
-      Left = 16
-      Top = 38
-      Width = 145
-      Height = 21
-      TabOrder = 0
-      Items.Strings = (
-        #1053#1077#1076#1077#1083#1103
-        #1052#1077#1089#1103#1094' '
-        #1043#1086#1076)
-    end
+    OnClick = Button5Click
+  end
+  object ComboBox1: TComboBox
+    Left = 8
+    Top = 312
+    Width = 145
+    Height = 21
+    TabOrder = 8
+    Text = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1077#1088#1080#1086#1076
+    OnChange = ComboBox1Change
+    Items.Strings = (
+      #1053#1077#1076#1077#1083#1103' '
+      #1052#1077#1089#1103#1094
+      #1043#1086#1076)
   end
   object ADOConnection1: TADOConnection
     LoginPrompt = False
