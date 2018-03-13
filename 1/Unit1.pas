@@ -55,33 +55,36 @@ implementation
 
 {$R *.dfm}
 
-// 1 кнопка обновляет данные, исключает повторения
+// 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i: integer;
+  i, j: integer;
   a1, a2, a3, a4, a5, a: String;
 begin
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
   reset(f1);
   ProgressBar1.Max := last;
   Form1.ProgressBar1.Visible := true;
-
-  for i := first to last do
-  begin
-    readln(f1, a);
-    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add('insert into stable(ip, date, url, code, size) values("' +
-      Messengge.MyAddIp('^(.*?) ', a, i) + '", "' +
-      Messengge.MyAddIp('- - \[(.*?) ', a, i) + '", "' +
-      Messengge.MyAddIp('"(.*?)"', a, i) + '", "' +
-      Messengge.MyAddIp('" (.*?) ', a, i) + '", "' +
-      Messengge.MyAddIp('" \d+ (.*?)$', a, i) + '")');
-    ADOQuery1.ExecSQL;
-  end;
+  if first<>1 then for j  := 1 to first-1 do
+  readln(f1);
+  if first <> last then
+    for i := first to last do
+    begin
+      readln(f1, a);
+      Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add
+        ('insert into stable(ip, date, url, code, size) values("' +
+        Messengge.MyAddIp('^(.*?) ', a, i) + '", "' +
+        Messengge.MyAddIp('- - \[(.*?) ', a, i) + '", "' +
+        Messengge.MyAddIp('"(.*?)"', a, i) + '", "' +
+        Messengge.MyAddIp('" (.*?) ', a, i) + '", "' +
+        Messengge.MyAddIp('" \d+ (.*?)$', a, i) + '")');
+      ADOQuery1.ExecSQL;
+    end;
   CloseFile(f1);
   sleep(10);
-  first := last;
+  first := last+1;
   Form1.ProgressBar1.Visible := False;
 end;
 
@@ -101,10 +104,8 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS stable (ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30))');
-  { ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS stable (ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30), PRIMARY KEY (ip,date,size))');
-  } ADOQuery1.ExecSQL;
+    ('create table IF NOT EXISTS stable ( ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30))');
+  ADOQuery1.ExecSQL;
 end;
 
 // 4 кнопка удаляет таблицу
@@ -147,47 +148,47 @@ begin
   end;
 end;
 
-  procedure TForm1.FormCreate(Sender: TObject);
-  var
-    Ini: TIniFile;
-  begin
-    // подключение к базе
-    ADOConnection1.ConnectionString :=
-      'Provider=MSDASQL.1;Persist Security Info=False;User ID=root;Extended Properties="DSN=statistic;UID=root;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
-    ADOConnection1.Connected := true;
-    //
-    Messengge := TMessengge.Create;
-    Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
-    first := Ini.ReadInteger('Form', 'first', 1);
-    last := Ini.ReadInteger('Form', 'last', 100);
-    try
-      Top := Ini.ReadInteger('Form', 'Top', 100);
-      Left := Ini.ReadInteger('Form', 'Left', 100);
-      caption := Ini.ReadString('Form', 'Caption', 'New Form');
-      if Ini.ReadBool('Form', 'InitMax', False) then
-        WindowState := wsMaximized
-      else
-        WindowState := wsNormal;
-    finally
-      Ini.Free;
-    end;
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  Ini: TIniFile;
+begin
+  // подключение к базе
+  ADOConnection1.ConnectionString :=
+    'Provider=MSDASQL.1;Persist Security Info=False;User ID=root;Extended Properties="DSN=statistic;UID=root;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
+  ADOConnection1.Connected := true;
+  //
+  Messengge := TMessengge.Create;
+  Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
+  first := Ini.ReadInteger('Form', 'first', 1);
+  last := Ini.ReadInteger('Form', 'last', 100);
+  try
+    Top := Ini.ReadInteger('Form', 'Top', 100);
+    Left := Ini.ReadInteger('Form', 'Left', 100);
+    caption := Ini.ReadString('Form', 'Caption', 'New Form');
+    if Ini.ReadBool('Form', 'InitMax', False) then
+      WindowState := wsMaximized
+    else
+      WindowState := wsNormal;
+  finally
+    Ini.Free;
   end;
+end;
 
-  procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
-  var
-    Ini: TIniFile;
-  begin
-    Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
-    try
-      Ini.WriteInteger('Form', 'Top', Top);
-      Ini.WriteInteger('Form', 'Left', Left);
-      Ini.WriteString('Form', 'Caption', caption);
-      Ini.WriteBool('Form', 'InitMax', WindowState = wsMaximized);
-      Ini.WriteInteger('Form', 'first', first);
-      Ini.WriteInteger('Form', 'last', last);
-    finally
-      Ini.Free;
-    end;
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
+  try
+    Ini.WriteInteger('Form', 'Top', Top);
+    Ini.WriteInteger('Form', 'Left', Left);
+    Ini.WriteString('Form', 'Caption', caption);
+    Ini.WriteBool('Form', 'InitMax', WindowState = wsMaximized);
+    Ini.WriteInteger('Form', 'first', first);
+    Ini.WriteInteger('Form', 'last', last);
+  finally
+    Ini.Free;
   end;
+end;
 
 end.
