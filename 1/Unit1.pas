@@ -62,9 +62,10 @@ var
   i, j, k: int64;
   a: String;
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
-  ProgressBar1.Max := last;
+  ProgressBar1.Max := last-first;
+  ProgressBar1.Min:= 1;
   Form1.ProgressBar1.Visible := true;
   if first <> 1 then
     for j := 1 to first - 1 do
@@ -75,13 +76,14 @@ begin
     begin
       readln(f1, a);
       Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+      Memo1.Lines.Clear;
       Memo1.Lines.Add(inttostr(i));
       ADOQuery1.SQL.Clear;
       ADOQuery1.SQL.Add
         ('insert ignore into stable(ip, date, url, code, size) values("' +
         Messengge.MyAddIp('^(.*?) ', a) + '", "' +
         Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
-        Messengge.MyAddIp('"(.*?)" (200|400|501)', a) + '", "' +
+        Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
         Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
         Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
       ADOQuery1.ExecSQL;
@@ -123,7 +125,7 @@ end;
 procedure TForm1.Button5Click(Sender: TObject);
 begin
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
   k := 0;
   while not(eof(f1)) do
