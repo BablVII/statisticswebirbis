@@ -16,15 +16,15 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 8
-    Top = 243
+    Left = 11
+    Top = 235
     Width = 85
     Height = 13
     Caption = #1057#1090#1088#1086#1082' '#1074' '#1090#1072#1073#1083#1080#1094#1077
   end
   object Label2: TLabel
-    Left = 238
-    Top = 242
+    Left = 127
+    Top = 370
     Width = 5
     Height = 13
     Caption = '?'
@@ -104,8 +104,8 @@ object Form1: TForm1
     OnClick = Button3Click
   end
   object Button5: TButton
-    Left = 119
-    Top = 235
+    Left = 8
+    Top = 363
     Width = 113
     Height = 30
     Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1090#1088#1086#1082
@@ -125,6 +125,15 @@ object Form1: TForm1
       #1052#1077#1089#1103#1094
       #1043#1086#1076)
   end
+  object Memo1: TMemo
+    Left = 391
+    Top = 244
+    Width = 185
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 9
+  end
   object ADOConnection1: TADOConnection
     LoginPrompt = False
     Provider = 'MSDASQL.1'
@@ -138,7 +147,7 @@ object Form1: TForm1
     ParamCheck = False
     Parameters = <>
     SQL.Strings = (
-      ' select * from stable; ')
+      'select * from stable')
     Left = 8
   end
   object DataSource1: TDataSource

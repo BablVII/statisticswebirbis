@@ -10,14 +10,14 @@ type
   TMessengge = class
   public
 
-    function MyAddIp(MyExpression: string; MyA: string; MyI: integer):string;
+    function MyAddIp(MyExpression: string; MyA: string):string;
   end;
 
 implementation
 
 { TMessengge }
 
-function TMessengge.MyAddIp(MyExpression, MyA: string; MyI: integer): string;
+function TMessengge.MyAddIp(MyExpression, MyA: string): string;
 var
   reg: TregExpr;
 begin
@@ -26,7 +26,7 @@ begin
   reg.Expression := MyExpression;
   reg.Exec(MyA);
   result := reg.Match[1];
-  reg := nil;
+  Reg.Free;
 end;
 
 end.

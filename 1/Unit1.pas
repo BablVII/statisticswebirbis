@@ -28,6 +28,7 @@ type
     Button5: TButton;
     ComboBox1: TComboBox;
     Label3: TLabel;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -58,33 +59,36 @@ implementation
 // 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i, j: integer;
-  a1, a2, a3, a4, a5, a: String;
+  i, j, k: int64;
+  a: String;
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
   reset(f1);
   ProgressBar1.Max := last;
   Form1.ProgressBar1.Visible := true;
-  if first<>1 then for j  := 1 to first-1 do
-  readln(f1);
-  if first <> last then
-    for i := first to last do
+  if first <> 1 then
+    for j := 1 to first - 1 do
+      readln(f1);
+  k := first;
+  if k <> last then
+    for i := k to last do
     begin
       readln(f1, a);
       Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+      Memo1.Lines.Add(inttostr(i));
       ADOQuery1.SQL.Clear;
       ADOQuery1.SQL.Add
-        ('insert into stable(ip, date, url, code, size) values("' +
-        Messengge.MyAddIp('^(.*?) ', a, i) + '", "' +
-        Messengge.MyAddIp('- - \[(.*?) ', a, i) + '", "' +
-        Messengge.MyAddIp('"(.*?)"', a, i) + '", "' +
-        Messengge.MyAddIp('" (.*?) ', a, i) + '", "' +
-        Messengge.MyAddIp('" \d+ (.*?)$', a, i) + '")');
+        ('insert ignore into stable(ip, date, url, code, size) values("' +
+        Messengge.MyAddIp('^(.*?) ', a) + '", "' +
+        Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
+        Messengge.MyAddIp('"(.*?)" (200|400|501)', a) + '", "' +
+        Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
+        Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
       ADOQuery1.ExecSQL;
+      first := last + 1;
     end;
   CloseFile(f1);
-  sleep(10);
-  first := last+1;
+
   Form1.ProgressBar1.Visible := False;
 end;
 
@@ -104,7 +108,7 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS stable ( ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30))');
+    ('create table IF NOT EXISTS stable (id int not null auto_increment,ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30), primary key(id))');
   ADOQuery1.ExecSQL;
 end;
 
@@ -119,18 +123,14 @@ end;
 procedure TForm1.Button5Click(Sender: TObject);
 begin
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\stat1\Win32\Debug\access.log'); //
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
   reset(f1);
   k := 0;
-  ProgressBar1.Max := last;
-  Form1.ProgressBar1.Visible := true;
   while not(eof(f1)) do
   begin
     readln(f1);
-    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
     inc(k);
   end;
-  Form1.ProgressBar1.Visible := False;
   Label2.caption := inttostr(k);
   last := k;
   CloseFile(f1);
@@ -154,7 +154,8 @@ var
 begin
   // подключение к базе
   ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Persist Security Info=False;User ID=root;Extended Properties="DSN=statistic;UID=root;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
+    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
+
   ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
