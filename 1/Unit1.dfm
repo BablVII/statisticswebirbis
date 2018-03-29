@@ -23,11 +23,11 @@ object Form1: TForm1
     Caption = #1057#1090#1088#1086#1082' '#1074' '#1090#1072#1073#1083#1080#1094#1077
   end
   object Label2: TLabel
-    Left = 127
-    Top = 370
-    Width = 5
+    Left = 184
+    Top = 354
+    Width = 19
     Height = 13
-    Caption = '?'
+    Caption = 'GET'
   end
   object Label3: TLabel
     Left = 184
@@ -35,6 +35,13 @@ object Form1: TForm1
     Width = 157
     Height = 13
     Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1086#1073#1088#1072#1097#1077#1085#1080#1081
+  end
+  object Label4: TLabel
+    Left = 302
+    Top = 354
+    Width = 26
+    Height = 13
+    Caption = 'POST'
   end
   object StatusBar1: TStatusBar
     Left = 0

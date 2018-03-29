@@ -29,6 +29,7 @@ type
     ComboBox1: TComboBox;
     Label3: TLabel;
     Memo1: TMemo;
+    Label4: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -64,8 +65,8 @@ var
 begin
   AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
-  ProgressBar1.Max := last-first;
-  ProgressBar1.Min:= 1;
+  ProgressBar1.Max := last - first;
+  ProgressBar1.Min := 1;
   Form1.ProgressBar1.Visible := true;
   if first <> 1 then
     for j := 1 to first - 1 do
@@ -142,11 +143,19 @@ procedure TForm1.ComboBox1Change(Sender: TObject);
 begin
   case ComboBox1.ItemIndex of
     0:
-      Label3.caption := '1';
-    1:
-      Label3.caption := '2';
-    2:
-      Label3.caption := '3';
+      begin
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) as kol from stable where url like ''%GET%'';');
+        ADOQuery1.open;
+        Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) as kol1 from stable where url like ''%POST%'';');
+        ADOQuery1.open;
+
+        Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
+      end;
   end;
 end;
 
