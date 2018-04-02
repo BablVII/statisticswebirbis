@@ -65,6 +65,7 @@ begin
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
   reset(f1);
   Form1.ProgressBar1.Visible := true;
+  Form1.ProgressBar1.Max := 10;
   Memo1.Visible := true;
   for i := 1 to 10 do
   begin
@@ -77,31 +78,32 @@ begin
     a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
     a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
     a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-    ADOquery1.sql.text := 'select count(ip) from test where ip=:a1';
-    ADOquery1.parameters.params[0].value := a1;
-    ADOquery1.open;
 
-    if ADOquery1.isempty then // в count(ip) получили null, значит совпадений нет
+    ADOQuery1.close;
+    ADOQuery1.sql.text := 'select count(1) from test where (ip= "' + a1 +
+      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4
+      + '") and (size= "' + a5 + '")';
+    ADOQuery1.open;
+    if ADOQuery1.fields[0].asString = '0' then
+    // в count(ip) получили 0, значит совпадений нет
     begin
-      // тут код для добавления
-      ADOquery1.sql.text := 'insert test (ip) values (:a1)';
-      ADOquery1.parameters.params[0].value := a1;
-      ADOquery1.ExecSQL;
-      Showmessage('Добавили');
+      ADOQuery1.sql.text := 'insert test (ip,date,url,code,size) values ("' + a1 + '", "' +
+        a2 + '","' + a3 + '","' + a4 + '","' + a5 + '")';
+      ADOQuery1.ExecSQL;
     end
-    else
-      Showmessage(query.fields[0].asString); // выводим количество повторов
 
-    { ADOQuery1.SQL.Add
-      ('insert  into test (ip, date, url, code, size) values("' +
+    // Добавление строк
+     {ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add('insert  into test (ip, date, url, code, size) values("' +
       Messengge.MyAddIp('^(.*?) ', a) + '", "' +
       Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
       Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
       Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
-      Messengge.MyAddIp('" \d+ (.*?)$', a) + '")'); }
-    { for j := 1 to 10 do }
+      Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
+      ADOQuery1.ExecSQL;  }
 
   end;
+
   CloseFile(f1);
   Form1.ProgressBar1.Visible := False;
 end;

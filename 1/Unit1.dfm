@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 426
-  ClientWidth = 584
+  ClientWidth = 752
   Color = cl3DLight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +16,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 8
-    Top = 311
+    Left = 1
+    Top = 370
     Width = 85
     Height = 13
     Caption = #1057#1090#1088#1086#1082' '#1074' '#1090#1072#1073#1083#1080#1094#1077
@@ -47,7 +47,7 @@ object Form1: TForm1
     Visible = False
   end
   object Label5: TLabel
-    Left = 504
+    Left = 696
     Top = 55
     Width = 31
     Height = 13
@@ -71,15 +71,16 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Top = 407
-    Width = 584
+    Width = 752
     Height = 19
     Panels = <>
+    ExplicitWidth = 584
   end
   object DBGrid1: TDBGrid
     Left = 1
     Top = 166
-    Width = 583
-    Height = 139
+    Width = 743
+    Height = 195
     DataSource = DataSource1
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -92,13 +93,13 @@ object Form1: TForm1
   object ProgressBar1: TProgressBar
     Left = 0
     Top = 407
-    Width = 583
+    Width = 752
     Height = 19
     TabOrder = 2
     Visible = False
   end
   object Button1: TButton
-    Left = 221
+    Left = 381
     Top = 8
     Width = 107
     Height = 41
@@ -108,7 +109,7 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 346
+    Left = 506
     Top = 8
     Width = 102
     Height = 41
@@ -118,7 +119,7 @@ object Form1: TForm1
     OnClick = Button2Click
   end
   object Button5: TButton
-    Left = 463
+    Left = 631
     Top = 8
     Width = 113
     Height = 41
@@ -138,14 +139,13 @@ object Form1: TForm1
       'get/post')
   end
   object Memo1: TMemo
-    Left = 432
-    Top = 311
+    Left = 593
+    Top = 367
     Width = 151
-    Height = 74
+    Height = 34
     BorderStyle = bsNone
     Lines.Strings = (
       'Memo1')
-    ScrollBars = ssBoth
     TabOrder = 7
     Visible = False
   end
@@ -159,7 +159,6 @@ object Form1: TForm1
     Connection = ADOConnection1
     CursorType = ctStatic
     EnableBCD = False
-    ParamCheck = False
     Parameters = <>
     SQL.Strings = (
       'select * from stable')
