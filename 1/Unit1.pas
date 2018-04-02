@@ -61,7 +61,7 @@ implementation
 // 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i: int64;
+  i, k: int64;
   a, a1, a2, a3, a4, a5: String;
 begin
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
@@ -69,6 +69,9 @@ begin
   Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := last;
   Memo1.Visible := true;
+  ADOQuery1.Connection := ADOConnection1;
+  ADOQuery1.Close;
+  ADOQuery1.SQL.Clear;
   for i := 1 to last do
   begin
     readln(f1, a);
@@ -80,20 +83,15 @@ begin
     a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
     a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
     a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-
-    ADOQuery1.close;
-    ADOQuery1.sql.text := 'select count(1) from test where (ip= "' + a1 +
-      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4 +
-      '") and (size= "' + a5 + '")';
-    ADOQuery1.open;
-    if ADOQuery1.fields[0].asString = '0' then
-    // в count(ip) получили 0, значит совпадений нет
-    begin
-      ADOQuery1.sql.text := 'insert test (ip,date,url,code,size) values ("' + a1
-        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '")';
-      ADOQuery1.ExecSQL;
-    end
-
+    k := 0;
+    ADOQuery1.Close;
+    ADOQuery1.SQL.text := 'insert test (ip,date,url,code,size) values ("' + a1 +
+      '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 +
+      '") WHERE count(0) from test where (ip= "' + a1 + '" ) and (date= "' + a2
+      + '") and (url= "' + a3 + '") and (code= "' + a4 + '") and (size= "' +
+      a5 + '")';
+    adoquery1.ExecSQL;
+    ADOQuery1.Active := true;
     // Добавление строк
     { ADOQuery1.SQL.Clear;
       ADOQuery1.SQL.Add('insert  into test (ip, date, url, code, size) values("' +
@@ -105,7 +103,6 @@ begin
       ADOQuery1.ExecSQL; }
 
   end;
-
   CloseFile(f1);
   Form1.ProgressBar1.Visible := False;
 end;
@@ -113,8 +110,8 @@ end;
 // кнопка 2 выводит таблицу
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  ADOQuery1.sql.Clear;
-  ADOQuery1.sql.Add('select * from stable;');
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select * from stable;');
   ADOQuery1.active := true;
   DBGrid1.Visible := true;
   Label1.Visible := true;
@@ -143,21 +140,21 @@ begin
   case ComboBox1.ItemIndex of
     0:
       begin
-        ADOQuery1.sql.Clear;
-        ADOQuery1.sql.Add
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
           ('select count(*) as kol from test where url like ''%GET%'';');
         ADOQuery1.open;
         Label2.Visible := true;
         DBGrid1.Visible := true;
         Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
-        ADOQuery1.sql.Clear;
-        ADOQuery1.sql.Add
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
           ('select count(*) as kol1 from test where url like ''%POST%'';');
         ADOQuery1.open;
         Label4.Visible := true;
         Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
-        ADOQuery1.sql.Clear;
-        ADOQuery1.sql.Add
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
           ('select count(*) as kol2 from stable where url like ''%PDF%'';');
         ADOQuery1.open;
         Label9.Visible := true;
