@@ -21,8 +21,6 @@ type
     ProgressBar1: TProgressBar;
     Button1: TButton;
     Button2: TButton;
-    Button4: TButton;
-    Button3: TButton;
     Label1: TLabel;
     Label2: TLabel;
     Button5: TButton;
@@ -30,12 +28,13 @@ type
     Label3: TLabel;
     Memo1: TMemo;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
 
@@ -43,7 +42,7 @@ type
 
   public
     { Public declarations }
-    first, last: integer;
+    last: int64;
     f1: TextFile;
     k: integer;
   end;
@@ -61,80 +60,76 @@ implementation
 procedure TForm1.Button1Click(Sender: TObject);
 var
   i, j, k: int64;
-  a: String;
+  a, a1, a2, a3, a4, a5: String;
 begin
-  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
   reset(f1);
-  ProgressBar1.Max := last - first;
-  ProgressBar1.Min := 1;
   Form1.ProgressBar1.Visible := true;
-  if first <> 1 then
-    for j := 1 to first - 1 do
-      readln(f1);
-  k := first;
-  if k <> last then
-    for i := k to last do
-    begin
-      readln(f1, a);
-      Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
-      Memo1.Lines.Clear;
-      Memo1.Lines.Add(inttostr(i));
-      ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add
-        ('insert ignore into stable(ip, date, url, code, size) values("' +
-        Messengge.MyAddIp('^(.*?) ', a) + '", "' +
-        Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
-        Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
-        Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
-        Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
-      ADOQuery1.ExecSQL;
-      first := last + 1;
-    end;
-  CloseFile(f1);
+  Memo1.Visible := true;
+  for i := 1 to 10 do
+  begin
+    readln(f1, a);
+    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+    Memo1.Lines.Clear;
+    Memo1.Lines.Add(inttostr(i));
+    a1 := Messengge.MyAddIp('^(.*?) ', a);
+    a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
+    a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
+    a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
+    a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
+    ADOquery1.sql.text := 'select count(ip) from test where ip=:a1';
+    ADOquery1.parameters.params[0].value := a1;
+    ADOquery1.open;
 
+    if ADOquery1.isempty then // в count(ip) получили null, значит совпадений нет
+    begin
+      // тут код для добавления
+      ADOquery1.sql.text := 'insert test (ip) values (:a1)';
+      ADOquery1.parameters.params[0].value := a1;
+      ADOquery1.ExecSQL;
+      Showmessage('Добавили');
+    end
+    else
+      Showmessage(query.fields[0].asString); // выводим количество повторов
+
+    { ADOQuery1.SQL.Add
+      ('insert  into test (ip, date, url, code, size) values("' +
+      Messengge.MyAddIp('^(.*?) ', a) + '", "' +
+      Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
+      Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
+      Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
+      Messengge.MyAddIp('" \d+ (.*?)$', a) + '")'); }
+    { for j := 1 to 10 do }
+
+  end;
+  CloseFile(f1);
   Form1.ProgressBar1.Visible := False;
 end;
 
 // кнопка 2 выводит таблицу
 procedure TForm1.Button2Click(Sender: TObject);
-
 begin
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from stable;');
+  ADOQuery1.sql.Clear;
+  ADOQuery1.sql.Add('select * from test;');
   ADOQuery1.active := true;
   DBGrid1.Visible := true;
+  Label1.Visible := true;
   Label1.caption := inttostr(DBGrid1.DataSource.DataSet.RecordCount);
 end;
 
-// 3 кнопка создает таблицу если не создана
-procedure TForm1.Button3Click(Sender: TObject);
-begin
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS stable (id int not null auto_increment,ip varchar(30), date varchar(30), url text, code varchar(10),size varchar(30), primary key(id))');
-  ADOQuery1.ExecSQL;
-end;
-
-// 4 кнопка удаляет таблицу
-procedure TForm1.Button4Click(Sender: TObject);
-begin
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('drop table stable;');
-  ADOQuery1.ExecSQL;
-end;
-
+// 5 кнопка подсчет строк в файле
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-
-  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
   reset(f1);
   k := 0;
-  while not(eof(f1)) do
+  while not(Eof(f1)) do
   begin
     readln(f1);
     inc(k);
   end;
-  Label2.caption := inttostr(k);
+  Label5.Visible := true;
+  Label5.caption := inttostr(k);
   last := k;
   CloseFile(f1);
 end;
@@ -144,16 +139,17 @@ begin
   case ComboBox1.ItemIndex of
     0:
       begin
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
+        ADOQuery1.sql.Clear;
+        ADOQuery1.sql.Add
           ('select count(*) as kol from stable where url like ''%GET%'';');
         ADOQuery1.open;
+        Label2.Visible := true;
         Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
+        ADOQuery1.sql.Clear;
+        ADOQuery1.sql.Add
           ('select count(*) as kol1 from stable where url like ''%POST%'';');
         ADOQuery1.open;
-
+        Label4.Visible := true;
         Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
       end;
   end;
@@ -166,13 +162,11 @@ begin
   // подключение к базе
   ADOConnection1.ConnectionString :=
     'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
-
   ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
   Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
-  first := Ini.ReadInteger('Form', 'first', 1);
-  last := Ini.ReadInteger('Form', 'last', 100);
+  last := Ini.ReadInteger('Form', 'last', 4820221);
   try
     Top := Ini.ReadInteger('Form', 'Top', 100);
     Left := Ini.ReadInteger('Form', 'Left', 100);
@@ -196,7 +190,6 @@ begin
     Ini.WriteInteger('Form', 'Left', Left);
     Ini.WriteString('Form', 'Caption', caption);
     Ini.WriteBool('Form', 'InitMax', WindowState = wsMaximized);
-    Ini.WriteInteger('Form', 'first', first);
     Ini.WriteInteger('Form', 'last', last);
   finally
     Ini.Free;
