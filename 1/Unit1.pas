@@ -31,6 +31,8 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -59,15 +61,15 @@ implementation
 // 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i, j, k: int64;
+  i: int64;
   a, a1, a2, a3, a4, a5: String;
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
   Form1.ProgressBar1.Visible := true;
-  Form1.ProgressBar1.Max := 10;
+  Form1.ProgressBar1.Max := last;
   Memo1.Visible := true;
-  for i := 1 to 10 do
+  for i := 1 to last do
   begin
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -81,26 +83,26 @@ begin
 
     ADOQuery1.close;
     ADOQuery1.sql.text := 'select count(1) from test where (ip= "' + a1 +
-      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4
-      + '") and (size= "' + a5 + '")';
+      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4 +
+      '") and (size= "' + a5 + '")';
     ADOQuery1.open;
     if ADOQuery1.fields[0].asString = '0' then
     // в count(ip) получили 0, значит совпадений нет
     begin
-      ADOQuery1.sql.text := 'insert test (ip,date,url,code,size) values ("' + a1 + '", "' +
-        a2 + '","' + a3 + '","' + a4 + '","' + a5 + '")';
+      ADOQuery1.sql.text := 'insert test (ip,date,url,code,size) values ("' + a1
+        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '")';
       ADOQuery1.ExecSQL;
     end
 
     // Добавление строк
-     {ADOQuery1.SQL.Clear;
+    { ADOQuery1.SQL.Clear;
       ADOQuery1.SQL.Add('insert  into test (ip, date, url, code, size) values("' +
       Messengge.MyAddIp('^(.*?) ', a) + '", "' +
       Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
       Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
       Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
       Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
-      ADOQuery1.ExecSQL;  }
+      ADOQuery1.ExecSQL; }
 
   end;
 
@@ -112,7 +114,7 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   ADOQuery1.sql.Clear;
-  ADOQuery1.sql.Add('select * from test;');
+  ADOQuery1.sql.Add('select * from stable;');
   ADOQuery1.active := true;
   DBGrid1.Visible := true;
   Label1.Visible := true;
@@ -122,7 +124,7 @@ end;
 // 5 кнопка подсчет строк в файле
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
   k := 0;
   while not(Eof(f1)) do
@@ -143,16 +145,24 @@ begin
       begin
         ADOQuery1.sql.Clear;
         ADOQuery1.sql.Add
-          ('select count(*) as kol from stable where url like ''%GET%'';');
+          ('select count(*) as kol from test where url like ''%GET%'';');
         ADOQuery1.open;
         Label2.Visible := true;
+        DBGrid1.Visible := true;
         Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
         ADOQuery1.sql.Clear;
         ADOQuery1.sql.Add
-          ('select count(*) as kol1 from stable where url like ''%POST%'';');
+          ('select count(*) as kol1 from test where url like ''%POST%'';');
         ADOQuery1.open;
         Label4.Visible := true;
         Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
+        ADOQuery1.sql.Clear;
+        ADOQuery1.sql.Add
+          ('select count(*) as kol2 from stable where url like ''%PDF%'';');
+        ADOQuery1.open;
+        Label9.Visible := true;
+        Label9.caption := inttostr(ADOQuery1.FieldByName('kol2').AsInteger);
+        DBGrid1.Visible := False;
       end;
   end;
 end;

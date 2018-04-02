@@ -24,8 +24,8 @@ object Form1: TForm1
     Visible = False
   end
   object Label2: TLabel
-    Left = 70
-    Top = 111
+    Left = 11
+    Top = 130
     Width = 19
     Height = 13
     Caption = 'GET'
@@ -40,7 +40,7 @@ object Form1: TForm1
   end
   object Label4: TLabel
     Left = 70
-    Top = 147
+    Top = 130
     Width = 26
     Height = 13
     Caption = 'POST'
@@ -62,11 +62,26 @@ object Form1: TForm1
     Caption = 'Get'
   end
   object Label7: TLabel
-    Left = 11
-    Top = 147
+    Left = 70
+    Top = 111
     Width = 21
     Height = 13
     Caption = 'Post'
+  end
+  object Label8: TLabel
+    Left = 126
+    Top = 111
+    Width = 21
+    Height = 13
+    Caption = 'Post'
+  end
+  object Label9: TLabel
+    Left = 126
+    Top = 130
+    Width = 19
+    Height = 13
+    Caption = 'PDF'
+    Visible = False
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -74,7 +89,6 @@ object Form1: TForm1
     Width = 752
     Height = 19
     Panels = <>
-    ExplicitWidth = 584
   end
   object DBGrid1: TDBGrid
     Left = 1
