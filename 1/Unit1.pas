@@ -70,9 +70,7 @@ begin
   Form1.ProgressBar1.Max := last;
   Memo1.Visible := true;
   ADOQuery1.Connection := ADOConnection1;
-  ADOQuery1.Close;
-  ADOQuery1.SQL.Clear;
-  for i := 1 to last do
+  for i := 1 to 20 do
   begin
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -85,12 +83,13 @@ begin
     a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
     k := 0;
     ADOQuery1.Close;
-    ADOQuery1.SQL.text := 'insert test (ip,date,url,code,size) values ("' + a1 +
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.add('insert IGNORE INTO test (ip,date,url,code,size) values ("' + a1 +
       '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 +
-      '") WHERE count(0) from test where (ip= "' + a1 + '" ) and (date= "' + a2
-      + '") and (url= "' + a3 + '") and (code= "' + a4 + '") and (size= "' +
-      a5 + '")';
-    adoquery1.ExecSQL;
+      '") WHERE count(0) =(select count(*) from test where (ip= "' + a1 +
+      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4 +
+      '") and (size= "' + a5 + '"))');
+    ADOQuery1.Open;
     ADOQuery1.Active := true;
     // Добавление строк
     { ADOQuery1.SQL.Clear;
@@ -111,8 +110,8 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from stable;');
-  ADOQuery1.active := true;
+  ADOQuery1.SQL.Add('select * from test;');
+  ADOQuery1.Active := true;
   DBGrid1.Visible := true;
   Label1.Visible := true;
   Label1.caption := inttostr(DBGrid1.DataSource.DataSet.RecordCount);
@@ -143,20 +142,20 @@ begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) as kol from test where url like ''%GET%'';');
-        ADOQuery1.open;
+        ADOQuery1.Open;
         Label2.Visible := true;
         DBGrid1.Visible := true;
         Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) as kol1 from test where url like ''%POST%'';');
-        ADOQuery1.open;
+        ADOQuery1.Open;
         Label4.Visible := true;
         Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) as kol2 from stable where url like ''%PDF%'';');
-        ADOQuery1.open;
+        ADOQuery1.Open;
         Label9.Visible := true;
         Label9.caption := inttostr(ADOQuery1.FieldByName('kol2').AsInteger);
         DBGrid1.Visible := False;
