@@ -61,10 +61,10 @@ implementation
 // 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i, k: int64;
+  i, k: integer;
   a, a1, a2, a3, a4, a5: String;
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'D:\_GIT\access.log');
   reset(f1);
   Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := last;
@@ -82,24 +82,12 @@ begin
     a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
     a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
     k := 0;
-    ADOQuery1.Close;
+
     ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.add('insert IGNORE INTO test (ip,date,url,code,size) values ("' + a1 +
-      '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 +
-      '") WHERE count(0) =(select count(*) from test where (ip= "' + a1 +
-      '" ) and (date= "' + a2 + '") and (url= "' + a3 + '") and (code= "' + a4 +
-      '") and (size= "' + a5 + '"))');
-    ADOQuery1.Open;
-    ADOQuery1.Active := true;
-    // Добавление строк
-    { ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add('insert  into test (ip, date, url, code, size) values("' +
-      Messengge.MyAddIp('^(.*?) ', a) + '", "' +
-      Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
-      Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
-      Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
-      Messengge.MyAddIp('" \d+ (.*?)$', a) + '")');
-      ADOQuery1.ExecSQL; }
+    ADOQuery1.SQL.Add
+      ('INSERT IGNORE INTO stable (ip,date,url,code,size) values ("' + a1 +
+      '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
+    ADOQuery1.ExecSQL;
 
   end;
   CloseFile(f1);
@@ -120,7 +108,7 @@ end;
 // 5 кнопка подсчет строк в файле
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'D:\_GIT\access.log');
   reset(f1);
   k := 0;
   while not(Eof(f1)) do
@@ -169,7 +157,7 @@ var
 begin
   // подключение к базе
   ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
+    'Provider=MSDASQL.1;Password=lViw0V5LHLNnWljJ;Persist Security Info=True;User ID=statistic;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;PWD=lViw0V5LHLNnWljJ;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";';
   ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
