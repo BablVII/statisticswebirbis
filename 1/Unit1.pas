@@ -61,16 +61,16 @@ implementation
 // 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i, k: integer;
+  i:integer;
   a, a1, a2, a3, a4, a5: String;
 begin
-  AssignFile(f1, 'D:\_GIT\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
   Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := last;
   Memo1.Visible := true;
   ADOQuery1.Connection := ADOConnection1;
-  for i := 1 to 20 do
+  for i := 1 to 40 do
   begin
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -81,11 +81,10 @@ begin
     a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
     a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
     a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-    k := 0;
 
     ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add
-      ('INSERT IGNORE INTO stable (ip,date,url,code,size) values ("' + a1 +
+      ('INSERT IGNORE INTO test (ip,date,url,code,size) values ("' + a1 +
       '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
     ADOQuery1.ExecSQL;
 
@@ -108,7 +107,7 @@ end;
 // 5 кнопка подсчет строк в файле
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  AssignFile(f1, 'D:\_GIT\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
   k := 0;
   while not(Eof(f1)) do
@@ -157,7 +156,7 @@ var
 begin
   // подключение к базе
   ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Password=lViw0V5LHLNnWljJ;Persist Security Info=True;User ID=statistic;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;PWD=lViw0V5LHLNnWljJ;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";';
+    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic;';
   ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
