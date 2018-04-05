@@ -164,9 +164,12 @@ object Form1: TForm1
     Visible = False
   end
   object ADOConnection1: TADOConnection
-    LoginPrompt = False
+    ConnectionString = 
+      'Provider=MSDASQL.1;Persist Security Info=False;Extended Properti' +
+      'es="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID' +
+      '=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initi' +
+      'al Catalog=statistic'
     Provider = 'MSDASQL.1'
-    Left = 32
   end
   object ADOQuery1: TADOQuery
     AutoCalcFields = False
@@ -176,6 +179,7 @@ object Form1: TForm1
     Parameters = <>
     SQL.Strings = (
       'select * from stable')
+    Left = 32
   end
   object DataSource1: TDataSource
     DataSet = ADOQuery1

@@ -128,14 +128,14 @@ begin
       begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
-          ('select count(*) as kol from test where url like ''%GET%'';');
+          ('select count(*) as kol from stable where url like ''%GET%'';');
         ADOQuery1.Open;
         Label2.Visible := true;
         DBGrid1.Visible := true;
         Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
-          ('select count(*) as kol1 from test where url like ''%POST%'';');
+          ('select count(*) as kol1 from stable where url like ''%POST%'';');
         ADOQuery1.Open;
         Label4.Visible := true;
         Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
@@ -155,9 +155,9 @@ var
   Ini: TIniFile;
 begin
   // подключение к базе
-  ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic;';
-  ADOConnection1.Connected := true;
+  {ADOConnection1.ConnectionString :=
+    'Provider=MSDASQL.1;Persist Security Info=False;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic';
+ } ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
   Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));
