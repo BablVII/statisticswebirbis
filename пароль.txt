@@ -1,0 +1,9 @@
+lViw0V5LHLNnWljJ
+statistic
+ mysql -ustatistic -plViw0V5LHLNnWljJ  -Dstatistic < /data/share/z/.staf/.ivc/farid/z/_LECTURE/dump.cancelled/statistic_stable.sql
+
+
+Provider=MSDASQL.1;Persist Security Info=False;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1"
+
+
+Provider=MSDASQL.1;Password=lViw0V5LHLNnWljJ;Persist Security Info=True;User ID=statistic;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;PWD=lViw0V5LHLNnWljJ;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic
