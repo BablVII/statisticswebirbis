@@ -19,34 +19,34 @@ type
     ADOTable1: TADOTable;
     DBGrid1: TDBGrid;
     ProgressBar1: TProgressBar;
-    Button1: TButton;
-    Button2: TButton;
     Label1: TLabel;
     Label2: TLabel;
-    Button5: TButton;
     ComboBox1: TComboBox;
     Label3: TLabel;
     Memo1: TMemo;
     Label4: TLabel;
-    Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Label5: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
 
   private
 
   public
     { Public declarations }
-    last: int64;
     f1: TextFile;
-    k: integer;
+    last: integer;
+    a, a1, a2, a3, a4, a5, year: String;
   end;
 
 var
@@ -58,67 +58,114 @@ implementation
 
 {$R *.dfm}
 
-// 1 кнопка обновляет данные
 procedure TForm1.Button1Click(Sender: TObject);
-var
-  i:integer;
-  a, a1, a2, a3, a4, a5: String;
 begin
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('create table IF NOT EXISTS year2015 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+  ADOQuery1.ExecSQL;
+
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
   Form1.ProgressBar1.Visible := true;
-  Form1.ProgressBar1.Max := last;
+  Form1.ProgressBar1.Max := 4820221; // какое число задавать??
   Memo1.Visible := true;
-  ADOQuery1.Connection := ADOConnection1;
-  for i := 1 to 40 do
-  begin
+
+  repeat
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
-    Memo1.Lines.Clear;
-    Memo1.Lines.Add(inttostr(i));
-    a1 := Messengge.MyAddIp('^(.*?) ', a);
-    a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
-    a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
-    a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
-    a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
-      ('INSERT IGNORE INTO test (ip,date,url,code,size) values ("' + a1 +
-      '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
-    ADOQuery1.ExecSQL;
-
-  end;
+    year := Messengge.MyAddIp('(20..):', a);
+    if year = '2015' then
+    begin
+      a1 := Messengge.MyAddIp('^(.*?) ', a);
+      a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
+      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
+      a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
+      a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add
+        ('INSERT ignore into year2015 (ip,date,url,code,size) values ("' + a1 +
+        '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '");');
+      ADOQuery1.ExecSQL;
+    end;
+  until eof(f1);
   CloseFile(f1);
   Form1.ProgressBar1.Visible := False;
+
 end;
 
-// кнопка 2 выводит таблицу
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from test;');
-  ADOQuery1.Active := true;
-  DBGrid1.Visible := true;
-  Label1.Visible := true;
-  Label1.caption := inttostr(DBGrid1.DataSource.DataSet.RecordCount);
-end;
+  ADOQuery1.SQL.Add
+    ('create table IF NOT EXISTS year2016 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+  ADOQuery1.ExecSQL;
 
-// 5 кнопка подсчет строк в файле
-procedure TForm1.Button5Click(Sender: TObject);
-begin
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
-  k := 0;
-  while not(Eof(f1)) do
-  begin
-    readln(f1);
-    inc(k);
-  end;
-  Label5.Visible := true;
-  Label5.caption := inttostr(k);
-  last := k;
+  Form1.ProgressBar1.Visible := true;
+  Form1.ProgressBar1.Max := 4820221; // какое число задавать??
+  Memo1.Visible := true;
+
+  repeat
+    readln(f1, a);
+    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+    year := Messengge.MyAddIp('(20..):', a);
+    if year = '2016' then
+    begin
+      a1 := Messengge.MyAddIp('^(.*?) ', a);
+      a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
+      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
+      a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
+      a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add
+        ('INSERT ignore into year2016 (ip,date,url,code,size) values ("' + a1 +
+        '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '");');
+      ADOQuery1.ExecSQL;
+    end;
+  until eof(f1);
   CloseFile(f1);
+  Form1.ProgressBar1.Visible := False;
+
+end;
+
+
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('create table IF NOT EXISTS year2017 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+  ADOQuery1.ExecSQL;
+
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  reset(f1);
+  Form1.ProgressBar1.Visible := true;
+  Form1.ProgressBar1.Max := 4820221; // какое число задавать??
+  Memo1.Visible := true;
+
+  repeat
+    readln(f1, a);
+    Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
+    year := Messengge.MyAddIp('(20..):', a);
+    if year = '2017' then
+    begin
+      a1 := Messengge.MyAddIp('^(.*?) ', a);
+      a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
+      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
+      a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
+      a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add
+        ('INSERT ignore into year2017 (ip,date,url,code,size) values ("' + a1 +
+        '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '");');
+      ADOQuery1.ExecSQL;
+    end;
+  until eof(f1);
+  CloseFile(f1);
+  Form1.ProgressBar1.Visible := False;
+
 end;
 
 procedure TForm1.ComboBox1Change(Sender: TObject);
@@ -155,9 +202,9 @@ var
   Ini: TIniFile;
 begin
   // подключение к базе
-  {ADOConnection1.ConnectionString :=
+  { ADOConnection1.ConnectionString :=
     'Provider=MSDASQL.1;Persist Security Info=False;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic';
- } ADOConnection1.Connected := true;
+  } ADOConnection1.Connected := true;
   //
   Messengge := TMessengge.Create;
   Ini := TIniFile.Create(ChangeFileExt(Application.ExeName, '.INI'));

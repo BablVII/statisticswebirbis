@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1095#1077#1089#1082#1080#1081' '#1091#1095#1077#1090
   ClientHeight = 426
   ClientWidth = 752
-  Color = cl3DLight
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -46,14 +46,6 @@ object Form1: TForm1
     Caption = 'POST'
     Visible = False
   end
-  object Label5: TLabel
-    Left = 696
-    Top = 55
-    Width = 31
-    Height = 13
-    Caption = 'Label5'
-    Visible = False
-  end
   object Label6: TLabel
     Left = 11
     Top = 111
@@ -82,6 +74,13 @@ object Form1: TForm1
     Height = 13
     Caption = 'PDF'
     Visible = False
+  end
+  object Label5: TLabel
+    Left = 616
+    Top = 111
+    Width = 31
+    Height = 13
+    Caption = 'Label5'
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -112,41 +111,12 @@ object Form1: TForm1
     TabOrder = 2
     Visible = False
   end
-  object Button1: TButton
-    Left = 381
-    Top = 8
-    Width = 107
-    Height = 41
-    Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1076#1072#1085#1085#1099#1077
-    TabOrder = 3
-    WordWrap = True
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Left = 506
-    Top = 8
-    Width = 102
-    Height = 41
-    Caption = #1042#1099#1074#1077#1089#1090#1080' '#1090#1072#1073#1083#1080#1094#1091
-    TabOrder = 4
-    WordWrap = True
-    OnClick = Button2Click
-  end
-  object Button5: TButton
-    Left = 631
-    Top = 8
-    Width = 113
-    Height = 41
-    Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1090#1088#1086#1082
-    TabOrder = 5
-    OnClick = Button5Click
-  end
   object ComboBox1: TComboBox
     Left = 183
     Top = 81
     Width = 145
     Height = 21
-    TabOrder = 6
+    TabOrder = 3
     Text = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1077#1088#1080#1086#1076
     OnChange = ComboBox1Change
     Items.Strings = (
@@ -160,15 +130,42 @@ object Form1: TForm1
     BorderStyle = bsNone
     Lines.Strings = (
       'Memo1')
-    TabOrder = 7
+    TabOrder = 4
     Visible = False
+  end
+  object Button1: TButton
+    Left = 669
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = '2015'
+    TabOrder = 5
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 588
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = '2016'
+    TabOrder = 6
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 507
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = '2017'
+    TabOrder = 7
+    OnClick = Button3Click
   end
   object ADOConnection1: TADOConnection
     ConnectionString = 
-      'Provider=MSDASQL.1;Persist Security Info=False;Extended Properti' +
-      'es="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID' +
-      '=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initi' +
-      'al Catalog=statistic'
+      'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User' +
+      ' ID=root;Extended Properties="DSN=statistic;UID=root;DATABASE=st' +
+      'atistic;PORT=3306";Initial Catalog=statistic'
+    LoginPrompt = False
     Provider = 'MSDASQL.1'
   end
   object ADOQuery1: TADOQuery
