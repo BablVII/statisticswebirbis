@@ -173,6 +173,7 @@ object Form1: TForm1
     Connection = ADOConnection1
     CursorType = ctStatic
     EnableBCD = False
+    ParamCheck = False
     Parameters = <>
     SQL.Strings = (
       'select * from stable')
