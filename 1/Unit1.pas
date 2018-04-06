@@ -65,14 +65,14 @@ begin
     ('create table IF NOT EXISTS year2015 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
   ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
-  Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := 4820221;
+  Form1.ProgressBar1.Min := 1;
+  Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
-    ('INSERT year2015 (ip,date,url,code,size) values ("' + a1 +
+  ADOQuery1.SQL.Add('INSERT year2015 (ip,date,url,code,size) values ("' + a1 +
     '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
   repeat
     readln(f1, a);
@@ -96,17 +96,17 @@ procedure TForm1.Button2Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS year2015 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+    ('create table IF NOT EXISTS year2016 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
   ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
-  Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := 4820221;
+  Form1.ProgressBar1.Min := 1;
+  Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
-    ('INSERT year2016 (ip,date,url,code,size) values ("' + a1 +
+  ADOQuery1.SQL.Add('INSERT year2016 (ip,date,url,code,size) values ("' + a1 +
     '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
   repeat
     readln(f1, a);
@@ -130,17 +130,17 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS year2015 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+    ('create table IF NOT EXISTS year2017 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
   ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
-  Form1.ProgressBar1.Visible := true;
   Form1.ProgressBar1.Max := 4820221;
+  Form1.ProgressBar1.Min := 1;
+  Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
-    ('INSERT year2017 (ip,date,url,code,size) values ("' + a1 +
+  ADOQuery1.SQL.Add('INSERT year2017 (ip,date,url,code,size) values ("' + a1 +
     '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
   repeat
     readln(f1, a);
@@ -159,6 +159,7 @@ begin
   CloseFile(f1);
   Form1.ProgressBar1.Visible := False;
 end;
+
 procedure TForm1.ComboBox1Change(Sender: TObject);
 begin
   case ComboBox1.ItemIndex of

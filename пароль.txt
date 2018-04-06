@@ -1,0 +1,5 @@
+statistic
+lViw0V5LHLNnWljJ
+
+
+Provider=MSDASQL.1;Persist Security Info=False;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;SERVER=192.168.125.253;UID=statistic;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic
