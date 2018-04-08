@@ -16,71 +16,11 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 1
-    Top = 370
-    Width = 85
-    Height = 13
-    Caption = #1057#1090#1088#1086#1082' '#1074' '#1090#1072#1073#1083#1080#1094#1077
-    Visible = False
-  end
-  object Label2: TLabel
-    Left = 11
-    Top = 130
-    Width = 19
-    Height = 13
-    Caption = 'GET'
-    Visible = False
-  end
-  object Label3: TLabel
     Left = 8
-    Top = 84
-    Width = 157
+    Top = 48
+    Width = 225
     Height = 13
-    Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1086#1073#1088#1072#1097#1077#1085#1080#1081
-  end
-  object Label4: TLabel
-    Left = 70
-    Top = 130
-    Width = 26
-    Height = 13
-    Caption = 'POST'
-    Visible = False
-  end
-  object Label6: TLabel
-    Left = 11
-    Top = 111
-    Width = 17
-    Height = 13
-    Caption = 'Get'
-  end
-  object Label7: TLabel
-    Left = 70
-    Top = 111
-    Width = 21
-    Height = 13
-    Caption = 'Post'
-  end
-  object Label8: TLabel
-    Left = 126
-    Top = 111
-    Width = 21
-    Height = 13
-    Caption = 'Post'
-  end
-  object Label9: TLabel
-    Left = 126
-    Top = 130
-    Width = 19
-    Height = 13
-    Caption = 'PDF'
-    Visible = False
-  end
-  object Label5: TLabel
-    Left = 616
-    Top = 111
-    Width = 31
-    Height = 13
-    Caption = 'Label5'
+    Caption = #1050#1086#1083'-'#1074#1086' '#1091#1085#1080#1082#1072#1083#1100#1085#1099#1093' ip '#1089#1088#1077#1076#1080' '#1089#1082#1072#1095#1077#1085#1085#1099#1093' pdf:'
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -112,8 +52,8 @@ object Form1: TForm1
     Visible = False
   end
   object ComboBox1: TComboBox
-    Left = 183
-    Top = 81
+    Left = 8
+    Top = 8
     Width = 145
     Height = 21
     TabOrder = 3
@@ -160,6 +100,13 @@ object Form1: TForm1
     TabOrder = 7
     OnClick = Button3Click
   end
+  object Edit1: TEdit
+    Left = 248
+    Top = 45
+    Width = 121
+    Height = 21
+    TabOrder = 8
+  end
   object ADOConnection1: TADOConnection
     ConnectionString = 
       'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User' +
@@ -167,6 +114,8 @@ object Form1: TForm1
       'atistic;PORT=3306";Initial Catalog=statistic'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
+    Left = 16
+    Top = 368
   end
   object ADOQuery1: TADOQuery
     AutoCalcFields = False
@@ -177,16 +126,19 @@ object Form1: TForm1
     Parameters = <>
     SQL.Strings = (
       'select * from stable')
-    Left = 32
+    Left = 64
+    Top = 368
   end
   object DataSource1: TDataSource
     DataSet = ADOQuery1
-    Left = 64
+    Left = 104
+    Top = 368
   end
   object ADOTable1: TADOTable
     Connection = ADOConnection1
     CursorType = ctStatic
     TableName = 'stable'
-    Left = 96
+    Left = 136
+    Top = 368
   end
 end

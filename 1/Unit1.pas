@@ -19,20 +19,13 @@ type
     ADOTable1: TADOTable;
     DBGrid1: TDBGrid;
     ProgressBar1: TProgressBar;
-    Label1: TLabel;
-    Label2: TLabel;
     ComboBox1: TComboBox;
-    Label3: TLabel;
     Memo1: TMemo;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Label5: TLabel;
+    Label1: TLabel;
+    Edit1: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -71,9 +64,6 @@ begin
   Form1.ProgressBar1.Min := 1;
   Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('INSERT year2015 (ip,date,url,code,size) values ("' + a1 +
-    '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
   repeat
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -85,7 +75,12 @@ begin
       a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
       a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
       a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-      ADOQuery1.ExecSQL;
+      ADOQuery.Close;
+      ADOQuery.SQL.Clear;
+      ADOQuery1.SQL.Add('INSERT year2015 (ip,date,url,code,size) values ("' + a1
+        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
+      ADOQuery.Open;
+      ADOQuery.Active := true;
     end;
   until eof(f1);
   CloseFile(f1);
@@ -105,9 +100,7 @@ begin
   Form1.ProgressBar1.Min := 1;
   Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('INSERT year2016 (ip,date,url,code,size) values ("' + a1 +
-    '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
+
   repeat
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -119,7 +112,12 @@ begin
       a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
       a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
       a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-      ADOQuery1.ExecSQL;
+      ADOQuery.Close;
+      ADOQuery.SQL.Clear;
+      ADOQuery1.SQL.Add('INSERT year2016 (ip,date,url,code,size) values ("' + a1
+        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
+      ADOQuery.Open;
+      ADOQuery.Active := true;
     end;
   until eof(f1);
   CloseFile(f1);
@@ -139,9 +137,6 @@ begin
   Form1.ProgressBar1.Min := 1;
   Form1.ProgressBar1.Visible := true;
   Memo1.Visible := true;
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('INSERT year2017 (ip,date,url,code,size) values ("' + a1 +
-    '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
   repeat
     readln(f1, a);
     Form1.ProgressBar1.Position := Form1.ProgressBar1.Position + 1;
@@ -153,7 +148,12 @@ begin
       a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
       a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
       a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-      ADOQuery1.ExecSQL;
+       ADOQuery.Close;
+      ADOQuery.SQL.Clear;
+      ADOQuery1.SQL.Add('INSERT year2017 (ip,date,url,code,size) values ("' + a1
+        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '") ;');
+      ADOQuery.Open;
+      ADOQuery.Active := true;
     end;
   until eof(f1);
   CloseFile(f1);
@@ -165,26 +165,12 @@ begin
   case ComboBox1.ItemIndex of
     0:
       begin
+        ADOQuery1.Close;
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
-          ('select count(*) as kol from stable where url like ''%GET%'';');
+          ('select count(*) DISTINCT ip from stable where url like ''%pdf%'';');
         ADOQuery1.Open;
-        Label2.Visible := true;
-        DBGrid1.Visible := true;
-        Label2.caption := inttostr(ADOQuery1.FieldByName('kol').AsInteger);
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) as kol1 from stable where url like ''%POST%'';');
-        ADOQuery1.Open;
-        Label4.Visible := true;
-        Label4.caption := inttostr(ADOQuery1.FieldByName('kol1').AsInteger);
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) as kol2 from stable where url like ''%PDF%'';');
-        ADOQuery1.Open;
-        Label9.Visible := true;
-        Label9.caption := inttostr(ADOQuery1.FieldByName('kol2').AsInteger);
-        DBGrid1.Visible := False;
+
       end;
   end;
 end;
