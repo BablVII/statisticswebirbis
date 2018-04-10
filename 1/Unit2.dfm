@@ -54,9 +54,7 @@ object Form2: TForm2
     TabOrder = 1
     OnChange = ComboBox1Change
     Items.Strings = (
-      #1053#1077#1076#1077#1083#1103
-      #1052#1077#1089#1103#1094
-      #1043#1086#1076)
+      #1054#1073#1097#1072#1103)
   end
   object StringGrid1: TStringGrid
     Left = 8

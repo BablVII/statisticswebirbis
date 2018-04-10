@@ -31,7 +31,7 @@ type
   public
     last: integer;
     f1: TextFile;
-    a, a1, year: string;
+    a, a1,a2, a3,a4,a5,year: string;
     { Public declarations }
   end;
 
@@ -65,32 +65,46 @@ begin
     year := Messengge.MyAddIp('\/(20..):', a1);
     if year = '2016' then
     begin
+      a1 := Messengge.MyAddIp('^(.*?) ', a);
+      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
+      a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
+      a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
       ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add('insert into year2016(ip,date,url,code,size) values("' +
-        Messengge.MyAddIp('^(.*?) ', a) + '", "' +
-        Messengge.MyAddIp('- - \[(.*?) ', a) + '", "' +
-        Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a) + '", "' +
-        Messengge.MyAddIp('".*?" (.*?) ', a) + '", "' +
-        Messengge.MyAddIp('" \d+ (.*?)$', a) + '");');
+      ADOQuery1.SQL.Add('INSERT into year2016 (ip,date,url,code,size) values ("' + a1
+        + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '");');
       ADOQuery1.ExecSQL;
     end;
   until eof(f1);
   CloseFile(f1);
   ProgressBar1.Visible := False;
+  ProgressBar1.Position :=0;
 end;
 
 procedure TForm2.ComboBox1Change(Sender: TObject);
 begin
   StringGrid1.Visible := true;
-  { case ComboBox1.ItemIndex of
+  case ComboBox1.ItemIndex of
     0:
-    begin
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
-    ('select count(ip) DISTINCT ip from stable where url like ''%pdf%'';');
-    ADOQuery1.Open;
-    end;
-    end; }
+      begin
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip))  from stable where url like ''%pdf%'';');
+        ADOQuery1.Open;
+        StringGrid1.Cells[1, 1] := IntToStr(AdoQuery1.Fields[0].AsInteger);
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) from stable where url like ''%pdf%'';');
+        ADOQuery1.Open;
+        StringGrid1.Cells[1, 2] := IntToStr(AdoQuery1.Fields[0].AsInteger);
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip)) from stable;');
+        ADOQuery1.Open;
+        StringGrid1.Cells[1, 3] := IntToStr(AdoQuery1.Fields[0].AsInteger);
+      end;
+  end;
 end;
 
 procedure TForm2.FormActivate(Sender: TObject);
@@ -111,9 +125,9 @@ begin
   StringGrid1.Cells[0, 0] := 'Запрос';
   StringGrid1.Cells[1, 0] := 'Количество';
 
-  StringGrid1.Cells[0, 1] := 'Кол-во уникальных ip(pdf)';
-  StringGrid1.Cells[0, 2] := 'Кол-во обращений';
-  StringGrid1.Cells[0, 3] := 'Кол-во уникальных ip';
+  StringGrid1.Cells[0, 1] := 'Количество авторизаций';
+  StringGrid1.Cells[0, 2] := 'Количество просмотров(книговыдача)';
+  StringGrid1.Cells[0, 3] := 'Количество виртуальных посещений';
   try
     Top := Ini.ReadInteger('Form', 'Top', 100);
     Left := Ini.ReadInteger('Form', 'Left', 100);
