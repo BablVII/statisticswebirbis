@@ -65,7 +65,7 @@ object Form2: TForm2
     Color = 6832446
     ParentBackground = False
     TabOrder = 4
-    object FakeButton1_Statistic: TLabel
+    object Statistic: TLabel
       Tag = 1
       Left = 38
       Top = 40
@@ -78,11 +78,11 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = FakeButton1_StatisticClick
-      OnMouseMove = FakeButton1_StatisticMouseMove
-      OnMouseLeave = FakeButton4_ExitMouseLeave
+      OnClick = StatisticClick
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
     end
-    object FakeButton2_Diag: TLabel
+    object Diagramm: TLabel
       Tag = 2
       Left = 38
       Top = 62
@@ -95,11 +95,11 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = FakeButton2_DiagClick
-      OnMouseMove = FakeButton1_StatisticMouseMove
-      OnMouseLeave = FakeButton4_ExitMouseLeave
+      OnClick = DiagrammClick
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
     end
-    object FakeButton3_Update: TLabel
+    object Update: TLabel
       Tag = 3
       Left = 38
       Top = 304
@@ -112,11 +112,11 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = FakeButton3_UpdateClick
-      OnMouseMove = FakeButton1_StatisticMouseMove
-      OnMouseLeave = FakeButton4_ExitMouseLeave
+      OnClick = UpdateClick
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
     end
-    object FakeButton4_Exit: TLabel
+    object Exit: TLabel
       Tag = 4
       Left = 38
       Top = 326
@@ -129,9 +129,9 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = FakeButton4_ExitClick
-      OnMouseMove = FakeButton1_StatisticMouseMove
-      OnMouseLeave = FakeButton4_ExitMouseLeave
+      OnClick = ExitClick
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
     end
     object Icon1_Statistic: TImage
       Left = 16
@@ -1374,8 +1374,8 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
-      OnMouseMove = FakeButton1_StatisticMouseMove
-      OnMouseLeave = FakeButton4_ExitMouseLeave
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
     end
     object Icon5_Excel: TImage
       Left = 421

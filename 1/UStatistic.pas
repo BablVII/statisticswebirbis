@@ -19,10 +19,10 @@ type
     Head: TPanel;
     Title_1: TLabel;
     Title_2: TLabel;
-    FakeButton1_Statistic: TLabel;
-    FakeButton2_Diag: TLabel;
-    FakeButton3_Update: TLabel;
-    FakeButton4_Exit: TLabel;
+    Statistic: TLabel;
+    Diagramm: TLabel;
+    Update: TLabel;
+    Exit: TLabel;
     Year2015: TLabel;
     Year2016: TLabel;
     Year2017: TLabel;
@@ -38,17 +38,17 @@ type
     ADOQuery1: TADOQuery;
     ProgressBar1: TProgressBar;
     procedure FormActivate(Sender: TObject);
-    procedure FakeButton4_ExitClick(Sender: TObject);
-    procedure FakeButton1_StatisticMouseMove(Sender: TObject;
+    procedure ExitClick(Sender: TObject);
+    procedure StatisticMouseMove(Sender: TObject;
       Shift: TShiftState; X, Y: Integer);
-    procedure FakeButton4_ExitMouseLeave(Sender: TObject);
+    procedure ExitMouseLeave(Sender: TObject);
     procedure Year2015Click(Sender: TObject);
     procedure Year2016Click(Sender: TObject);
     procedure Year2017Click(Sender: TObject);
     procedure Year2018Click(Sender: TObject);
-    procedure FakeButton3_UpdateClick(Sender: TObject);
-    procedure FakeButton1_StatisticClick(Sender: TObject);
-    procedure FakeButton2_DiagClick(Sender: TObject);
+    procedure UpdateClick(Sender: TObject);
+    procedure StatisticClick(Sender: TObject);
+    procedure DiagrammClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -77,7 +77,7 @@ begin
   Messengge := TMessengge.Create;
 end;
 
-procedure TForm2.FakeButton3_UpdateClick(Sender: TObject);
+procedure TForm2.UpdateClick(Sender: TObject);
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
@@ -111,7 +111,7 @@ begin
   ProgressBar1.Position := 0;
 end;
 
-procedure TForm2.FakeButton1_StatisticClick(Sender: TObject);
+procedure TForm2.StatisticClick(Sender: TObject);
 begin
   Year2015.Visible := true;
   Year2016.Visible := true;
@@ -119,7 +119,7 @@ begin
   Year2018.Visible := true;
 end;
 
-procedure TForm2.FakeButton2_DiagClick(Sender: TObject);
+procedure TForm2.DiagrammClick(Sender: TObject);
 begin
   Excel.Visible := False;
   Year2015.Visible := False;
@@ -158,18 +158,18 @@ begin
 end;
 
 // интерфейс
-procedure TForm2.FakeButton1_StatisticMouseMove(Sender: TObject;
+procedure TForm2.StatisticMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
   FakeButton_MouseMove(Sender);
 end;
 
-procedure TForm2.FakeButton4_ExitMouseLeave(Sender: TObject);
+procedure TForm2.ExitMouseLeave(Sender: TObject);
 begin
   FakeButton_MouseLeave(Sender);
 end;
 
-procedure TForm2.FakeButton4_ExitClick(Sender: TObject);
+procedure TForm2.ExitClick(Sender: TObject);
 begin
   Form1.Close;
 end;

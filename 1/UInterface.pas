@@ -23,13 +23,13 @@ procedure FakeButton_MouseMove(Sender: TObject);
 begin
   case TComponent(Sender).Tag of
     1:
-      form2.FakeButton1_Statistic.Font.Color := RGB(255, 255, 255);
+      form2.Statistic.Font.Color := RGB(255, 255, 255);
     2:
-      form2.FakeButton2_Diag.Font.Color := RGB(255, 255, 255);
+      form2.Diagramm.Font.Color := RGB(255, 255, 255);
     3:
-      form2.FakeButton3_Update.Font.Color := RGB(255, 255, 255);
+      form2.Update.Font.Color := RGB(255, 255, 255);
     4:
-      form2.FakeButton4_Exit.Font.Color := RGB(255, 255, 255);
+      form2.Exit.Font.Color := RGB(255, 255, 255);
     9:
       form2.Excel.Font.Color := RGB(62, 65, 104);
   end;
@@ -39,13 +39,13 @@ procedure FakeButton_MouseLeave(Sender: TObject);
 begin
   case TComponent(Sender).Tag of
     1:
-      form2.FakeButton1_Statistic.Font.Color := RGB(179, 182, 203);
+      form2.Statistic.Font.Color := RGB(179, 182, 203);
     2:
-      form2.FakeButton2_Diag.Font.Color := RGB(179, 182, 203);
+      form2.Diagramm.Font.Color := RGB(179, 182, 203);
     3:
-      form2.FakeButton3_Update.Font.Color := RGB(179, 182, 203);
+      form2.Update.Font.Color := RGB(179, 182, 203);
     4:
-      form2.FakeButton4_Exit.Font.Color := RGB(179, 182, 203);
+      form2.Exit.Font.Color := RGB(179, 182, 203);
     9:
       form2.Excel.Font.Color := RGB(179, 182, 203);
   end;
