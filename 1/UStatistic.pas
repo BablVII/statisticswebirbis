@@ -39,8 +39,8 @@ type
     ProgressBar1: TProgressBar;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
-    procedure StatisticMouseMove(Sender: TObject;
-      Shift: TShiftState; X, Y: Integer);
+    procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
     procedure ExitMouseLeave(Sender: TObject);
     procedure Year2015Click(Sender: TObject);
     procedure Year2016Click(Sender: TObject);
@@ -55,7 +55,7 @@ type
   public
     { Public declarations }
     f1: TextFile;
-    a, a1, a2, a3, a4, a5, year: string;
+
   end;
 
 var
@@ -78,13 +78,15 @@ begin
 end;
 
 procedure TForm2.UpdateClick(Sender: TObject);
+var
+  a, a1, a2, a3, a4, a5, year: string;
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('create table IF NOT EXISTS year2016 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
   ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
+  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
   reset(f1);
   ProgressBar1.Max := 4820221;
   ProgressBar1.Min := 1;
@@ -92,8 +94,8 @@ begin
   repeat
     readln(f1, a);
     ProgressBar1.Position := ProgressBar1.Position + 1;
-    a1 := Messengge.MyAddIp('- - \[(.*?) ', a);
-    year := Messengge.MyAddIp('\/(20..):', a1);
+    a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
+    year := Messengge.MyAddIp('\/(20..):', a2);
     if year = '2016' then
     begin
       a1 := Messengge.MyAddIp('^(.*?) ', a);
@@ -101,14 +103,13 @@ begin
       a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
       a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
       ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add('INSERT into year2016 (ip,date,url,code,size) values ("'
-        + a1 + '", "' + a2 + '","' + a3 + '","' + a4 + '","' + a5 + '");');
+      ADOQuery1.SQL.Add('insert into stable(ip, date, url, code, size) values("'
+        + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
       ADOQuery1.ExecSQL;
     end;
   until eof(f1);
   CloseFile(f1);
-  ProgressBar1.Visible := False;
-  ProgressBar1.Position := 0;
+ProgressBar1.Visible := False;
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
@@ -158,8 +159,8 @@ begin
 end;
 
 // интерфейс
-procedure TForm2.StatisticMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
+procedure TForm2.StatisticMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
 begin
   FakeButton_MouseMove(Sender);
 end;
