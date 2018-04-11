@@ -78,6 +78,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = FakeButton1_StatisticClick
       OnMouseMove = FakeButton1_StatisticMouseMove
       OnMouseLeave = FakeButton4_ExitMouseLeave
     end
@@ -94,6 +95,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = FakeButton2_DiagClick
       OnMouseMove = FakeButton1_StatisticMouseMove
       OnMouseLeave = FakeButton4_ExitMouseLeave
     end
@@ -1307,6 +1309,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = Year2015Click
     end
     object Year2016: TLabel
@@ -1322,6 +1325,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = Year2016Click
     end
     object Year2017: TLabel
@@ -1337,6 +1341,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = Year2017Click
     end
     object Year2018: TLabel
@@ -1352,6 +1357,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = Year2018Click
     end
     object Excel: TLabel
@@ -1367,6 +1373,7 @@ object Form2: TForm2
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnMouseMove = FakeButton1_StatisticMouseMove
       OnMouseLeave = FakeButton4_ExitMouseLeave
     end
@@ -1648,6 +1655,7 @@ object Form2: TForm2
         E34EE2A99E929278BAF307BBE7C265E99B1193A1977EF5C6D7865C1E4E9AA6A5
         AAF1D5FB7DE12B30921F2348191A38D94FB0B6E5CCBB70BBBE8AAC68E56A0541
         D2C720F020F974FA5ACA550E3875FFD9}
+      Visible = False
     end
     object ProgressBar1: TProgressBar
       Left = 0
@@ -1664,8 +1672,8 @@ object Form2: TForm2
       ' ID=root;Data Source=statistic;Initial Catalog=statistic'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
-    Left = 7
-    Top = 154
+    Left = 23
+    Top = 162
   end
   object ADOQuery1: TADOQuery
     Connection = ADOConnection1
@@ -1673,7 +1681,7 @@ object Form2: TForm2
     Parameters = <>
     SQL.Strings = (
       'use statistic;')
-    Left = 57
-    Top = 153
+    Left = 25
+    Top = 209
   end
 end

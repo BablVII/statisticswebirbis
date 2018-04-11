@@ -47,7 +47,8 @@ type
     procedure Year2017Click(Sender: TObject);
     procedure Year2018Click(Sender: TObject);
     procedure FakeButton3_UpdateClick(Sender: TObject);
-
+    procedure FakeButton1_StatisticClick(Sender: TObject);
+    procedure FakeButton2_DiagClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -70,7 +71,6 @@ uses UAuthorization, UInterface;
 procedure TForm2.FormActivate(Sender: TObject);
 begin
   Form1.hide;
-
   ADOConnection1.ConnectionString :=
     'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;UID=root;PWD=1234;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic';
   ADOConnection1.Connected := true;
@@ -86,12 +86,12 @@ begin
 
   AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\access.log');
   reset(f1);
-  progressbar1.Max := 4820221;
-  progressbar1.Min:= 1;
-  progressbar1.Visible := true;
+  ProgressBar1.Max := 4820221;
+  ProgressBar1.Min := 1;
+  ProgressBar1.Visible := true;
   repeat
     readln(f1, a);
-    progressbar1.Position := progressbar1.Position   + 1;
+    ProgressBar1.Position := ProgressBar1.Position + 1;
     a1 := Messengge.MyAddIp('- - \[(.*?) ', a);
     year := Messengge.MyAddIp('\/(20..):', a1);
     if year = '2016' then
@@ -107,8 +107,54 @@ begin
     end;
   until eof(f1);
   CloseFile(f1);
-   progressbar1.Visible  := False;
-  progressbar1.Position  := 0;
+  ProgressBar1.Visible := False;
+  ProgressBar1.Position := 0;
+end;
+
+procedure TForm2.FakeButton1_StatisticClick(Sender: TObject);
+begin
+  Year2015.Visible := true;
+  Year2016.Visible := true;
+  Year2017.Visible := true;
+  Year2018.Visible := true;
+end;
+
+procedure TForm2.FakeButton2_DiagClick(Sender: TObject);
+begin
+  Excel.Visible := False;
+  Year2015.Visible := False;
+  Year2016.Visible := False;
+  Year2017.Visible := False;
+  Year2018.Visible := False;
+  Icon5_Excel.Visible := False;
+end;
+
+procedure TForm2.Year2015Click(Sender: TObject);
+begin
+  FakeButton_Click(Sender);
+  Excel.Visible := true;
+  Icon5_Excel.Visible := true;
+end;
+
+procedure TForm2.Year2016Click(Sender: TObject);
+begin
+  FakeButton_Click(Sender);
+  Excel.Visible := true;
+  Icon5_Excel.Visible := true;
+end;
+
+procedure TForm2.Year2017Click(Sender: TObject);
+begin
+  FakeButton_Click(Sender);
+  Excel.Visible := true;
+  Icon5_Excel.Visible := true;
+end;
+
+procedure TForm2.Year2018Click(Sender: TObject);
+begin
+  FakeButton_Click(Sender);
+  Excel.Visible := true;
+  Icon5_Excel.Visible := true;
 end;
 
 // интерфейс
@@ -121,26 +167,6 @@ end;
 procedure TForm2.FakeButton4_ExitMouseLeave(Sender: TObject);
 begin
   FakeButton_MouseLeave(Sender);
-end;
-
-procedure TForm2.Year2015Click(Sender: TObject);
-begin
-  FakeButton_Click(Sender);
-end;
-
-procedure TForm2.Year2016Click(Sender: TObject);
-begin
-  FakeButton_Click(Sender);
-end;
-
-procedure TForm2.Year2017Click(Sender: TObject);
-begin
-  FakeButton_Click(Sender);
-end;
-
-procedure TForm2.Year2018Click(Sender: TObject);
-begin
-  FakeButton_Click(Sender);
 end;
 
 procedure TForm2.FakeButton4_ExitClick(Sender: TObject);
