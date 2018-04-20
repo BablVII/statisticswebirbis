@@ -37,6 +37,16 @@ type
     ADOConnection1: TADOConnection;
     ADOQuery1: TADOQuery;
     ProgressBar1: TProgressBar;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    ComboBox1: TComboBox;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -49,6 +59,8 @@ type
     procedure UpdateClick(Sender: TObject);
     procedure StatisticClick(Sender: TObject);
     procedure DiagrammClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+
 
   private
     { Private declarations }
@@ -109,7 +121,7 @@ begin
     end;
   until eof(f1);
   CloseFile(f1);
-ProgressBar1.Visible := False;
+  ProgressBar1.Visible := False;
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
@@ -118,6 +130,83 @@ begin
   Year2016.Visible := true;
   Year2017.Visible := true;
   Year2018.Visible := true;
+end;
+
+
+procedure TForm2.ComboBox1Change(Sender: TObject);
+begin
+case ComboBox1.ItemIndex of
+    0:
+      begin
+        Label1.Visible := true;
+        Label2.Visible := true;
+        Label3.Visible := true;
+        Label4.Visible := true;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%2015%'' ;');
+        ADOQuery1.Open;
+        Label5.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label5.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) from stable where url like ''%pdf%'' and date like ''%2015%'';');
+        ADOQuery1.Open;
+        Label6.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label6.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip)) from stable where date like ''%2015%'';');
+        ADOQuery1.Open;
+        Label7.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label7.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) from stable where date like ''%2015%'';');
+        ADOQuery1.Open;
+        Label8.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label8.Visible := true;
+      end;
+    1:
+      begin
+        Label1.Visible := true;
+        Label2.Visible := true;
+        Label3.Visible := true;
+        Label4.Visible := true;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'' ;');
+        ADOQuery1.Open;
+        Label5.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label5.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'';');
+        ADOQuery1.Open;
+        Label6.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label6.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(DISTINCT (ip)) from stable where date like ''%/Jan/2015%'';');
+        ADOQuery1.Open;
+        Label7.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label7.Visible := true;
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('select count(*) from stable where date like ''%/Jan/2015%'';');
+        ADOQuery1.Open;
+        Label8.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label8.Visible := true;
+
+      end;
+
+  end;
 end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
@@ -132,10 +221,13 @@ end;
 
 procedure TForm2.Year2015Click(Sender: TObject);
 begin
+  Panel1.Visible := true;
   FakeButton_Click(Sender);
   Excel.Visible := true;
   Icon5_Excel.Visible := true;
+
 end;
+
 
 procedure TForm2.Year2016Click(Sender: TObject);
 begin
@@ -157,6 +249,7 @@ begin
   Excel.Visible := true;
   Icon5_Excel.Visible := true;
 end;
+
 
 // интерфейс
 procedure TForm2.StatisticMouseMove(Sender: TObject; Shift: TShiftState;

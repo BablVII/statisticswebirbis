@@ -87,8 +87,8 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  login := 'login';  // 'login';
-  pass := '1234';     //'1234';
+  login := '1';  // 'login';
+  pass := '1';     //'1234';
 end;
 
 end.
