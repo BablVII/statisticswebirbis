@@ -3,7 +3,7 @@ object Form2: TForm2
   Top = 0
   BorderStyle = bsNone
   Caption = 'Form2'
-  ClientHeight = 399
+  ClientHeight = 403
   ClientWidth = 713
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object Form2: TForm2
     Left = 0
     Top = 41
     Width = 145
-    Height = 357
+    Height = 362
     BevelOuter = bvNone
     Color = 6832446
     ParentBackground = False
@@ -1252,14 +1252,14 @@ object Form2: TForm2
     Left = 144
     Top = 41
     Width = 572
-    Height = 359
+    Height = 362
     BevelOuter = bvNone
     Color = 15657959
     ParentBackground = False
     TabOrder = 2
     object Year2015: TLabel
       Tag = 5
-      Left = 368
+      Left = 392
       Top = 5
       Width = 32
       Height = 14
@@ -1275,7 +1275,7 @@ object Form2: TForm2
     end
     object Year2016: TLabel
       Tag = 6
-      Left = 413
+      Left = 437
       Top = 5
       Width = 32
       Height = 14
@@ -1291,7 +1291,7 @@ object Form2: TForm2
     end
     object Year2017: TLabel
       Tag = 7
-      Left = 459
+      Left = 483
       Top = 5
       Width = 32
       Height = 14
@@ -1307,7 +1307,7 @@ object Form2: TForm2
     end
     object Year2018: TLabel
       Tag = 8
-      Left = 504
+      Left = 528
       Top = 5
       Width = 32
       Height = 14
@@ -1323,7 +1323,7 @@ object Form2: TForm2
     end
     object Excel: TLabel
       Tag = 9
-      Left = 444
+      Left = 468
       Top = 319
       Width = 92
       Height = 16
@@ -1339,7 +1339,7 @@ object Form2: TForm2
       OnMouseLeave = ExitMouseLeave
     end
     object Icon5_Excel: TImage
-      Left = 421
+      Left = 445
       Top = 320
       Width = 16
       Height = 16
@@ -1622,182 +1622,9 @@ object Form2: TForm2
       Left = 0
       Top = 341
       Width = 569
-      Height = 17
+      Height = 20
       TabOrder = 0
       Visible = False
-    end
-    object Panel1: TPanel
-      Left = 24
-      Top = 49
-      Width = 505
-      Height = 192
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 1
-      Visible = False
-      object Label1: TLabel
-        Left = 15
-        Top = 53
-        Width = 202
-        Height = 21
-        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1072#1074#1090#1086#1088#1080#1079#1072#1094#1080#1081':'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object Label2: TLabel
-        Left = 12
-        Top = 80
-        Width = 307
-        Height = 21
-        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1088#1086#1089#1084#1086#1090#1088#1086#1074'('#1082#1085#1080#1075#1086#1074#1099#1076#1072#1095#1072'):'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object Label3: TLabel
-        Left = 15
-        Top = 107
-        Width = 295
-        Height = 21
-        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074#1080#1088#1090#1091#1072#1083#1100#1085#1099#1093' '#1087#1086#1089#1077#1097#1077#1085#1080#1081':'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object Label4: TLabel
-        Left = 15
-        Top = 145
-        Width = 151
-        Height = 21
-        Caption = #1044#1072#1085#1085#1099#1077' '#1079#1072' '#1087#1077#1088#1080#1086#1076':'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object Label5: TLabel
-        Left = 447
-        Top = 50
-        Width = 6
-        Height = 24
-        BiDiMode = bdRightToLeft
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -20
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBiDiMode = False
-        ParentFont = False
-        Transparent = False
-        Visible = False
-      end
-      object Label6: TLabel
-        Left = 447
-        Top = 95
-        Width = 6
-        Height = 24
-        BiDiMode = bdRightToLeft
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -20
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBiDiMode = False
-        ParentFont = False
-        Transparent = False
-        Visible = False
-      end
-      object Label7: TLabel
-        Left = 447
-        Top = 145
-        Width = 6
-        Height = 24
-        BiDiMode = bdRightToLeft
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -20
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBiDiMode = False
-        ParentFont = False
-        Transparent = False
-        Visible = False
-      end
-      object Label8: TLabel
-        Left = 447
-        Top = 196
-        Width = 6
-        Height = 24
-        BiDiMode = bdRightToLeft
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -20
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBiDiMode = False
-        ParentFont = False
-        Transparent = False
-        Visible = False
-      end
-      object ComboBox1: TComboBox
-        Left = 12
-        Top = 9
-        Width = 474
-        Height = 29
-        Color = 15657959
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        Text = #1055#1077#1088#1080#1086#1076
-        OnChange = ComboBox1Change
-        Items.Strings = (
-          #1043#1086#1076
-          #1071#1085#1074#1072#1088#1100
-          #1060#1077#1074#1088#1072#1083#1100
-          #1052#1072#1088#1090
-          #1040#1087#1088#1077#1083#1100
-          #1052#1072#1081
-          #1048#1102#1085#1100
-          #1048#1102#1083#1100
-          #1040#1074#1075#1091#1089#1090' '
-          #1057#1077#1085#1090#1103#1073#1088#1100
-          #1054#1082#1090#1103#1073#1088#1100
-          #1053#1086#1103#1073#1088#1100' '
-          #1044#1077#1082#1072#1073#1088#1100)
-      end
-    end
-    object Memo1: TMemo
-      Left = 24
-      Top = 279
-      Width = 177
-      Height = 42
-      Lines.Strings = (
-        'Memo1')
-      TabOrder = 2
     end
   end
   object ADOConnection1: TADOConnection
@@ -1811,6 +1638,7 @@ object Form2: TForm2
   end
   object ADOQuery1: TADOQuery
     Connection = ADOConnection1
+    CommandTimeout = 100000
     ParamCheck = False
     Parameters = <>
     SQL.Strings = (

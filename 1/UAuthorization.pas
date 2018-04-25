@@ -10,10 +10,6 @@ uses
 
 type
   TForm1 = class(TForm)
-    BorderTop: TPanel;
-    BorderBottom: TPanel;
-    BorderLeft: TPanel;
-    BorderRight: TPanel;
     Authorization: TLabel;
     Head: TPanel;
     icon1_user: TImage;

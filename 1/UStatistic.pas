@@ -33,17 +33,6 @@ type
     ADOConnection1: TADOConnection;
     ADOQuery1: TADOQuery;
     ProgressBar1: TProgressBar;
-    Panel1: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    ComboBox1: TComboBox;
-    Memo1: TMemo;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -56,8 +45,6 @@ type
     procedure UpdateClick(Sender: TObject);
     procedure StatisticClick(Sender: TObject);
     procedure DiagrammClick(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
-
     procedure HeadMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
 
@@ -66,7 +53,7 @@ type
   public
     { Public declarations }
     f1: TextFile;
-
+    jan, feb, mar, apr, may, june, jule, aug, sept, oct, nov, dec: string;
   end;
 
 var
@@ -93,18 +80,18 @@ var
   i: Integer;
   a, a1, a2, a3, a4, a5, year: string;
 begin
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
+  { ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add
     ('create table IF NOT EXISTS stable1 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
-  ADOQuery1.ExecSQL;
+    ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\Apache-2.4_queriesa.log');
-  reset(f1);
-  ProgressBar1.Max := 580003;
-  ProgressBar1.Min := 1;
-  ProgressBar1.Visible := true;
-  for i := 1 to 580003 do
-  begin
+    AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\Apache-2.4_queriesa.log');
+    reset(f1);
+    ProgressBar1.Max := 580003;
+    ProgressBar1.Min := 1;
+    ProgressBar1.Visible := true;
+    for i := 1 to 580003 do
+    begin
     readln(f1, a);
     Memo1.Lines.Add(inttostr(i));
     ProgressBar1.Position := ProgressBar1.Position + 1;
@@ -112,14 +99,14 @@ begin
     a2 := Messengge.MyAddIp('\[(.*?) ', a);
     a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|404)', a);
     a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a);
-    a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
-    ADOQuery1.SQL.Clear;
+  }// a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
+  { ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add('insert into stable1 (ip, date, url, code, size) values("'
-      + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
+    + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
     ADOQuery1.ExecSQL;
-  end;
-  CloseFile(f1);
-  ProgressBar1.Visible := False;
+    end;
+    CloseFile(f1);
+    ProgressBar1.Visible := False; }
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
@@ -128,88 +115,6 @@ begin
   Year2016.Visible := true;
   Year2017.Visible := true;
   Year2018.Visible := true;
-end;
-
-{ case
-  0 procedure x (date(''''#39'%2015%'#39''''))
-  1
-  2
-  3 }
-
-procedure TForm2.ComboBox1Change(Sender: TObject);
-begin
-  case ComboBox1.ItemIndex of
-    0:
-      begin
-        Label1.Visible := true;
-        Label2.Visible := true;
-        Label3.Visible := true;
-        Label4.Visible := true;
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%2015%'' ;');
-        ADOQuery1.Open;
-        Label5.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label5.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) from stable where url like ''%pdf%'' and date like ''%2015%'';');
-        ADOQuery1.Open;
-        Label6.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label6.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(DISTINCT (ip)) from stable where date like ''%2015%'';');
-        ADOQuery1.Open;
-        Label7.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label7.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) from stable where date like ''%2015%'';');
-        ADOQuery1.Open;
-        Label8.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label8.Visible := true;
-      end;
-    1:
-      begin
-        Label1.Visible := true;
-        Label2.Visible := true;
-        Label3.Visible := true;
-        Label4.Visible := true;
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'' ;');
-        ADOQuery1.Open;
-        Label5.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label5.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'';');
-        ADOQuery1.Open;
-        Label6.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label6.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(DISTINCT (ip)) from stable where date like ''%/Jan/2015%'';');
-        ADOQuery1.Open;
-        Label7.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label7.Visible := true;
-
-        ADOQuery1.SQL.Clear;
-        ADOQuery1.SQL.Add
-          ('select count(*) from stable where date like ''%/Jan/2015%'';');
-        ADOQuery1.Open;
-        Label8.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
-        Label8.Visible := true;
-
-      end;
-
-  end;
 end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
@@ -224,11 +129,342 @@ end;
 
 procedure TForm2.Year2015Click(Sender: TObject);
 begin
-  Panel1.Visible := true;
+
   FakeButton_Click(Sender);
   Excel.Visible := true;
   Icon5_Excel.Visible := true;
+  ProgressBar1.Max := 4;
+  ProgressBar1.Min := 0;
+  ProgressBar1.Visible := true;
 
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'' ;');
+  ADOQuery1.Open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Feb/2015%'' ;');
+  ADOQuery1.Open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Mar/2015%'' ;');
+  ADOQuery1.Open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Apr/2015%'' ;');
+  ADOQuery1.Open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/May/2015%'' ;');
+  ADOQuery1.Open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/June/2015%'' ;');
+  ADOQuery1.Open;
+  june := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Jule/2015%'' ;');
+  ADOQuery1.Open;
+  jule := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Aug/2015%'' ;');
+  ADOQuery1.Open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Sept/2015%'' ;');
+  ADOQuery1.Open;
+  sept := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Oct/2015%'' ;');
+  ADOQuery1.Open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Nov/2015%'' ;');
+  ADOQuery1.Open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Dec/2015%'' ;');
+  ADOQuery1.Open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('insert into year2015(Statistic, Jan, Feb, Mar, Apr, May, June, Jule, Aug, Sept, Oct, Nov, December) values(''Количество авторизаций'',"'
+    + jan + '","' + feb + '","' + mar + '","' + apr + '","' + may + '","' + june
+    + '","' + jule + '","' + aug + '","' + sept + '","' + oct + '","' + nov +
+    '","' + dec + '");');
+  ADOQuery1.ExecSQL;
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+
+  // 2
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'';');
+  ADOQuery1.Open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Feb/2015%'';');
+  ADOQuery1.Open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Mar/2015%'';');
+  ADOQuery1.Open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Apr/2015%'';');
+  ADOQuery1.Open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/May/2015%'';');
+  ADOQuery1.Open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/June/2015%'';');
+  ADOQuery1.Open;
+  june := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Jule/2015%'';');
+  ADOQuery1.Open;
+  jule := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Aug/2015%'';');
+  ADOQuery1.Open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Sept/2015%'';');
+  ADOQuery1.Open;
+  sept := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Oct/2015%'';');
+  ADOQuery1.Open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Nov/2015%'';');
+  ADOQuery1.Open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Dec/2015%'';');
+  ADOQuery1.Open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('insert into year2015(Statistic, Jan, Feb, Mar, Apr, May, June, Jule, Aug, Sept, Oct, Nov, December) values(''Количество просмотров(книговыдача)'',"'
+    + jan + '","' + feb + '","' + mar + '","' + apr + '","' + may + '","' + june
+    + '","' + jule + '","' + aug + '","' + sept + '","' + oct + '","' + nov +
+    '","' + dec + '");');
+  ADOQuery1.ExecSQL;
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+  // 3
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Jan/2015%'';');
+  ADOQuery1.Open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Feb/2015%'';');
+  ADOQuery1.Open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Mar/2015%'';');
+  ADOQuery1.Open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Apr/2015%'';');
+  ADOQuery1.Open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/May/2015%'';');
+  ADOQuery1.Open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/June/2015%'';');
+  ADOQuery1.Open;
+  june := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Jule/2015%'';');
+  ADOQuery1.Open;
+  jule := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Aug/2015%'';');
+  ADOQuery1.Open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Sept/2015%'';');
+  ADOQuery1.Open;
+  sept := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Oct/2015%'';');
+  ADOQuery1.Open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Nov/2015%'';');
+  ADOQuery1.Open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Dec/2015%'';');
+  ADOQuery1.Open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('insert into year2015(Statistic, Jan, Feb, Mar, Apr, May, June, Jule, Aug, Sept, Oct, Nov, December) values(''Количество виртуальных посещений'',"'
+    + jan + '","' + feb + '","' + mar + '","' + apr + '","' + may + '","' + june
+    + '","' + jule + '","' + aug + '","' + sept + '","' + oct + '","' + nov +
+    '","' + dec + '");');
+  ADOQuery1.ExecSQL;
+     ProgressBar1.Position := ProgressBar1.Position + 1;
+  // 4
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(*) from stable where date like ''%/Jan/2015%'';');
+  ADOQuery1.Open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Feb/2015%'';');
+  ADOQuery1.Open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Mar/2015%'';');
+  ADOQuery1.Open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Apr/2015%'';');
+  ADOQuery1.Open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/May/2015%'';');
+  ADOQuery1.Open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/June/2015%'';');
+  ADOQuery1.Open;
+  june := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Jule/2015%'';');
+  ADOQuery1.Open;
+  jule := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Aug/2015%'';');
+  ADOQuery1.Open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Sept/2015%'';');
+  ADOQuery1.Open;
+  sept := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Oct/2015%'';');
+  ADOQuery1.Open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Nov/2015%'';');
+  ADOQuery1.Open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('select count(DISTINCT (ip)) from stable where date like ''%/Dec/2015%'';');
+  ADOQuery1.Open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('insert into year2015(Statistic, Jan, Feb, Mar, Apr, May, June, Jule, Aug, Sept, Oct, Nov, December) values(''Количество запросов'',"'
+    + jan + '","' + feb + '","' + mar + '","' + apr + '","' + may + '","' + june
+    + '","' + jule + '","' + aug + '","' + sept + '","' + oct + '","' + nov +
+    '","' + dec + '");');
+  ADOQuery1.ExecSQL;
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+  showmessage('Done');
+  ProgressBar1.Visible:=false;
 end;
 
 procedure TForm2.Year2016Click(Sender: TObject);

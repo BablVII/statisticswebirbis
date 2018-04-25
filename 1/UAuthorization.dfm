@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 0
   BorderStyle = bsNone
   Caption = 'Form1'
-  ClientHeight = 351
-  ClientWidth = 350
+  ClientHeight = 312
+  ClientWidth = 339
   Color = 15657959
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Authorization_user: TImage
-    Left = 80
-    Top = 172
+    Left = 72
+    Top = 140
     Width = 32
     Height = 32
     Picture.Data = {
@@ -299,8 +299,8 @@ object Form1: TForm1
       FFD2A23F7941D06BAF7BF75EEBDEFDD7BAF7BF75EEBFFFD9}
   end
   object Authorization_password: TImage
-    Left = 80
-    Top = 220
+    Left = 72
+    Top = 188
     Width = 32
     Height = 32
     Picture.Data = {
@@ -583,8 +583,8 @@ object Form1: TForm1
       75EEBFFFD9}
   end
   object FakeButton1_Authorization: TImage
-    Left = 103
-    Top = 288
+    Left = 95
+    Top = 256
     Width = 145
     Height = 33
     Picture.Data = {
@@ -917,48 +917,10 @@ object Form1: TForm1
     OnMouseLeave = FakeButton1_AuthorizationMouseLeave
     OnMouseMove = FakeButton1_AuthorizationMouseMove
   end
-  object BorderTop: TPanel
-    Left = 0
-    Top = 0
-    Width = 362
-    Height = 1
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 0
-  end
-  object BorderBottom: TPanel
-    Left = -1
-    Top = 350
-    Width = 362
-    Height = 1
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 1
-  end
-  object BorderLeft: TPanel
-    Left = 0
-    Top = 1
-    Width = 1
-    Height = 362
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 2
-  end
-  object BorderRight: TPanel
-    Left = 349
-    Top = 1
-    Width = 1
-    Height = 362
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 3
-  end
   object Head: TPanel
     Left = 1
     Top = 1
-    Width = 348
+    Width = 338
     Height = 120
     BevelOuter = bvNone
     Color = 6832446
@@ -969,12 +931,12 @@ object Form1: TForm1
     Font.Style = []
     ParentBackground = False
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 0
     object Authorization: TLabel
-      Left = -1
-      Top = 93
-      Width = 349
-      Height = 16
+      Left = 0
+      Top = 97
+      Width = 338
+      Height = 23
       Alignment = taCenter
       AutoSize = False
       Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103
@@ -986,7 +948,7 @@ object Form1: TForm1
       ParentFont = False
     end
     object icon1_user: TImage
-      Left = 143
+      Left = 135
       Top = 27
       Width = 64
       Height = 64
@@ -1436,8 +1398,8 @@ object Form1: TForm1
     end
   end
   object Edit_login: TEdit
-    Left = 118
-    Top = 178
+    Left = 110
+    Top = 146
     Width = 155
     Height = 21
     TabStop = False
@@ -1449,13 +1411,13 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     ReadOnly = True
-    TabOrder = 5
+    TabOrder = 1
     Text = #1042#1074#1077#1076#1080#1090#1077' '#1083#1086#1075#1080#1085
     OnClick = Edit_loginClick
   end
   object Edit_password: TEdit
-    Left = 118
-    Top = 227
+    Left = 110
+    Top = 195
     Width = 155
     Height = 21
     TabStop = False
@@ -1466,7 +1428,7 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 2
     Text = #1042#1074#1077#1076#1080#1090#1077' '#1087#1072#1088#1086#1083#1100
     OnClick = Edit_passwordClick
   end
