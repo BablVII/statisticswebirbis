@@ -4,7 +4,7 @@ object Form2: TForm2
   BorderStyle = bsNone
   Caption = 'Form2'
   ClientHeight = 399
-  ClientWidth = 709
+  ClientWidth = 713
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,55 +16,15 @@ object Form2: TForm2
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object BorderTop: TPanel
-    Left = 0
-    Top = 0
-    Width = 709
-    Height = 1
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 0
-  end
-  object BorderBottom: TPanel
-    Left = 0
-    Top = 398
-    Width = 709
-    Height = 1
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 1
-  end
-  object BorderLeft: TPanel
-    Left = 0
-    Top = 1
-    Width = 1
-    Height = 397
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 2
-  end
-  object BorderRight: TPanel
-    Left = 708
-    Top = 1
-    Width = 1
-    Height = 398
-    BevelOuter = bvNone
-    Color = clBtnShadow
-    ParentBackground = False
-    TabOrder = 3
-  end
   object Menu: TPanel
-    Left = 1
+    Left = 0
     Top = 41
-    Width = 150
+    Width = 145
     Height = 357
     BevelOuter = bvNone
     Color = 6832446
     ParentBackground = False
-    TabOrder = 4
+    TabOrder = 0
     object Statistic: TLabel
       Tag = 1
       Left = 38
@@ -1252,14 +1212,15 @@ object Form2: TForm2
     end
   end
   object Head: TPanel
-    Left = 1
-    Top = 1
-    Width = 707
-    Height = 40
+    Left = 0
+    Top = 0
+    Width = 713
+    Height = 41
     BevelOuter = bvNone
     Color = 10121064
     ParentBackground = False
-    TabOrder = 5
+    TabOrder = 1
+    OnMouseDown = HeadMouseDown
     object Title_1: TLabel
       Left = 38
       Top = 11
@@ -1288,14 +1249,14 @@ object Form2: TForm2
     end
   end
   object Body: TPanel
-    Left = 151
+    Left = 144
     Top = 41
-    Width = 557
-    Height = 357
+    Width = 572
+    Height = 359
     BevelOuter = bvNone
     Color = 15657959
     ParentBackground = False
-    TabOrder = 6
+    TabOrder = 2
     object Year2015: TLabel
       Tag = 5
       Left = 368
@@ -1660,16 +1621,16 @@ object Form2: TForm2
     object ProgressBar1: TProgressBar
       Left = 0
       Top = 341
-      Width = 560
+      Width = 569
       Height = 17
       TabOrder = 0
       Visible = False
     end
     object Panel1: TPanel
-      Left = 32
-      Top = 40
+      Left = 24
+      Top = 49
       Width = 505
-      Height = 241
+      Height = 192
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 1
@@ -1690,8 +1651,8 @@ object Form2: TForm2
         WordWrap = True
       end
       object Label2: TLabel
-        Left = 15
-        Top = 98
+        Left = 12
+        Top = 80
         Width = 307
         Height = 21
         Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1088#1086#1089#1084#1086#1090#1088#1086#1074'('#1082#1085#1080#1075#1086#1074#1099#1076#1072#1095#1072'):'
@@ -1706,7 +1667,7 @@ object Form2: TForm2
       end
       object Label3: TLabel
         Left = 15
-        Top = 148
+        Top = 107
         Width = 295
         Height = 21
         Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074#1080#1088#1090#1091#1072#1083#1100#1085#1099#1093' '#1087#1086#1089#1077#1097#1077#1085#1080#1081':'
@@ -1721,7 +1682,7 @@ object Form2: TForm2
       end
       object Label4: TLabel
         Left = 15
-        Top = 196
+        Top = 145
         Width = 151
         Height = 21
         Caption = #1044#1072#1085#1085#1099#1077' '#1079#1072' '#1087#1077#1088#1080#1086#1076':'
@@ -1828,6 +1789,15 @@ object Form2: TForm2
           #1053#1086#1103#1073#1088#1100' '
           #1044#1077#1082#1072#1073#1088#1100)
       end
+    end
+    object Memo1: TMemo
+      Left = 24
+      Top = 279
+      Width = 177
+      Height = 42
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 2
     end
   end
   object ADOConnection1: TADOConnection

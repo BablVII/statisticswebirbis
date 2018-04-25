@@ -7,16 +7,17 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, JPEG;
 
-
 procedure FakeButton_MouseMove(Sender: TObject);
 procedure FakeButton_MouseLeave(Sender: TObject);
 procedure FakeButton_Click(Sender: TObject);
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
 
+
 implementation
 
 uses UStatistic, UAuthorization;
+
 
 
 procedure FakeButton_MouseMove(Sender: TObject);

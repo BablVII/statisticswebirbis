@@ -11,10 +11,6 @@ uses
 
 type
   TForm2 = class(TForm)
-    BorderTop: TPanel;
-    BorderBottom: TPanel;
-    BorderLeft: TPanel;
-    BorderRight: TPanel;
     Menu: TPanel;
     Head: TPanel;
     Title_1: TLabel;
@@ -47,6 +43,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     ComboBox1: TComboBox;
+    Memo1: TMemo;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -61,6 +58,8 @@ type
     procedure DiagrammClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
 
+    procedure HeadMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     { Private declarations }
@@ -91,35 +90,34 @@ end;
 
 procedure TForm2.UpdateClick(Sender: TObject);
 var
+  i: Integer;
   a, a1, a2, a3, a4, a5, year: string;
 begin
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS year2016 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+    ('create table IF NOT EXISTS stable1 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
   ADOQuery1.ExecSQL;
 
-  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\access.log');
+  AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\Apache-2.4_queriesa.log');
   reset(f1);
-  ProgressBar1.Max := 4820221;
+  ProgressBar1.Max := 580003;
   ProgressBar1.Min := 1;
   ProgressBar1.Visible := true;
-  repeat
+  for i := 1 to 580003 do
+  begin
     readln(f1, a);
+    Memo1.Lines.Add(inttostr(i));
     ProgressBar1.Position := ProgressBar1.Position + 1;
-    a2 := Messengge.MyAddIp('- - \[(.*?) ', a);
-    year := Messengge.MyAddIp('\/(20..):', a2);
-    if year = '2016' then
-    begin
-      a1 := Messengge.MyAddIp('^(.*?) ', a);
-      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501)', a);
-      a4 := Messengge.MyAddIp('".*?" (.*?) ', a);
-      a5 := Messengge.MyAddIp('" \d+ (.*?)$', a);
-      ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add('insert into stable(ip, date, url, code, size) values("'
-        + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
-      ADOQuery1.ExecSQL;
-    end;
-  until eof(f1);
+    a1 := Messengge.MyAddIp('alias: (.*?) ', a);
+    a2 := Messengge.MyAddIp('\[(.*?) ', a);
+    a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|404)', a);
+    a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a);
+    a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('insert into stable1 (ip, date, url, code, size) values("'
+      + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
+    ADOQuery1.ExecSQL;
+  end;
   CloseFile(f1);
   ProgressBar1.Visible := False;
 end;
@@ -132,10 +130,15 @@ begin
   Year2018.Visible := true;
 end;
 
+{ case
+  0 procedure x (date(''''#39'%2015%'#39''''))
+  1
+  2
+  3 }
 
 procedure TForm2.ComboBox1Change(Sender: TObject);
 begin
-case ComboBox1.ItemIndex of
+  case ComboBox1.ItemIndex of
     0:
       begin
         Label1.Visible := true;
@@ -146,28 +149,28 @@ case ComboBox1.ItemIndex of
         ADOQuery1.SQL.Add
           ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%2015%'' ;');
         ADOQuery1.Open;
-        Label5.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label5.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label5.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) from stable where url like ''%pdf%'' and date like ''%2015%'';');
         ADOQuery1.Open;
-        Label6.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label6.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label6.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(DISTINCT (ip)) from stable where date like ''%2015%'';');
         ADOQuery1.Open;
-        Label7.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label7.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label7.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) from stable where date like ''%2015%'';');
         ADOQuery1.Open;
-        Label8.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label8.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label8.Visible := true;
       end;
     1:
@@ -180,28 +183,28 @@ case ComboBox1.ItemIndex of
         ADOQuery1.SQL.Add
           ('select count(DISTINCT (ip)) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'' ;');
         ADOQuery1.Open;
-        Label5.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label5.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label5.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) from stable where url like ''%pdf%'' and date like ''%/Jan/2015%'';');
         ADOQuery1.Open;
-        Label6.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label6.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label6.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(DISTINCT (ip)) from stable where date like ''%/Jan/2015%'';');
         ADOQuery1.Open;
-        Label7.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label7.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label7.Visible := true;
 
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add
           ('select count(*) from stable where date like ''%/Jan/2015%'';');
         ADOQuery1.Open;
-        Label8.Caption := IntToStr(ADOQuery1.Fields[0].AsInteger);
+        Label8.caption := inttostr(ADOQuery1.Fields[0].AsInteger);
         Label8.Visible := true;
 
       end;
@@ -228,7 +231,6 @@ begin
 
 end;
 
-
 procedure TForm2.Year2016Click(Sender: TObject);
 begin
   FakeButton_Click(Sender);
@@ -252,6 +254,14 @@ end;
 
 
 // интерфейс
+
+procedure TForm2.HeadMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  ReleaseCapture;
+  Perform(WM_SysCommand, $F012, 0);
+end;
+
 procedure TForm2.StatisticMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
