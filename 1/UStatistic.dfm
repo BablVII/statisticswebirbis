@@ -4,7 +4,7 @@ object Form2: TForm2
   BorderStyle = bsNone
   Caption = 'Form2'
   ClientHeight = 403
-  ClientWidth = 713
+  ClientWidth = 866
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1214,7 +1214,7 @@ object Form2: TForm2
   object Head: TPanel
     Left = 0
     Top = 0
-    Width = 713
+    Width = 866
     Height = 41
     BevelOuter = bvNone
     Color = 10121064
@@ -1251,7 +1251,7 @@ object Form2: TForm2
   object Body: TPanel
     Left = 144
     Top = 41
-    Width = 572
+    Width = 722
     Height = 362
     BevelOuter = bvNone
     Color = 15657959
@@ -1259,14 +1259,14 @@ object Form2: TForm2
     TabOrder = 2
     object Year2015: TLabel
       Tag = 5
-      Left = 392
-      Top = 5
+      Left = 527
+      Top = 40
       Width = 32
-      Height = 14
+      Height = 16
       Caption = '2015'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
-      Font.Height = -12
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
@@ -1275,30 +1275,29 @@ object Form2: TForm2
     end
     object Year2016: TLabel
       Tag = 6
-      Left = 437
-      Top = 5
+      Left = 577
+      Top = 40
       Width = 32
-      Height = 14
+      Height = 16
       Caption = '2016'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
-      Font.Height = -12
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
-      OnClick = Year2016Click
     end
     object Year2017: TLabel
       Tag = 7
-      Left = 483
-      Top = 5
+      Left = 627
+      Top = 40
       Width = 32
-      Height = 14
+      Height = 16
       Caption = '2017'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
-      Font.Height = -12
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
@@ -1307,23 +1306,22 @@ object Form2: TForm2
     end
     object Year2018: TLabel
       Tag = 8
-      Left = 528
-      Top = 5
+      Left = 677
+      Top = 40
       Width = 32
-      Height = 14
+      Height = 16
       Caption = '2018'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
-      Font.Height = -12
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
-      OnClick = Year2018Click
     end
     object Excel: TLabel
       Tag = 9
-      Left = 468
+      Left = 619
       Top = 319
       Width = 92
       Height = 16
@@ -1339,8 +1337,8 @@ object Form2: TForm2
       OnMouseLeave = ExitMouseLeave
     end
     object Icon5_Excel: TImage
-      Left = 445
-      Top = 320
+      Left = 597
+      Top = 319
       Width = 16
       Height = 16
       Picture.Data = {
@@ -1621,9 +1619,30 @@ object Form2: TForm2
     object ProgressBar1: TProgressBar
       Left = 0
       Top = 341
-      Width = 569
+      Width = 721
       Height = 20
+      TabOrder = 1
+      Visible = False
+    end
+    object DBGrid1: TDBGrid
+      Left = 16
+      Top = 96
+      Width = 697
+      Height = 169
+      DataSource = DataSource1
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
       TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
       Visible = False
     end
   end
@@ -1633,17 +1652,32 @@ object Form2: TForm2
       ' ID=root;Data Source=statistic;Initial Catalog=statistic'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
-    Left = 65519
-    Top = 250
+    Left = 23
+    Top = 194
   end
   object ADOQuery1: TADOQuery
     Connection = ADOConnection1
+    CursorType = ctStatic
     CommandTimeout = 100000
     ParamCheck = False
     Parameters = <>
     SQL.Strings = (
-      'use statistic;')
-    Left = 65521
-    Top = 281
+      
+        'select Statistic, January, February, March, April, May, June, Ju' +
+        'le, August, September, October, November, December from year2015')
+    Left = 97
+    Top = 241
+  end
+  object ADOTable1: TADOTable
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    TableName = 'year2015'
+    Left = 96
+    Top = 169
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 24
+    Top = 249
   end
 end
