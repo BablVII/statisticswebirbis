@@ -36,7 +36,6 @@ type
     DBGrid1: TDBGrid;
     ADOTable1: TADOTable;
     DataSource1: TDataSource;
-    Panel1: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -95,13 +94,17 @@ begin
   Year2018.visible := true;
   ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
   ExlApp.visible := false; // делаем окно Excel невидимым
-  ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls');
-  { ExlApp.Workbooks.Add; // создаем книгу для экспорта
+  if FileExists('Statistic.xls') then
+    ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls')
+  else
+  begin
+    ExlApp.Workbooks.Add; // создаем книгу для экспорта
     ExlApp.Worksheets.Add(After := ExlApp.Worksheets[ExlApp.Worksheets.Count]);
     ExlApp.Worksheets[1].Name := '2015';
     ExlApp.Worksheets[2].Name := '2016';
     ExlApp.Worksheets[3].Name := '2017';
-    ExlApp.Worksheets[4].Name := '2018'; }
+    ExlApp.Worksheets[4].Name := '2018';
+  end;
   ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
   opn := true;
 end;

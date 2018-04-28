@@ -1555,6 +1555,70 @@ object Form2: TForm2
         D2C720F020F974FA5ACA550E3875FFD9}
       Visible = False
     end
+    object Year2015: TLabel
+      Tag = 5
+      Left = 512
+      Top = 35
+      Width = 44
+      Height = 21
+      Caption = '2015'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 13350579
+      Font.Height = -17
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      OnClick = Year2015Click
+    end
+    object Year2016: TLabel
+      Tag = 6
+      Left = 563
+      Top = 35
+      Width = 44
+      Height = 21
+      Caption = '2016'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 13350579
+      Font.Height = -17
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      OnClick = Year2016Click
+    end
+    object Year2017: TLabel
+      Tag = 7
+      Left = 613
+      Top = 35
+      Width = 44
+      Height = 21
+      Caption = '2017'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 13350579
+      Font.Height = -17
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      OnClick = Year2017Click
+    end
+    object Year2018: TLabel
+      Tag = 8
+      Left = 663
+      Top = 35
+      Width = 44
+      Height = 21
+      Caption = '2018'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 13350579
+      Font.Height = -17
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      OnClick = Year2018Click
+    end
     object ProgressBar1: TProgressBar
       Left = 0
       Top = 341
@@ -1584,79 +1648,6 @@ object Form2: TForm2
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       Visible = False
-    end
-    object Panel1: TPanel
-      Left = 327
-      Top = 29
-      Width = 195
-      Height = 45
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 2
-      object Year2015: TLabel
-        Tag = 5
-        Left = 0
-        Top = 24
-        Width = 195
-        Height = 21
-        Caption = '2015'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 13350579
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Visible = False
-        OnClick = Year2015Click
-      end
-      object Year2016: TLabel
-        Tag = 6
-        Left = 151
-        Top = 24
-        Width = 44
-        Height = 21
-        Caption = '2016'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 13350579
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Visible = False
-        OnClick = Year2016Click
-      end
-      object Year2017: TLabel
-        Tag = 7
-        Left = 151
-        Top = 24
-        Width = 44
-        Height = 21
-        Caption = '2017'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 13350579
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Visible = False
-        OnClick = Year2017Click
-      end
-      object Year2018: TLabel
-        Tag = 8
-        Left = 151
-        Top = 24
-        Width = 44
-        Height = 21
-        Caption = '2018'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 13350579
-        Font.Height = -17
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Visible = False
-        OnClick = Year2018Click
-      end
     end
   end
   object ADOConnection1: TADOConnection
