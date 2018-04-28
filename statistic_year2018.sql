@@ -16,38 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `year2015`
+-- Table structure for table `year2018`
 --
 
-DROP TABLE IF EXISTS `year2015`;
+DROP TABLE IF EXISTS `year2018`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `year2015` (
+CREATE TABLE `year2018` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Statistic` varchar(45) DEFAULT NULL,
-  `Jan` varchar(45) DEFAULT NULL,
-  `Feb` varchar(45) DEFAULT NULL,
-  `Mar` varchar(45) DEFAULT NULL,
-  `Apr` varchar(45) DEFAULT NULL,
+  `January` varchar(45) DEFAULT NULL,
+  `February` varchar(45) DEFAULT NULL,
+  `March` varchar(45) DEFAULT NULL,
+  `April` varchar(45) DEFAULT NULL,
   `May` varchar(45) DEFAULT NULL,
   `June` varchar(45) DEFAULT NULL,
   `Jule` varchar(45) DEFAULT NULL,
-  `Aug` varchar(45) DEFAULT NULL,
-  `Sep` varchar(45) DEFAULT NULL,
-  `Oct` varchar(45) DEFAULT NULL,
-  `Nov` varchar(45) DEFAULT NULL,
+  `August` varchar(45) DEFAULT NULL,
+  `September` varchar(45) DEFAULT NULL,
+  `October` varchar(45) DEFAULT NULL,
+  `November` varchar(45) DEFAULT NULL,
   `December` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `year2015`
+-- Dumping data for table `year2018`
 --
 
-LOCK TABLES `year2015` WRITE;
-/*!40000 ALTER TABLE `year2015` DISABLE KEYS */;
-/*!40000 ALTER TABLE `year2015` ENABLE KEYS */;
+LOCK TABLES `year2018` WRITE;
+/*!40000 ALTER TABLE `year2018` DISABLE KEYS */;
+INSERT INTO `year2018` VALUES (1,'Количество авторизаций','','','','','','','','','','','',''),(2,'Количество просмотров(книговыдача)','','','','','','','','','','','',''),(3,'Количество виртуальных посещений','','','','','','','','','','','',''),(4,'Количество запросов','','','','','','','','','','','','');
+/*!40000 ALTER TABLE `year2018` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-26  3:11:25
+-- Dump completed on 2018-04-28 13:21:20

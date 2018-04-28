@@ -1287,6 +1287,7 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
+      OnClick = Year2016Click
     end
     object Year2017: TLabel
       Tag = 7
@@ -1318,6 +1319,7 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
+      OnClick = Year2018Click
     end
     object Excel: TLabel
       Tag = 9
@@ -1626,9 +1628,10 @@ object Form2: TForm2
     end
     object DBGrid1: TDBGrid
       Left = 16
-      Top = 96
+      Top = 80
       Width = 697
-      Height = 169
+      Height = 113
+      BorderStyle = bsNone
       DataSource = DataSource1
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
