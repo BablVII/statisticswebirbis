@@ -50,6 +50,7 @@ type
     procedure Year2016Click(Sender: TObject);
     procedure Year2017Click(Sender: TObject);
     procedure Year2018Click(Sender: TObject);
+    procedure ExcelClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -57,8 +58,14 @@ type
     { Public declarations }
     f1: TextFile;
     jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec: string;
-    i: Integer;
+    i, ex: Integer;
+    ExlApp: Variant;
+
   end;
+
+const
+  xlExcel9795 = $0000002B;
+  xlExcel8 = 56;
 
 var
   Form2: TForm2;
@@ -79,43 +86,28 @@ begin
   Messengge := TMessengge.Create;
 end;
 
-procedure TForm2.UpdateClick(Sender: TObject);
-var
-  a, a1, a2, a3, a4, a5, year: string;
+procedure TForm2.StatisticClick(Sender: TObject);
 begin
-  { ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
-    ('create table IF NOT EXISTS stable1 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
-    ADOQuery1.ExecSQL;
-
-    AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\Apache-2.4_queriesa.log');
-    reset(f1);
-    ProgressBar1.Max := 580003;
-    ProgressBar1.Min := 1;
-    ProgressBar1.Visible := true;
-    for i := 1 to 580003 do
-    begin
-    readln(f1, a);
-    Memo1.Lines.Add(inttostr(i));
-    ProgressBar1.Position := ProgressBar1.Position + 1;
-    a1 := Messengge.MyAddIp('alias: (.*?) ', a);
-    a2 := Messengge.MyAddIp('\[(.*?) ', a);
-    a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|404)', a);
-    a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a); }
-  // a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
-  { ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add('insert into stable1 (ip, date, url, code, size) values("'
-    + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
-    ADOQuery1.ExecSQL;
-    end;
-    CloseFile(f1);
-    ProgressBar1.Visible := False; }
+  Year2015.visible := true;
+  Year2016.visible := true;
+  Year2017.visible := true;
+  Year2018.visible := true;
+  ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
+  ExlApp.visible := false; // делаем окно Excel невидимым
+  ExlApp.Workbooks.Add; // создаем книгу для экспорта
+  ExlApp.Worksheets.Add(After := ExlApp.Worksheets[ExlApp.Worksheets.Count]);
+  ExlApp.Worksheets[1].Name := '2015';
+  ExlApp.Worksheets[2].Name := '2016';
+  ExlApp.Worksheets[3].Name := '2017';
+  ExlApp.Worksheets[4].Name := '2018';
+  ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
 end;
 
 procedure TForm2.Year2015Click(Sender: TObject);
 var
   b: Integer;
 begin
+  ex := 2015;
   FakeButton_Click(Sender);
   Excel.visible := true;
   Icon5_Excel.visible := true;
@@ -134,6 +126,7 @@ procedure TForm2.Year2016Click(Sender: TObject);
 var
   b: Integer;
 begin
+  ex := 2016;
   FakeButton_Click(Sender);
   Excel.visible := true;
   Icon5_Excel.visible := true;
@@ -152,6 +145,7 @@ procedure TForm2.Year2017Click(Sender: TObject);
 var
   b: Integer;
 begin
+  ex := 2017;
   FakeButton_Click(Sender);
   Excel.visible := true;
   Icon5_Excel.visible := true;
@@ -170,6 +164,7 @@ procedure TForm2.Year2018Click(Sender: TObject);
 var
   b: Integer;
 begin
+  ex := 2018;
   FakeButton_Click(Sender);
   Excel.visible := true;
   Icon5_Excel.visible := true;
@@ -520,29 +515,73 @@ begin
     ProgressBar1.Position := 0; }
 end;
 
-procedure TForm2.StatisticClick(Sender: TObject);
+procedure TForm2.ExcelClick(Sender: TObject);
+
 begin
-  Year2015.visible := true;
-  Year2016.visible := true;
-  Year2017.visible := true;
-  Year2018.visible := true;
+
+  case ex of
+    2015:
+      begin
+        ExlApp.Workbooks[1].Sheets.Item[1].Activate;
+        ExlApp.Cells[1, 1] := '2015';
+        showmessage('Экспорт завершен');
+      end;
+    2016:
+      begin
+        ExlApp.Workbooks[1].Sheets.Item[2].Activate;
+        ExlApp.Cells[1, 1] := '2016';
+        showmessage('Экспорт завершен');
+      end;
+  end;
+
 end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
 begin
-  Excel.visible := False;
-  Year2015.visible := False;
-  Year2016.visible := False;
-  Year2017.visible := False;
-  Year2018.visible := False;
-  Icon5_Excel.visible := False;
-   ADOTable1.Active := False;
-  ADOQuery1.Active := False;
-  DBGrid1.visible := False;
+  Excel.visible := false;
+  Year2015.visible := false;
+  Year2016.visible := false;
+  Year2017.visible := false;
+  Year2018.visible := false;
+  Icon5_Excel.visible := false;
+  ADOTable1.Active := false;
+  ADOQuery1.Active := false;
+  DBGrid1.visible := false;
+
 end;
 
+procedure TForm2.UpdateClick(Sender: TObject);
+var
+  a, a1, a2, a3, a4, a5, year: string;
+begin
+  { ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add
+    ('create table IF NOT EXISTS stable1 (id int NOT NULL AUTO_INCREMENT, ip varchar(30), date varchar(30), url text, code varchar(10), size varchar(30), PRIMARY KEY (id))');
+    ADOQuery1.ExecSQL;
 
-
+    AssignFile(f1, 'C:\Users\Svetyxa\Desktop\Диплом\Apache-2.4_queriesa.log');
+    reset(f1);
+    ProgressBar1.Max := 580003;
+    ProgressBar1.Min := 1;
+    ProgressBar1.Visible := true;
+    for i := 1 to 580003 do
+    begin
+    readln(f1, a);
+    Memo1.Lines.Add(inttostr(i));
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+    a1 := Messengge.MyAddIp('alias: (.*?) ', a);
+    a2 := Messengge.MyAddIp('\[(.*?) ', a);
+    a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|404)', a);
+    a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a); }
+  // a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
+  { ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('insert into stable1 (ip, date, url, code, size) values("'
+    + a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
+    ADOQuery1.ExecSQL;
+    end;
+    CloseFile(f1);
+    ProgressBar1.Visible := False; }
+end;
 
 // интерфейс
 
@@ -567,7 +606,19 @@ end;
 procedure TForm2.ExitClick(Sender: TObject);
 begin
   Form1.Close;
-  ADOConnection1.Connected := False;
+  ADOConnection1.Connected := false;
+  // обработка исключения при сохраннении файла
+  try
+    // формат xls 97-2003 если установлен 2003 Excel
+    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\Statistic.xls',
+      xlExcel9795);
+  except
+    // формат xls 97-2003 если установлен 2007-2010 Excel
+    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\Statistic.xls',
+      xlExcel8);
+  end;
+  ExlApp.Quit; // закрываем приложение Excel
+  ExlApp := Unassigned; // очищаем выделенную память
 end;
 
 end.

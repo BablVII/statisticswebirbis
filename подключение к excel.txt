@@ -34,3 +34,5 @@
     // очищаем выделенную память
     ExlApp := Unassigned;
     Sheet := Unassigned; }
+//Добавление нового листа в кноце ExlApp.Worksheets.Add(After:=ExlApp.Worksheets[ExlApp.Worksheets.Count]);
+  {case ex of

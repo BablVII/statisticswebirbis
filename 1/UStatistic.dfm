@@ -1335,6 +1335,7 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
+      OnClick = ExcelClick
       OnMouseMove = StatisticMouseMove
       OnMouseLeave = ExitMouseLeave
     end
