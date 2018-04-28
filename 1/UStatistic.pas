@@ -36,6 +36,7 @@ type
     DBGrid1: TDBGrid;
     ADOTable1: TADOTable;
     DataSource1: TDataSource;
+    Panel1: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -60,7 +61,7 @@ type
     jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec: string;
     i, ex: Integer;
     ExlApp: Variant;
-
+    opn: boolean;
   end;
 
 const
@@ -94,13 +95,15 @@ begin
   Year2018.visible := true;
   ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
   ExlApp.visible := false; // делаем окно Excel невидимым
-  ExlApp.Workbooks.Add; // создаем книгу для экспорта
-  ExlApp.Worksheets.Add(After := ExlApp.Worksheets[ExlApp.Worksheets.Count]);
-  ExlApp.Worksheets[1].Name := '2015';
-  ExlApp.Worksheets[2].Name := '2016';
-  ExlApp.Worksheets[3].Name := '2017';
-  ExlApp.Worksheets[4].Name := '2018';
+  ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls');
+  { ExlApp.Workbooks.Add; // создаем книгу для экспорта
+    ExlApp.Worksheets.Add(After := ExlApp.Worksheets[ExlApp.Worksheets.Count]);
+    ExlApp.Worksheets[1].Name := '2015';
+    ExlApp.Worksheets[2].Name := '2016';
+    ExlApp.Worksheets[3].Name := '2017';
+    ExlApp.Worksheets[4].Name := '2018'; }
   ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
+  opn := true;
 end;
 
 procedure TForm2.Year2015Click(Sender: TObject);
@@ -298,25 +301,25 @@ begin
 
     ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add
-    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jun/2017%'';');
+    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jun/2018%'';');
     ADOQuery1.Open;
     jun := inttostr(ADOQuery1.Fields[0].AsInteger);
 
     ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add
-    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jul/2017%'';');
+    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jul/2018%'';');
     ADOQuery1.Open;
     jul := inttostr(ADOQuery1.Fields[0].AsInteger);
 
     ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add
-    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Aug/2017%'';');
+    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Aug/2018%'';');
     ADOQuery1.Open;
     aug := inttostr(ADOQuery1.Fields[0].AsInteger);
 
     ADOQuery1.SQL.Clear;
     ADOQuery1.SQL.Add
-    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Sep/2017%'';');
+    ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Sep/2018%'';');
     ADOQuery1.Open;
     sep := inttostr(ADOQuery1.Fields[0].AsInteger);
 
@@ -516,24 +519,76 @@ begin
 end;
 
 procedure TForm2.ExcelClick(Sender: TObject);
-
+var
+  row, col: Integer;
 begin
 
   case ex of
     2015:
       begin
         ExlApp.Workbooks[1].Sheets.Item[1].Activate;
-        ExlApp.Cells[1, 1] := '2015';
+        for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
+        begin
+          for col := 0 to DBGrid1.Columns.Count - 1 do
+          begin
+            ExlApp.Workbooks[1].Worksheets[1].cells[1, col + 1].value :=
+              DBGrid1.Columns[col].Title.caption;
+            ExlApp.Workbooks[1].Worksheets[1].cells[row + 2, col + 1].value :=
+              DBGrid1.DataSource.DataSet.Fields[col].AsString;
+          end;
+          DBGrid1.DataSource.DataSet.Next;
+        end;
         showmessage('Экспорт завершен');
       end;
     2016:
       begin
         ExlApp.Workbooks[1].Sheets.Item[2].Activate;
-        ExlApp.Cells[1, 1] := '2016';
+        for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
+        begin
+          for col := 0 to DBGrid1.Columns.Count - 1 do
+          begin
+            ExlApp.Workbooks[1].Worksheets[2].cells[1, col + 1].value :=
+              DBGrid1.Columns[col].Title.caption;
+            ExlApp.Workbooks[1].Worksheets[2].cells[row + 2, col + 1].value :=
+              DBGrid1.DataSource.DataSet.Fields[col].AsString;
+          end;
+          DBGrid1.DataSource.DataSet.Next;
+        end;
+        showmessage('Экспорт завершен');
+      end;
+    2017:
+      begin
+        ExlApp.Workbooks[1].Sheets.Item[3].Activate;
+        for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
+        begin
+          for col := 0 to DBGrid1.Columns.Count - 1 do
+          begin
+            ExlApp.Workbooks[1].Worksheets[3].cells[1, col + 1].value :=
+              DBGrid1.Columns[col].Title.caption;
+            ExlApp.Workbooks[1].Worksheets[3].cells[row + 2, col + 1].value :=
+              DBGrid1.DataSource.DataSet.Fields[col].AsString;
+          end;
+          DBGrid1.DataSource.DataSet.Next;
+        end;
+        showmessage('Экспорт завершен');
+      end;
+    2018:
+      begin
+        ExlApp.Workbooks[1].Sheets.Item[4].Activate;
+        for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
+        begin
+          for col := 0 to DBGrid1.Columns.Count - 1 do
+          begin
+            ExlApp.Workbooks[1].Worksheets[4].cells[1, col + 1].value :=
+              DBGrid1.Columns[col].Title.caption;
+            ExlApp.Workbooks[1].Worksheets[4].cells[row + 2, col + 1].value :=
+              DBGrid1.DataSource.DataSet.Fields[col].AsString;
+          end;
+          DBGrid1.DataSource.DataSet.Next;
+        end;
         showmessage('Экспорт завершен');
       end;
   end;
-
 end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
@@ -604,21 +659,24 @@ begin
 end;
 
 procedure TForm2.ExitClick(Sender: TObject);
+var
+  Active: boolean;
 begin
   Form1.Close;
   ADOConnection1.Connected := false;
-  // обработка исключения при сохраннении файла
-  try
-    // формат xls 97-2003 если установлен 2003 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\Statistic.xls',
-      xlExcel9795);
-  except
-    // формат xls 97-2003 если установлен 2007-2010 Excel
-    ExlApp.Workbooks[1].saveas('C:\Users\Svetyxa\Desktop\Statistic.xls',
-      xlExcel8);
+  if opn = true then
+  begin
+    try
+      // формат xls 97-2003 если установлен 2003 Excel
+      ExlApp.Workbooks[1].saveas(getcurrentdir + '\Statistic.xls', xlExcel9795);
+    except
+      // формат xls 97-2003 если установлен 2007-2010 Excel
+      ExlApp.Workbooks[1].saveas(getcurrentdir + '\Statistic.xls', xlExcel8);
+    end;
+    ExlApp.Quit; // закрываем приложение Excel
+    ExlApp := Unassigned; // очищаем выделенную память
   end;
-  ExlApp.Quit; // закрываем приложение Excel
-  ExlApp := Unassigned; // очищаем выделенную память
+
 end;
 
 end.

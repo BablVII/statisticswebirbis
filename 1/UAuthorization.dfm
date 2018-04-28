@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderStyle = bsNone
   Caption = 'Form1'
   ClientHeight = 312
-  ClientWidth = 339
+  ClientWidth = 337
   Color = 15657959
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -918,8 +918,8 @@ object Form1: TForm1
     OnMouseMove = FakeButton1_AuthorizationMouseMove
   end
   object Head: TPanel
-    Left = 1
-    Top = 1
+    Left = 0
+    Top = 0
     Width = 338
     Height = 120
     BevelOuter = bvNone
