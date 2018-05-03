@@ -13,12 +13,9 @@ procedure FakeButton_Click(Sender: TObject);
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
 
-
 implementation
 
 uses UStatistic, UAuthorization;
-
-
 
 procedure FakeButton_MouseMove(Sender: TObject);
 begin
@@ -28,11 +25,13 @@ begin
     2:
       form2.Diagramm.Font.Color := RGB(255, 255, 255);
     3:
-      form2.Update.Font.Color := RGB(255, 255, 255);
+      form2.Updatebase.Font.Color := RGB(255, 255, 255);
     4:
       form2.Exit.Font.Color := RGB(255, 255, 255);
     9:
       form2.Excel.Font.Color := RGB(62, 65, 104);
+    10:
+      form2.Update.Font.Color := RGB(62, 65, 104);
   end;
 end;
 
@@ -44,11 +43,13 @@ begin
     2:
       form2.Diagramm.Font.Color := RGB(179, 182, 203);
     3:
-      form2.Update.Font.Color := RGB(179, 182, 203);
+      form2.Updatebase.Font.Color := RGB(179, 182, 203);
     4:
       form2.Exit.Font.Color := RGB(179, 182, 203);
     9:
       form2.Excel.Font.Color := RGB(179, 182, 203);
+    10:
+      form2.Update.Font.Color := RGB(179, 182, 203);
   end;
 end;
 

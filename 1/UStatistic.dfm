@@ -3,8 +3,8 @@ object Form2: TForm2
   Top = 0
   BorderStyle = bsNone
   Caption = 'Form2'
-  ClientHeight = 403
-  ClientWidth = 867
+  ClientHeight = 404
+  ClientWidth = 785
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object Form2: TForm2
   object Menu: TPanel
     Left = 0
     Top = 41
-    Width = 145
-    Height = 362
+    Width = 146
+    Height = 363
     BevelOuter = bvNone
     Color = 6832446
     ParentBackground = False
@@ -59,20 +59,20 @@ object Form2: TForm2
       OnMouseMove = StatisticMouseMove
       OnMouseLeave = ExitMouseLeave
     end
-    object Update: TLabel
+    object Updatebase: TLabel
       Tag = 3
       Left = 38
       Top = 304
-      Width = 81
+      Width = 97
       Height = 16
-      Caption = #1054#1073#1085#1086#1074#1083#1077#1085#1080#1077
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1073#1072#1079#1091
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = UpdateClick
+      OnClick = UpdatebaseClick
       OnMouseMove = StatisticMouseMove
       OnMouseLeave = ExitMouseLeave
     end
@@ -1214,7 +1214,7 @@ object Form2: TForm2
   object Head: TPanel
     Left = -2
     Top = 0
-    Width = 869
+    Width = 787
     Height = 41
     BevelOuter = bvNone
     Color = 10121064
@@ -1250,8 +1250,8 @@ object Form2: TForm2
   end
   object Body: TPanel
     Left = 146
-    Top = 42
-    Width = 719
+    Top = 41
+    Width = 639
     Height = 362
     BevelOuter = bvNone
     Color = 15657959
@@ -1259,11 +1259,11 @@ object Form2: TForm2
     TabOrder = 2
     object Excel: TLabel
       Tag = 9
-      Left = 547
+      Left = 459
       Top = 319
       Width = 166
       Height = 16
-      Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1074' Excel'
+      Caption = #1047#1072#1087#1080#1089#1072#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1074' Excel'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -13
@@ -1276,7 +1276,7 @@ object Form2: TForm2
       OnMouseLeave = ExitMouseLeave
     end
     object Icon5_Excel: TImage
-      Left = 525
+      Left = 437
       Top = 319
       Width = 16
       Height = 16
@@ -1557,7 +1557,7 @@ object Form2: TForm2
     end
     object Year2015: TLabel
       Tag = 5
-      Left = 512
+      Left = 433
       Top = 35
       Width = 44
       Height = 21
@@ -1573,7 +1573,7 @@ object Form2: TForm2
     end
     object Year2016: TLabel
       Tag = 6
-      Left = 563
+      Left = 483
       Top = 35
       Width = 44
       Height = 21
@@ -1589,7 +1589,7 @@ object Form2: TForm2
     end
     object Year2017: TLabel
       Tag = 7
-      Left = 613
+      Left = 533
       Top = 35
       Width = 44
       Height = 21
@@ -1605,24 +1605,71 @@ object Form2: TForm2
     end
     object Year2018: TLabel
       Tag = 8
-      Left = 663
+      Left = 575
       Top = 35
-      Width = 44
+      Width = 50
       Height = 21
+      BiDiMode = bdRightToLeft
       Caption = '2018'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -17
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      ParentBiDiMode = False
       ParentFont = False
       Visible = False
       OnClick = Year2018Click
     end
+    object Icon6_Update: TImage
+      Left = 459
+      Top = 297
+      Width = 16
+      Height = 16
+      Center = True
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+        00200806000000737A7AF40000000473424954080808087C0864880000000970
+        485973000001C2000001C201E83C7D540000001974455874536F667477617265
+        007777772E696E6B73636170652E6F72679BEE3C1A0000015D4944415478DA63
+        641860C038241DE0E09069F19F894116C5A07F0C8F0F1C987E822E0EB077CA58
+        FDFF3F43088A418C0C6B0EEE9B113A321C30E05130E00E18F0281870070C7814
+        0CB803063C0A461D30B21CE0E09026F28F91E92490A9448AC1FF1918EEB23131
+        9BEFDD3BF52DC52160E392A9C4F4F73FC8112244DAFF9AE1EF1FF34387E6DCA7
+        380460C0DE39D3F6FFBFFF7B804C36024A7F313231BA1CDC3BFD3031E6929406
+        EC9D3213FFFFFF3F0FAF818C8C4907F74D9F4FAC992427427BC78C3E60FC1662
+        93FBCFC0D87778FFF46252CC233D17343430D91D7CB11EC8F24393D974C85E22
+        1028FF8FB60E00026BEB245E6636B62340A61E54E812D37F26EB0307A67D21D5
+        2CB25BC54E4ED9F27FFEFF05E50C06164666F37DFBA63E24C71C8A9AE5B68E99
+        F68C8CFFFE1FDA37F310B9660CBE7E0130AB915C9C9202805974355E07D83966
+        FCA7A5030EED9F8162E7E073C0804701BDC1803B0000EE82B92159256A280000
+        000049454E44AE426082}
+      Visible = False
+    end
+    object Update: TLabel
+      Tag = 10
+      Left = 471
+      Top = 297
+      Width = 154
+      Height = 16
+      BiDiMode = bdRightToLeft
+      Caption = #1055#1086#1089#1095#1080#1090#1072#1090#1100' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1091
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 13350579
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBiDiMode = False
+      ParentFont = False
+      Visible = False
+      OnClick = UpdateClick
+      OnMouseMove = StatisticMouseMove
+      OnMouseLeave = ExitMouseLeave
+    end
     object ProgressBar1: TProgressBar
       Left = 0
-      Top = 341
-      Width = 721
+      Top = 342
+      Width = 639
       Height = 20
       TabOrder = 1
       Visible = False
@@ -1630,7 +1677,7 @@ object Form2: TForm2
     object DBGrid1: TDBGrid
       Left = 16
       Top = 80
-      Width = 697
+      Width = 609
       Height = 113
       BorderStyle = bsNone
       DataSource = DataSource1
@@ -1653,7 +1700,8 @@ object Form2: TForm2
   object ADOConnection1: TADOConnection
     ConnectionString = 
       'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User' +
-      ' ID=root;Data Source=statistic;Initial Catalog=statistic'
+      ' ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DA' +
+      'TABASE=statistic;PORT=3306";Initial Catalog=statistic'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
     Left = 23
