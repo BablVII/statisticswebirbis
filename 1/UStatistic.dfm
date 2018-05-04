@@ -1261,7 +1261,7 @@ object Form2: TForm2
       Tag = 9
       Left = 459
       Top = 319
-      Width = 166
+      Width = 164
       Height = 16
       Caption = #1047#1072#1087#1080#1089#1072#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1074' Excel'
       Font.Charset = DEFAULT_CHARSET
@@ -1605,9 +1605,9 @@ object Form2: TForm2
     end
     object Year2018: TLabel
       Tag = 8
-      Left = 575
+      Left = 581
       Top = 35
-      Width = 50
+      Width = 44
       Height = 21
       BiDiMode = bdRightToLeft
       Caption = '2018'
@@ -1648,12 +1648,12 @@ object Form2: TForm2
     end
     object Update: TLabel
       Tag = 10
-      Left = 471
+      Left = 486
       Top = 297
-      Width = 154
+      Width = 139
       Height = 16
       BiDiMode = bdRightToLeft
-      Caption = #1055#1086#1089#1095#1080#1090#1072#1090#1100' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1091
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1091
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -13

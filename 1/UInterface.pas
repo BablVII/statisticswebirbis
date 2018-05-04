@@ -12,6 +12,7 @@ procedure FakeButton_MouseLeave(Sender: TObject);
 procedure FakeButton_Click(Sender: TObject);
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
+procedure FakeButton_MenuClick(Sender: TObject);
 
 implementation
 
@@ -87,16 +88,24 @@ begin
   end;
 end;
 
+procedure FakeButton_MenuClick(Sender: TObject);
+begin
+  form2.Year2015.Font.Color := RGB(179, 182, 203);
+  form2.Year2016.Font.Color := RGB(179, 182, 203);
+  form2.Year2017.Font.Color := RGB(179, 182, 203);
+  form2.Year2018.Font.Color := RGB(179, 182, 203);
+end;
+
 procedure ButtonAuthorizationMove;
 begin
   form1.FakeButton1_Authorization.Picture.LoadFromFile
-    (getcurrentdir + '\data\interface\authorization_m.jpg');
+    ('D:\Диплом\statisticswebirbis\1\Win32\Debug\data\interface\authorization_m.jpg');
 end;
 
 procedure ButtonAuthorizationLeave;
 begin
   form1.FakeButton1_Authorization.Picture.LoadFromFile
-    (getcurrentdir + '\data\interface\authorization_l.jpg');
+    ('D:\Диплом\statisticswebirbis\1\Win32\Debug\data\interface\authorization_l.jpg');
 end;
 
 end.

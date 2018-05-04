@@ -92,25 +92,30 @@ end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
 begin
+  FakeButton_MenuClick(Sender);
   Year2015.visible := true;
   Year2016.visible := true;
   Year2017.visible := true;
   Year2018.visible := true;
-  ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
-  ExlApp.visible := false; // делаем окно Excel невидимым
-  if FileExists('Statistic.xls') then
-    ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls')
-  else
+  if opn = false then
   begin
-    ExlApp.Workbooks.Add; // создаем книгу для экспорта
-    ExlApp.Worksheets.Add(After := ExlApp.Worksheets[ExlApp.Worksheets.Count]);
-    ExlApp.Worksheets[1].Name := '2015';
-    ExlApp.Worksheets[2].Name := '2016';
-    ExlApp.Worksheets[3].Name := '2017';
-    ExlApp.Worksheets[4].Name := '2018';
+    ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
+    ExlApp.visible := false; // делаем окно Excel невидимым
+    if FileExists('Statistic.xls') then
+      ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls')
+    else
+    begin
+      ExlApp.Workbooks.Add; // создаем книгу для экспорта
+      ExlApp.Worksheets.Add(After := ExlApp.Worksheets
+        [ExlApp.Worksheets.Count]);
+      ExlApp.Worksheets[1].Name := '2015';
+      ExlApp.Worksheets[2].Name := '2016';
+      ExlApp.Worksheets[3].Name := '2017';
+      ExlApp.Worksheets[4].Name := '2018';
+    end;
+    ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
+    opn := true;
   end;
-  ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
-  opn := true;
 end;
 
 procedure TForm2.Year2015Click(Sender: TObject);
@@ -290,79 +295,79 @@ begin
 
   // 2
 
-   ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jan/2018%'';');
-    ADOQuery1.open;
-    jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Feb/2018%'';');
-    ADOQuery1.open;
-    feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Mar/2018%'';');
-    ADOQuery1.open;
-    mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Apr/2018%'';');
-    ADOQuery1.open;
-    apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/May/2018%'';');
-    ADOQuery1.open;
-    may := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jun/2018%'';');
-    ADOQuery1.open;
-    jun := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jun := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Jul/2018%'';');
-    ADOQuery1.open;
-    jul := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jul := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Aug/2018%'';');
-    ADOQuery1.open;
-    aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Sep/2018%'';');
-    ADOQuery1.open;
-    sep := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  sep := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Oct/2018%'';');
-    ADOQuery1.open;
-    oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Nov/2018%'';');
-    ADOQuery1.open;
-    nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where url like ''%pdf%'' and date like ''%/Dec/2018%'';');
-    ADOQuery1.open;
-    dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-      ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add('update year2018 set January = if(January <> "' + jan +
     '", January + "' + jan + '",January),February = if(February <> "' + feb +
     '", February + "' + feb + '",February),March = if(March <> "' + mar +
@@ -378,81 +383,81 @@ begin
     '",December)  where id = 2;');
   ADOQuery1.ExecSQL;
 
-    // 3
+  // 3
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Jan/2018%'';');
-    ADOQuery1.open;
-    jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Feb/2018%'';');
-    ADOQuery1.open;
-    feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Mar/2018%'';');
-    ADOQuery1.open;
-    mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Apr/2018%'';');
-    ADOQuery1.open;
-    apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/May/2018%'';');
-    ADOQuery1.open;
-    may := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Jun/2018%'';');
-    ADOQuery1.open;
-    jun := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jun := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Jul/2018%'';');
-    ADOQuery1.open;
-    jul := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jul := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Aug/2018%'';');
-    ADOQuery1.open;
-    aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Sep/2018%'';');
-    ADOQuery1.open;
-    sep := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  sep := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Oct/2018%'';');
-    ADOQuery1.open;
-    oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Nov/2018%'';');
-    ADOQuery1.open;
-    nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(DISTINCT (ip)) from stable1 where date like ''%/Dec/2018%'';');
-    ADOQuery1.open;
-    dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-      ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add('update year2018 set January = if(January <> "' + jan +
     '", January + "' + jan + '",January),February = if(February <> "' + feb +
     '", February + "' + feb + '",February),March = if(March <> "' + mar +
@@ -468,81 +473,81 @@ begin
     '",December)  where id = 3;');
   ADOQuery1.ExecSQL;
 
-    // 4
+  // 4
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Jan/2018%'';');
-    ADOQuery1.open;
-    jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Feb/2018%'';');
-    ADOQuery1.open;
-    feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Mar/2018%'';');
-    ADOQuery1.open;
-    mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Apr/2018%'';');
-    ADOQuery1.open;
-    apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/May/2018%'';');
-    ADOQuery1.open;
-    may := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  may := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Jun/2018%'';');
-    ADOQuery1.open;
-    jun := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jun := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Jul/2018%'';');
-    ADOQuery1.open;
-    jul := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  jul := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Aug/2018%'';');
-    ADOQuery1.open;
-    aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Sep/2018%'';');
-    ADOQuery1.open;
-    sep := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  sep := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from  stable1 where date like ''%/Oct/2018%'';');
-    ADOQuery1.open;
-    oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Nov/2018%'';');
-    ADOQuery1.open;
-    nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-    ADOQuery1.SQL.Clear;
-    ADOQuery1.SQL.Add
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
     ('select count(*) from stable1 where date like ''%/Dec/2018%'';');
-    ADOQuery1.open;
-    dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.open;
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
 
-     ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add('update year2018 set January = if(January <> "' + jan +
     '", January + "' + jan + '",January),February = if(February <> "' + feb +
     '", February + "' + feb + '",February),March = if(March <> "' + mar +
@@ -657,7 +662,7 @@ procedure TForm2.UpdatebaseClick(Sender: TObject);
 var
   date, a, a1, a2, a3, a4, a5, year: string;
 begin
-   Icon6_Update.visible := false;
+  Icon6_Update.visible := false;
   Update.visible := false;
   Excel.visible := false;
   Year2015.visible := false;
@@ -698,7 +703,7 @@ begin
       ADOQuery1.ExecSQL;
     end;
   until eof(f1);
-   showmessage('Обновление завершено');
+  showmessage('Обновление завершено');
   CloseFile(f1);
   ProgressBar1.visible := false;
 end;
