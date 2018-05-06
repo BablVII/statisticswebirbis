@@ -4,7 +4,7 @@ object Form2: TForm2
   BorderStyle = bsNone
   Caption = 'Form2'
   ClientHeight = 404
-  ClientWidth = 785
+  ClientWidth = 965
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -61,8 +61,8 @@ object Form2: TForm2
     end
     object Updatebase: TLabel
       Tag = 3
-      Left = 38
-      Top = 304
+      Left = 36
+      Top = 298
       Width = 97
       Height = 16
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1073#1072#1079#1091
@@ -78,8 +78,8 @@ object Form2: TForm2
     end
     object Exit: TLabel
       Tag = 4
-      Left = 38
-      Top = 326
+      Left = 36
+      Top = 320
       Width = 43
       Height = 16
       Caption = #1042#1099#1093#1086#1076
@@ -654,8 +654,8 @@ object Form2: TForm2
         3927F3FD9D68E841C2A7AFFFD9}
     end
     object Icon3_Update: TImage
-      Left = 16
-      Top = 304
+      Left = 14
+      Top = 298
       Width = 16
       Height = 16
       Picture.Data = {
@@ -933,8 +933,8 @@ object Form2: TForm2
         DBFEAC75AD2141D5C7AFFFD9}
     end
     object Icon4_Exit: TImage
-      Left = 16
-      Top = 326
+      Left = 14
+      Top = 320
       Width = 16
       Height = 16
       Picture.Data = {
@@ -1214,7 +1214,7 @@ object Form2: TForm2
   object Head: TPanel
     Left = -2
     Top = 0
-    Width = 787
+    Width = 967
     Height = 41
     BevelOuter = bvNone
     Color = 10121064
@@ -1251,7 +1251,7 @@ object Form2: TForm2
   object Body: TPanel
     Left = 146
     Top = 41
-    Width = 639
+    Width = 819
     Height = 362
     BevelOuter = bvNone
     Color = 15657959
@@ -1259,8 +1259,8 @@ object Form2: TForm2
     TabOrder = 2
     object Excel: TLabel
       Tag = 9
-      Left = 459
-      Top = 319
+      Left = 643
+      Top = 320
       Width = 164
       Height = 16
       Caption = #1047#1072#1087#1080#1089#1072#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1074' Excel'
@@ -1276,8 +1276,8 @@ object Form2: TForm2
       OnMouseLeave = ExitMouseLeave
     end
     object Icon5_Excel: TImage
-      Left = 437
-      Top = 319
+      Left = 621
+      Top = 320
       Width = 16
       Height = 16
       Picture.Data = {
@@ -1557,8 +1557,8 @@ object Form2: TForm2
     end
     object Year2015: TLabel
       Tag = 5
-      Left = 433
-      Top = 35
+      Left = 615
+      Top = 36
       Width = 44
       Height = 21
       Caption = '2015'
@@ -1573,8 +1573,8 @@ object Form2: TForm2
     end
     object Year2016: TLabel
       Tag = 6
-      Left = 483
-      Top = 35
+      Left = 665
+      Top = 36
       Width = 44
       Height = 21
       Caption = '2016'
@@ -1589,8 +1589,8 @@ object Form2: TForm2
     end
     object Year2017: TLabel
       Tag = 7
-      Left = 533
-      Top = 35
+      Left = 715
+      Top = 36
       Width = 44
       Height = 21
       Caption = '2017'
@@ -1605,8 +1605,8 @@ object Form2: TForm2
     end
     object Year2018: TLabel
       Tag = 8
-      Left = 581
-      Top = 35
+      Left = 763
+      Top = 36
       Width = 44
       Height = 21
       BiDiMode = bdRightToLeft
@@ -1622,8 +1622,8 @@ object Form2: TForm2
       OnClick = Year2018Click
     end
     object Icon6_Update: TImage
-      Left = 459
-      Top = 297
+      Left = 643
+      Top = 298
       Width = 16
       Height = 16
       Center = True
@@ -1648,8 +1648,8 @@ object Form2: TForm2
     end
     object Update: TLabel
       Tag = 10
-      Left = 486
-      Top = 297
+      Left = 670
+      Top = 298
       Width = 139
       Height = 16
       BiDiMode = bdRightToLeft
@@ -1669,7 +1669,7 @@ object Form2: TForm2
     object ProgressBar1: TProgressBar
       Left = 0
       Top = 342
-      Width = 639
+      Width = 815
       Height = 20
       TabOrder = 1
       Visible = False
@@ -1677,8 +1677,8 @@ object Form2: TForm2
     object DBGrid1: TDBGrid
       Left = 16
       Top = 80
-      Width = 609
-      Height = 113
+      Width = 793
+      Height = 121
       BorderStyle = bsNone
       DataSource = DataSource1
       Font.Charset = RUSSIAN_CHARSET
@@ -1696,40 +1696,214 @@ object Form2: TForm2
       TitleFont.Style = []
       Visible = False
     end
+    object Diagram: TDBChart
+      Left = 16
+      Top = 82
+      Width = 793
+      Height = 210
+      Foot.Font.Height = -16
+      LeftWall.Color = 10509885
+      MarginBottom = 2
+      MarginLeft = 1
+      MarginRight = 1
+      MarginTop = 2
+      Title.Font.Color = 6832446
+      Title.Font.Height = -16
+      Title.Font.Style = [fsBold]
+      Title.Margins.Left = 5
+      Title.Text.Strings = (
+        #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1079#1072#1087#1088#1086#1089#1086#1074' '#1079#1072' '#1075#1086#1076)
+      Title.VertMargin = 0
+      AxisVisible = False
+      BottomAxis.Items = {010000000100}
+      Emboss.Color = 13684944
+      LeftAxis.Axis.Width = 0
+      LeftAxis.Grid.Width = 0
+      LeftAxis.Visible = False
+      Shadow.Color = clBlack
+      TopAxis.Grid.Width = 0
+      Zoom.Pen.Width = 0
+      Color = 16316664
+      TabOrder = 2
+      Visible = False
+      DefaultCanvas = 'TGDIPlusCanvas'
+      ColorPaletteIndex = -2
+      ColorPalette = (
+        5783062
+        8214305
+        9858600
+        9674287
+        7321141
+        6263589
+        5078805
+        3695117)
+      object Series1: TBarSeries
+        BarBrush.Color = clBlack
+        Marks.Margins.Left = 0
+        Marks.Arrow.Visible = False
+        Marks.Callout.Arrow.Visible = False
+        Marks.Callout.ArrowHead = ahSolid
+        DataSource = ADOQuery1
+        Title = #1071#1085#1074#1072#1088#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        Sides = 41
+        TickLines.Width = 0
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'January'
+      end
+      object Series2: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1060#1077#1074#1088#1072#1083#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'February'
+      end
+      object Series3: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1052#1072#1088#1090
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'March'
+      end
+      object Series4: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1040#1087#1088#1077#1083#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'April'
+      end
+      object Series5: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1052#1072#1081
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'May'
+      end
+      object Series6: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1048#1102#1085#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'June'
+      end
+      object Series7: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1048#1102#1083#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'Jule'
+      end
+      object Series8: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1040#1074#1075#1091#1089#1090
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'August'
+      end
+      object Series9: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1057#1077#1085#1090#1103#1073#1088#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'September'
+      end
+      object Series10: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1054#1082#1090#1103#1073#1088#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'October'
+      end
+      object Series11: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1053#1086#1103#1073#1088#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'November'
+      end
+      object Series12: TBarSeries
+        DataSource = ADOQuery1
+        Title = #1044#1077#1082#1072#1073#1088#1100
+        BarWidthPercent = 100
+        SideMargins = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Bar'
+        YValues.Order = loNone
+        YValues.ValueSource = 'December'
+      end
+    end
   end
   object ADOConnection1: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User' +
       ' ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DA' +
       'TABASE=statistic;PORT=3306";Initial Catalog=statistic'
     LoginPrompt = False
-    Provider = 'MSDASQL.1'
-    Left = 23
-    Top = 194
+    Left = 7
+    Top = 154
   end
   object ADOQuery1: TADOQuery
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
-    CommandTimeout = 100000
+    CommandTimeout = 10000
     ParamCheck = False
     Parameters = <>
     SQL.Strings = (
-      
-        'select Statistic, January, February, March, April, May, June, Ju' +
-        'le, August, September, October, November, December from year2015')
-    Left = 97
-    Top = 241
-  end
-  object ADOTable1: TADOTable
-    Connection = ADOConnection1
-    CursorType = ctStatic
-    TableName = 'year2015'
-    Left = 96
-    Top = 169
+      'SELECT * FROM year2015 where id=4'
+      '')
+    Left = 9
+    Top = 201
   end
   object DataSource1: TDataSource
     DataSet = ADOQuery1
-    Left = 24
-    Top = 249
+    Left = 8
+    Top = 257
   end
 end

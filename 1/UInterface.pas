@@ -98,14 +98,12 @@ end;
 
 procedure ButtonAuthorizationMove;
 begin
-  form1.FakeButton1_Authorization.Picture.LoadFromFile
-    ('D:\Диплом\statisticswebirbis\1\Win32\Debug\data\interface\authorization_m.jpg');
+  form1.enter.color:=  RGB(104, 111, 155);
 end;
 
 procedure ButtonAuthorizationLeave;
 begin
-  form1.FakeButton1_Authorization.Picture.LoadFromFile
-    ('D:\Диплом\statisticswebirbis\1\Win32\Debug\data\interface\authorization_l.jpg');
+  form1.enter.color:= RGB(62, 65, 104);
 end;
 
 end.

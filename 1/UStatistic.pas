@@ -8,7 +8,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, JPEG,
   Data.DB, Data.Win.ADODB, RegExpr, UMessengge, ComObj, Vcl.Grids,
   Data.DBXMySQL, Data.SqlExpr, Vcl.ComCtrls, Vcl.Samples.Gauges, Vcl.DBGrids,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series,
+  VclTee.TeeProcs, VclTee.Chart, VclTee.DBChart;
 
 type
   TForm2 = class(TForm)
@@ -35,10 +36,22 @@ type
     ADOQuery1: TADOQuery;
     ProgressBar1: TProgressBar;
     DBGrid1: TDBGrid;
-    ADOTable1: TADOTable;
     DataSource1: TDataSource;
     Icon6_Update: TImage;
     Update: TLabel;
+    Diagram: TDBChart;
+    Series2: TBarSeries;
+    Series3: TBarSeries;
+    Series4: TBarSeries;
+    Series5: TBarSeries;
+    Series6: TBarSeries;
+    Series7: TBarSeries;
+    Series8: TBarSeries;
+    Series9: TBarSeries;
+    Series10: TBarSeries;
+    Series11: TBarSeries;
+    Series12: TBarSeries;
+    Series1: TBarSeries;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
@@ -61,10 +74,10 @@ type
   public
     { Public declarations }
     f1: TextFile;
-    jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec: string;
-    i, ex: Integer;
+    jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec, menu1: string;
+    i, yearexcel: Integer;
     ExlApp: Variant;
-    opn: boolean;
+    openexcel: boolean;
   end;
 
 const
@@ -84,20 +97,27 @@ uses UAuthorization, UInterface;
 procedure TForm2.FormActivate(Sender: TObject);
 begin
   Form1.hide;
-  ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="Driver=MySQL ODBC 5.3 ANSI Driver;UID=root;PWD=1234;DATABASE=statistic;PORT=3306;COLUMN_SIZE_S32=1";Initial Catalog=statistic';
-  ADOConnection1.Connected := true;
   Messengge := TMessengge.Create;
+  ADOConnection1.Connected := false;
+  ADOConnection1.ConnectionString :=
+    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306;";Initial Catalog=statistic';
+  ADOConnection1.Connected := true;
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
 begin
+  Icon5_Excel.visible := false;
+  Excel.visible := false;
+  Icon5_Excel.visible := false;
+  Diagram.visible := false;
+  DBGrid1.visible := false;
   FakeButton_MenuClick(Sender);
   Year2015.visible := true;
   Year2016.visible := true;
   Year2017.visible := true;
   Year2018.visible := true;
-  if opn = false then
+  menu1 := 'statistic';
+  if openexcel = false then
   begin
     ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
     ExlApp.visible := false; // делаем окно Excel невидимым
@@ -114,7 +134,7 @@ begin
       ExlApp.Worksheets[4].Name := '2018';
     end;
     ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
-    opn := true;
+    openexcel := true;
   end;
 end;
 
@@ -122,80 +142,144 @@ procedure TForm2.Year2015Click(Sender: TObject);
 var
   b: Integer;
 begin
-  ex := 2015;
-  FakeButton_Click(Sender);
-  Icon5_Excel.visible := true;
-  Excel.visible := true;
-  Icon5_Excel.visible := true;
+  Icon6_Update.visible := false;
+  Update.visible := false;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select Statistic, January, February, March, April, May, June, Jule, August, September, October, November, December from year2015');
-  ADOTable1.Active := true;
   ADOQuery1.Active := true;
-  DBGrid1.visible := true;
   DBGrid1.Columns[0].Width := 210;
   for b := 1 to 12 do
     DBGrid1.Columns.Items[b].Width := 55;
+  if menu1 = 'statistic' then // статистика
+  begin
+    Diagram.visible := false;
+    yearexcel := 2015;
+    Icon5_Excel.visible := true;
+    Excel.visible := true;
+    Icon5_Excel.visible := true;
+    DBGrid1.visible := true;
+    FakeButton_Click(Sender);
+  end
+  else // диаграммы
+  begin
+    Icon5_Excel.visible := false;
+    Excel.visible := false;
+    Icon5_Excel.visible := false;
+    Diagram.visible := true;
+    DBGrid1.visible := false;
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('SELECT * FROM year2015 where id=4');
+    ADOQuery1.Active := true;
+  end;
 end;
 
 procedure TForm2.Year2016Click(Sender: TObject);
 var
   b: Integer;
 begin
-  ex := 2016;
-  FakeButton_Click(Sender);
-  Excel.visible := true;
-  Icon5_Excel.visible := true;
+  Icon6_Update.visible := false;
+  Update.visible := false;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select Statistic, January, February, March, April, May, June, Jule, August, September, October, November, December from year2016');
-  ADOTable1.Active := true;
   ADOQuery1.Active := true;
-  DBGrid1.visible := true;
   DBGrid1.Columns[0].Width := 210;
   for b := 1 to 12 do
     DBGrid1.Columns.Items[b].Width := 55;
+  if menu1 = 'statistic' then // статистика
+  begin
+    Diagram.visible := false;
+    yearexcel := 2016;
+    Icon5_Excel.visible := true;
+    Excel.visible := true;
+    Icon5_Excel.visible := true;
+    DBGrid1.visible := true;
+    FakeButton_Click(Sender);
+  end
+  else // диаграммы
+  begin
+    Icon5_Excel.visible := false;
+    Excel.visible := false;
+    Icon5_Excel.visible := false;
+    Diagram.visible := true;
+    DBGrid1.visible := false;
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('SELECT * FROM year2016 where id=4');
+    ADOQuery1.Active := true;
+  end;
 end;
 
 procedure TForm2.Year2017Click(Sender: TObject);
 var
   b: Integer;
 begin
-  ex := 2017;
-  FakeButton_Click(Sender);
-  Excel.visible := true;
-  Icon5_Excel.visible := true;
+  Icon6_Update.visible := false;
+  Update.visible := false;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select Statistic, January, February, March, April, May, June, Jule, August, September, October, November, December from year2017');
-  ADOTable1.Active := true;
   ADOQuery1.Active := true;
-  DBGrid1.visible := true;
   DBGrid1.Columns[0].Width := 210;
   for b := 1 to 12 do
     DBGrid1.Columns.Items[b].Width := 55;
+  if menu1 = 'statistic' then // статистика
+  begin
+    Diagram.visible := false;
+    yearexcel := 2017;
+    Icon5_Excel.visible := true;
+    Excel.visible := true;
+    Icon5_Excel.visible := true;
+    DBGrid1.visible := true;
+    FakeButton_Click(Sender);
+  end
+  else // диаграммы
+  begin
+    Icon5_Excel.visible := false;
+    Excel.visible := false;
+    Icon5_Excel.visible := false;
+    Diagram.visible := true;
+    DBGrid1.visible := false;
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('SELECT * FROM year2017 where id=4');
+    ADOQuery1.Active := true;
+  end;
 end;
 
 procedure TForm2.Year2018Click(Sender: TObject);
 var
   b: Integer;
 begin
-  ex := 2018;
-  FakeButton_Click(Sender);
-  Icon6_Update.visible := true;
-  Update.visible := true;
-  Excel.visible := true;
-  Icon5_Excel.visible := true;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select Statistic, January, February, March, April, May, June, Jule, August, September, October, November, December from year2018');
-  ADOTable1.Active := true;
   ADOQuery1.Active := true;
-  DBGrid1.visible := true;
   DBGrid1.Columns[0].Width := 210;
   for b := 1 to 12 do
     DBGrid1.Columns.Items[b].Width := 55;
-
+  if menu1 = 'statistic' then // статистика
+  begin
+    Icon6_Update.visible := true;
+    Update.visible := true;
+    Diagram.visible := false;
+    yearexcel := 2018;
+    Icon5_Excel.visible := true;
+    Excel.visible := true;
+    Icon5_Excel.visible := true;
+    DBGrid1.visible := true;
+    FakeButton_Click(Sender);
+  end
+  else // диаграммы
+  begin
+    Icon5_Excel.visible := false;
+    Excel.visible := false;
+    Icon5_Excel.visible := false;
+    Diagram.visible := true;
+    DBGrid1.visible := false;
+    ADOQuery1.SQL.Clear;
+    ADOQuery1.SQL.Add('SELECT * FROM year2018 where id=4');
+    ADOQuery1.Active := true;
+  end;
 end;
 
 procedure TForm2.UpdateClick(Sender: TObject);
@@ -574,7 +658,7 @@ var
   row, col: Integer;
 begin
 
-  case ex of
+  case yearexcel of
     2015:
       begin
         ExlApp.Workbooks[1].Sheets.Item[1].Activate;
@@ -644,18 +728,17 @@ end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
 begin
+  Year2015.visible := true;
+  Year2016.visible := true;
+  Year2017.visible := true;
+  Year2018.visible := true;
+  FakeButton_MenuClick(Sender);
   Icon6_Update.visible := false;
   Update.visible := false;
   Excel.visible := false;
-  Year2015.visible := false;
-  Year2016.visible := false;
-  Year2017.visible := false;
-  Year2018.visible := false;
   Icon5_Excel.visible := false;
-  ADOTable1.Active := false;
-  ADOQuery1.Active := false;
   DBGrid1.visible := false;
-
+  menu1 := 'diagramm';
 end;
 
 procedure TForm2.UpdatebaseClick(Sender: TObject);
@@ -670,8 +753,9 @@ begin
   Year2017.visible := false;
   Year2018.visible := false;
   Icon5_Excel.visible := false;
-  ADOTable1.Active := false;
   ADOQuery1.Active := false;
+  DBGrid1.visible := false;
+  Diagram.visible := false;
   DBGrid1.visible := false;
 
   ADOQuery1.SQL.Clear;
@@ -734,7 +818,7 @@ var
 begin
   Form1.Close;
   ADOConnection1.Connected := false;
-  if opn = true then
+  if openexcel = true then
   begin
     try
       // формат xls 97-2003 если установлен 2003 Excel
