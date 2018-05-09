@@ -40,23 +40,24 @@ object Form2: TForm2
       ParentFont = False
       OnClick = StatisticClick
       OnMouseMove = StatisticMouseMove
-      OnMouseLeave = ExitMouseLeave
+      OnMouseLeave = StatisticMouseLeave
     end
     object Diagramm: TLabel
       Tag = 2
       Left = 38
       Top = 62
-      Width = 78
+      Width = 75
       Height = 16
-      Caption = #1044#1080#1072#1075#1088#1072#1084#1084#1099
+      Caption = #1044#1080#1072#1075#1088#1072#1084#1084#1072
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = DiagrammClick
       OnMouseMove = StatisticMouseMove
-      OnMouseLeave = ExitMouseLeave
+      OnMouseLeave = StatisticMouseLeave
     end
     object Updatebase: TLabel
       Tag = 3
@@ -73,7 +74,7 @@ object Form2: TForm2
       ParentFont = False
       OnClick = UpdatebaseClick
       OnMouseMove = StatisticMouseMove
-      OnMouseLeave = ExitMouseLeave
+      OnMouseLeave = StatisticMouseLeave
     end
     object Exit: TLabel
       Tag = 4
@@ -90,7 +91,7 @@ object Form2: TForm2
       ParentFont = False
       OnClick = ExitClick
       OnMouseMove = StatisticMouseMove
-      OnMouseLeave = ExitMouseLeave
+      OnMouseLeave = StatisticMouseLeave
     end
     object Icon1_Statistic: TImage
       Left = 16
@@ -1247,144 +1248,24 @@ object Form2: TForm2
       ParentFont = False
     end
   end
-  object RadioButton1: TRadioButton
-    Left = 204
-    Top = 168
-    Width = 113
-    Height = 17
-    Caption = 'RadioButton1'
-    Color = clRed
-    DoubleBuffered = True
-    ParentColor = False
-    ParentDoubleBuffered = False
-    TabOrder = 2
-    StyleElements = []
-  end
   object Body: TPanel
-    Left = 146
+    Left = 147
     Top = 41
     Width = 819
     Height = 362
     BevelOuter = bvNone
     Color = 15657959
     ParentBackground = False
-    TabOrder = 3
-    object ProgressBar1: TProgressBar
-      Left = 0
-      Top = 342
-      Width = 601
-      Height = 20
-      TabOrder = 0
-      Visible = False
-    end
-    object Panel1: TPanel
-      Left = 22
-      Top = 6
-      Width = 562
-      Height = 103
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 1
-      object Label1: TLabel
-        Left = 8
-        Top = 10
-        Width = 106
-        Height = 16
-        Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1076#1072#1090#1091':'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 8
-        Top = 40
-        Width = 141
-        Height = 16
-        Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1079#1072#1087#1088#1086#1089#1072':'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Calendar: TDateTimePicker
-        Left = 248
-        Top = 8
-        Width = 121
-        Height = 21
-        Date = 43228.713731678240000000
-        Time = 43228.713731678240000000
-        DateFormat = dfLong
-        TabOrder = 0
-        OnChange = CalendarChange
-      end
-      object Calendar1: TDateTimePicker
-        Left = 408
-        Top = 8
-        Width = 137
-        Height = 21
-        Date = 43228.713883831020000000
-        Time = 43228.713883831020000000
-        ShowCheckbox = True
-        Checked = False
-        DateFormat = dfLong
-        TabOrder = 1
-        OnChange = CalendarChange
-      end
-      object Uniq: TCheckBox
-        Left = 248
-        Top = 40
-        Width = 97
-        Height = 17
-        Caption = #1059#1085#1080#1082#1072#1083#1100#1085#1086#1089#1090#1100
-        Color = clWhite
-        ParentColor = False
-        TabOrder = 2
-        StyleElements = []
-      end
-      object PDF: TCheckBox
-        Left = 411
-        Top = 40
-        Width = 38
-        Height = 17
-        Caption = 'PDF'
-        Color = clWhite
-        ParentColor = False
-        TabOrder = 3
-        StyleElements = []
-      end
-      object Countbutton: TPanel
-        Left = 24
-        Top = 64
-        Width = 521
-        Height = 27
-        Caption = #1055#1086#1076#1089#1095#1080#1090#1072#1090#1100
-        Color = 6832446
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 4
-        OnClick = CountbuttonClick
-        OnMouseLeave = CountbuttonMouseLeave
-        OnMouseMove = CountbuttonMouseMove
-      end
-    end
-    object Panel2: TPanel
+    TabOrder = 2
+    object Query: TPanel
       Left = 22
       Top = 127
       Width = 562
       Height = 187
       Color = clWhite
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 3
+      Visible = False
       object IQuery: TLabel
         Left = 8
         Top = 23
@@ -1490,6 +1371,395 @@ object Form2: TForm2
         ParentFont = False
       end
     end
+    object ProgressBar1: TProgressBar
+      Left = 0
+      Top = 342
+      Width = 601
+      Height = 20
+      TabOrder = 0
+      Visible = False
+    end
+    object Parametrs: TPanel
+      Left = 22
+      Top = 6
+      Width = 562
+      Height = 103
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      Visible = False
+      object Label1: TLabel
+        Left = 8
+        Top = 10
+        Width = 106
+        Height = 16
+        Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1076#1072#1090#1091':'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 8
+        Top = 40
+        Width = 141
+        Height = 16
+        Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1079#1072#1087#1088#1086#1089#1072':'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Calendar: TDateTimePicker
+        Left = 248
+        Top = 8
+        Width = 121
+        Height = 21
+        Date = 43228.713731678240000000
+        Time = 43228.713731678240000000
+        DateFormat = dfLong
+        TabOrder = 0
+        OnChange = CalendarChange
+      end
+      object Calendar1: TDateTimePicker
+        Left = 408
+        Top = 8
+        Width = 137
+        Height = 21
+        Date = 43228.713883831020000000
+        Time = 43228.713883831020000000
+        ShowCheckbox = True
+        Checked = False
+        DateFormat = dfLong
+        TabOrder = 1
+        OnChange = CalendarChange
+      end
+      object Uniq: TCheckBox
+        Left = 248
+        Top = 40
+        Width = 97
+        Height = 17
+        Caption = #1059#1085#1080#1082#1072#1083#1100#1085#1086#1089#1090#1100
+        Color = clWhite
+        ParentColor = False
+        TabOrder = 2
+        StyleElements = []
+      end
+      object PDF: TCheckBox
+        Left = 411
+        Top = 40
+        Width = 38
+        Height = 17
+        Caption = 'PDF'
+        Color = clWhite
+        ParentColor = False
+        TabOrder = 3
+        StyleElements = []
+      end
+      object Countbutton: TPanel
+        Left = 24
+        Top = 64
+        Width = 521
+        Height = 27
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        Color = 6832446
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 4
+        OnClick = CountbuttonClick
+        OnMouseLeave = CountbuttonMouseLeave
+        OnMouseMove = CountbuttonMouseMove
+      end
+    end
+    object Diagrammpanel: TPanel
+      Left = 22
+      Top = 6
+      Width = 562
+      Height = 347
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      Visible = False
+      object Label3: TLabel
+        Left = 16
+        Top = 13
+        Width = 74
+        Height = 16
+        Caption = #1060#1080#1083#1100#1090#1088' '#1087#1086':'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object January: TLabel
+        Tag = 1
+        Left = 16
+        Top = 35
+        Width = 39
+        Height = 14
+        Caption = #1071#1085#1074#1072#1088#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = JanuaryClick
+      end
+      object February: TLabel
+        Tag = 2
+        Left = 61
+        Top = 35
+        Width = 49
+        Height = 14
+        Caption = #1060#1077#1074#1088#1072#1083#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = FebruaryClick
+      end
+      object March: TLabel
+        Tag = 3
+        Left = 116
+        Top = 35
+        Width = 28
+        Height = 14
+        Caption = #1052#1072#1088#1090
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = MarchClick
+      end
+      object April: TLabel
+        Tag = 4
+        Left = 150
+        Top = 35
+        Width = 42
+        Height = 14
+        Caption = #1040#1087#1088#1077#1083#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = AprilClick
+      end
+      object May: TLabel
+        Tag = 5
+        Left = 198
+        Top = 35
+        Width = 22
+        Height = 14
+        Caption = #1052#1072#1081
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = MayClick
+      end
+      object June: TLabel
+        Tag = 6
+        Left = 226
+        Top = 35
+        Width = 30
+        Height = 14
+        Caption = #1048#1102#1085#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = JuneClick
+      end
+      object Jule: TLabel
+        Tag = 7
+        Left = 262
+        Top = 35
+        Width = 30
+        Height = 14
+        Caption = #1048#1102#1083#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = JuleClick
+      end
+      object August: TLabel
+        Tag = 8
+        Left = 298
+        Top = 35
+        Width = 37
+        Height = 14
+        Caption = #1040#1074#1075#1091#1089#1090
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = AugustClick
+      end
+      object September: TLabel
+        Tag = 9
+        Left = 341
+        Top = 35
+        Width = 54
+        Height = 14
+        Caption = #1057#1077#1085#1090#1103#1073#1088#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = SeptemberClick
+      end
+      object October: TLabel
+        Tag = 10
+        Left = 401
+        Top = 35
+        Width = 48
+        Height = 14
+        Caption = #1054#1082#1090#1103#1073#1088#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = OctoberClick
+      end
+      object November: TLabel
+        Tag = 11
+        Left = 455
+        Top = 35
+        Width = 42
+        Height = 14
+        Caption = #1053#1086#1103#1073#1088#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = NovemberClick
+      end
+      object December: TLabel
+        Tag = 12
+        Left = 504
+        Top = 35
+        Width = 47
+        Height = 14
+        Caption = #1044#1077#1082#1072#1073#1088#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = DecemberClick
+      end
+      object Updatediagram: TLabel
+        Tag = 5
+        Left = 483
+        Top = 314
+        Width = 62
+        Height = 16
+        Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 6832446
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnClick = UpdatediagramClick
+        OnMouseMove = StatisticMouseMove
+        OnMouseLeave = StatisticMouseLeave
+      end
+      object DBChart1: TDBChart
+        Left = 8
+        Top = 62
+        Width = 529
+        Height = 245
+        LeftWall.Color = 7291198
+        MarginBottom = 0
+        MarginLeft = 0
+        MarginRight = 2
+        MarginTop = 2
+        Title.Font.Color = 7291198
+        Title.Font.Height = -13
+        Title.Font.Style = [fsBold]
+        Title.Text.Strings = (
+          #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072' '#1087#1086#1089#1077#1097#1077#1085#1080#1081' '#1087#1086' '#1075#1086#1076#1072#1084)
+        Shadow.Color = clWhite
+        Shadow.Visible = False
+        BevelOuter = bvNone
+        Color = clWhite
+        TabOrder = 0
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
+        object Series1: TAreaSeries
+          AreaChartBrush.Color = clGray
+          AreaChartBrush.BackColor = clDefault
+          DrawArea = True
+          Pointer.InflateMargins = True
+          Pointer.Style = psRectangle
+          Pointer.Visible = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          XValues.ValueSource = 'year'
+          YValues.Name = 'Y'
+          YValues.Order = loNone
+          YValues.ValueSource = 'summ'
+          Data = {
+            0019000000000000000014844000000000002483400000000000588640000000
+            0000648440000000000038834000000000007082400000000000F07E40000000
+            0000E07A400000000000D07B400000000000A87B400000000000287940000000
+            00000876400000000000C06C4000000000008061400000000000C04240000000
+            0000003E400000000000C05C4000000000004040400000000000C04C40000000
+            0000E060400000000000F06E4000000000006063400000000000C05740000000
+            00000054400000000000605840}
+          Detail = {0000000000}
+        end
+      end
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 80
+    Top = 187
+    Width = 53
+    Height = 60
+    DataSource = DataSource1
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Visible = False
   end
   object ADOConnection1: TADOConnection
     Connected = True
@@ -1501,21 +1771,20 @@ object Form2: TForm2
     Left = 15
     Top = 146
   end
-  object ADOQuery1: TADOQuery
-    Connection = ADOConnection1
-    CursorType = ctStatic
-    CommandTimeout = 10000
-    ParamCheck = False
-    Parameters = <>
-    SQL.Strings = (
-      'SELECT * FROM year2015 where id=4'
-      '')
-    Left = 17
-    Top = 201
-  end
   object DataSource1: TDataSource
     DataSet = ADOQuery1
     Left = 16
     Top = 257
+  end
+  object ADOQuery1: TADOQuery
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    ParamCheck = False
+    Parameters = <>
+    SQL.Strings = (
+      'select * from diagramm')
+    Left = 16
+    Top = 201
   end
 end
