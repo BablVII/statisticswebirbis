@@ -9,10 +9,9 @@ uses
 
 procedure FakeButton_MouseMove(Sender: TObject);
 procedure FakeButton_MouseLeave(Sender: TObject);
-procedure FakeButton_Click(Sender: TObject);
+
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
-procedure FakeButton_MenuClick(Sender: TObject);
 
 implementation
 
@@ -29,10 +28,7 @@ begin
       form2.Updatebase.Font.Color := RGB(255, 255, 255);
     4:
       form2.Exit.Font.Color := RGB(255, 255, 255);
-    9:
-      form2.Excel.Font.Color := RGB(62, 65, 104);
-    10:
-      form2.Update.Font.Color := RGB(62, 65, 104);
+
   end;
 end;
 
@@ -47,63 +43,20 @@ begin
       form2.Updatebase.Font.Color := RGB(179, 182, 203);
     4:
       form2.Exit.Font.Color := RGB(179, 182, 203);
-    9:
-      form2.Excel.Font.Color := RGB(179, 182, 203);
-    10:
-      form2.Update.Font.Color := RGB(179, 182, 203);
-  end;
-end;
 
-procedure FakeButton_Click(Sender: TObject);
-begin
-  case TComponent(Sender).Tag of
-    5:
-      begin
-        form2.Year2015.Font.Color := RGB(62, 65, 104);
-        form2.Year2016.Font.Color := RGB(179, 182, 203);
-        form2.Year2017.Font.Color := RGB(179, 182, 203);
-        form2.Year2018.Font.Color := RGB(179, 182, 203);
-      end;
-    6:
-      begin
-        form2.Year2015.Font.Color := RGB(179, 182, 203);
-        form2.Year2016.Font.Color := RGB(62, 65, 104);
-        form2.Year2017.Font.Color := RGB(179, 182, 203);
-        form2.Year2018.Font.Color := RGB(179, 182, 203);
-      end;
-    7:
-      begin
-        form2.Year2015.Font.Color := RGB(179, 182, 203);
-        form2.Year2016.Font.Color := RGB(179, 182, 203);
-        form2.Year2017.Font.Color := RGB(62, 65, 104);
-        form2.Year2018.Font.Color := RGB(179, 182, 203);
-      end;
-    8:
-      begin
-        form2.Year2015.Font.Color := RGB(179, 182, 203);
-        form2.Year2016.Font.Color := RGB(179, 182, 203);
-        form2.Year2017.Font.Color := RGB(179, 182, 203);
-        form2.Year2018.Font.Color := RGB(62, 65, 104);
-      end;
   end;
-end;
-
-procedure FakeButton_MenuClick(Sender: TObject);
-begin
-  form2.Year2015.Font.Color := RGB(179, 182, 203);
-  form2.Year2016.Font.Color := RGB(179, 182, 203);
-  form2.Year2017.Font.Color := RGB(179, 182, 203);
-  form2.Year2018.Font.Color := RGB(179, 182, 203);
 end;
 
 procedure ButtonAuthorizationMove;
 begin
-  form1.enter.color:=  RGB(104, 111, 155);
+  form1.enter.Color := RGB(104, 111, 155);
+  form2.Countbutton.Color := RGB(104, 111, 155);
 end;
 
 procedure ButtonAuthorizationLeave;
 begin
-  form1.enter.color:= RGB(62, 65, 104);
+  form2.Countbutton.Color := RGB(62, 65, 104);
+  form1.enter.Color := RGB(62, 65, 104);
 end;
 
 end.
