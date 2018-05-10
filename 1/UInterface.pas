@@ -9,10 +9,9 @@ uses
 
 procedure FakeButton_MouseMove(Sender: TObject);
 procedure FakeButton_MouseLeave(Sender: TObject);
-
-procedure Font_style(Sender: TObject);
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
+procedure Deletevalue;
 
 implementation
 
@@ -64,191 +63,21 @@ begin
   form1.enter.Color := RGB(62, 65, 104);
 end;
 
-procedure Font_style(Sender: TObject);
+procedure Deletevalue;
 begin
-  case TComponent(Sender).Tag of
-    1:
-      begin
-        form2.January.Font.Style := [fsUnderLine];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    2:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [fsUnderLine];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    3:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [fsUnderLine];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    4:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [fsUnderLine];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    5:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [fsUnderLine];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    6:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [fsUnderLine];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    7:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [fsUnderLine];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    8:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [fsUnderLine];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    9:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [fsUnderLine];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    10:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [fsUnderLine];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [];
-      end;
-    11:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [fsUnderLine];
-        form2.December.Font.Style := [];
-      end;
-    12:
-      begin
-        form2.January.Font.Style := [];
-        form2.February.Font.Style := [];
-        form2.March.Font.Style := [];
-        form2.April.Font.Style := [];
-        form2.May.Font.Style := [];
-        form2.June.Font.Style := [];
-        form2.Jule.Font.Style := [];
-        form2.August.Font.Style := [];
-        form2.September.Font.Style := [];
-        form2.October.Font.Style := [];
-        form2.November.Font.Style := [];
-        form2.December.Font.Style := [fsUnderLine];
-      end;
+  form2.DBChart1.Series[0].YValues.ValueSource := '';
+  form2.DBChart1.Series[1].YValues.ValueSource := '';
+  form2.DBChart1.Series[2].YValues.ValueSource := '';
+  form2.DBChart1.Series[3].YValues.ValueSource := '';
+  form2.DBChart1.Series[4].YValues.ValueSource := '';
+  form2.DBChart1.Series[5].YValues.ValueSource := '';
+  form2.DBChart1.Series[6].YValues.ValueSource := '';
+  form2.DBChart1.Series[7].YValues.ValueSource := '';
+  form2.DBChart1.Series[8].YValues.ValueSource := '';
+  form2.DBChart1.Series[9].YValues.ValueSource := '';
+  form2.DBChart1.Series[10].YValues.ValueSource := '';
+  form2.DBChart1.Series[11].YValues.ValueSource := '';
 
-  end;
 end;
 
 end.

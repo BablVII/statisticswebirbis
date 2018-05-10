@@ -46,9 +46,9 @@ object Form2: TForm2
       Tag = 2
       Left = 38
       Top = 62
-      Width = 75
+      Width = 78
       Height = 16
-      Caption = #1044#1080#1072#1075#1088#1072#1084#1084#1072
+      Caption = #1044#1080#1072#1075#1088#1072#1084#1084#1099
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 13350579
       Font.Height = -13
@@ -1321,9 +1321,9 @@ object Form2: TForm2
       object IQuery2: TLabel
         Left = 8
         Top = 103
-        Width = 245
+        Width = 252
         Height = 16
-        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1085#1080#1082#1072#1083#1100#1085#1099#1093' '#1087#1086#1089#1077#1097#1077#1085#1080#1081':'
+        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074#1080#1088#1090#1091#1072#1083#1100#1085#1099#1093' '#1087#1086#1089#1077#1097#1077#1085#1080#1081':'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 6832446
         Font.Height = -13
@@ -1502,208 +1502,29 @@ object Form2: TForm2
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object January: TLabel
-        Tag = 1
-        Left = 16
-        Top = 35
-        Width = 39
-        Height = 14
-        Caption = #1071#1085#1074#1072#1088#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = JanuaryClick
-      end
-      object February: TLabel
-        Tag = 2
-        Left = 61
-        Top = 35
-        Width = 49
-        Height = 14
-        Caption = #1060#1077#1074#1088#1072#1083#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = FebruaryClick
-      end
-      object March: TLabel
-        Tag = 3
-        Left = 116
-        Top = 35
-        Width = 28
-        Height = 14
-        Caption = #1052#1072#1088#1090
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = MarchClick
-      end
-      object April: TLabel
-        Tag = 4
-        Left = 150
-        Top = 35
-        Width = 42
-        Height = 14
-        Caption = #1040#1087#1088#1077#1083#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = AprilClick
-      end
-      object May: TLabel
-        Tag = 5
-        Left = 198
-        Top = 35
-        Width = 22
-        Height = 14
-        Caption = #1052#1072#1081
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = MayClick
-      end
-      object June: TLabel
-        Tag = 6
-        Left = 226
-        Top = 35
-        Width = 30
-        Height = 14
-        Caption = #1048#1102#1085#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = JuneClick
-      end
-      object Jule: TLabel
-        Tag = 7
-        Left = 262
-        Top = 35
-        Width = 30
-        Height = 14
-        Caption = #1048#1102#1083#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = JuleClick
-      end
-      object August: TLabel
-        Tag = 8
-        Left = 298
-        Top = 35
-        Width = 37
-        Height = 14
-        Caption = #1040#1074#1075#1091#1089#1090
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = AugustClick
-      end
-      object September: TLabel
-        Tag = 9
-        Left = 341
-        Top = 35
-        Width = 54
-        Height = 14
-        Caption = #1057#1077#1085#1090#1103#1073#1088#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = SeptemberClick
-      end
-      object October: TLabel
-        Tag = 10
-        Left = 401
-        Top = 35
-        Width = 48
-        Height = 14
-        Caption = #1054#1082#1090#1103#1073#1088#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = OctoberClick
-      end
-      object November: TLabel
-        Tag = 11
-        Left = 455
-        Top = 35
-        Width = 42
-        Height = 14
-        Caption = #1053#1086#1103#1073#1088#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = NovemberClick
-      end
-      object December: TLabel
-        Tag = 12
-        Left = 504
-        Top = 35
-        Width = 47
-        Height = 14
-        Caption = #1044#1077#1082#1072#1073#1088#1100
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6832446
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = DecemberClick
-      end
       object Updatediagram: TLabel
         Tag = 5
-        Left = 483
-        Top = 314
-        Width = 62
+        Left = 323
+        Top = 319
+        Width = 225
         Height = 16
-        Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+        Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1089#1090#1072#1090#1080#1089#1090#1080#1095#1077#1089#1082#1080#1077' '#1076#1072#1085#1085#1099#1077
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 6832446
         Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        Visible = False
         OnClick = UpdatediagramClick
         OnMouseMove = StatisticMouseMove
         OnMouseLeave = StatisticMouseLeave
       end
       object DBChart1: TDBChart
-        Left = 8
-        Top = 62
-        Width = 529
-        Height = 245
+        Left = 0
+        Top = 40
+        Width = 561
+        Height = 273
         LeftWall.Color = 7291198
         MarginBottom = 0
         MarginLeft = 0
@@ -1713,45 +1534,157 @@ object Form2: TForm2
         Title.Font.Height = -13
         Title.Font.Style = [fsBold]
         Title.Text.Strings = (
-          #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072' '#1087#1086#1089#1077#1097#1077#1085#1080#1081' '#1087#1086' '#1075#1086#1076#1072#1084)
+          'TDBChart')
+        BottomAxis.Items = {010000000100}
+        Legend.Symbol.Height = 80
+        Legend.TextSymbolGap = 0
         Shadow.Color = clWhite
         Shadow.Visible = False
+        View3DOptions.ZoomText = ztAuto
+        Zoom.AnimatedSteps = 7
         BevelOuter = bvNone
         Color = clWhite
         TabOrder = 0
+        Visible = False
         DefaultCanvas = 'TGDIPlusCanvas'
-        ColorPaletteIndex = 13
-        object Series1: TAreaSeries
-          AreaChartBrush.Color = clGray
-          AreaChartBrush.BackColor = clDefault
-          DrawArea = True
-          Pointer.InflateMargins = True
-          Pointer.Style = psRectangle
-          Pointer.Visible = False
+        ColorPaletteIndex = 15
+        object Series1: TBarSeries
+          Marks.Margins.Left = 0
+          Marks.Margins.Units = maPercentSize
+          Marks.Style = smsValue
+          Marks.Arrow.Visible = False
+          Marks.Callout.Arrow.Visible = False
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          Sides = 51
           XValues.Name = 'X'
           XValues.Order = loAscending
-          XValues.ValueSource = 'year'
-          YValues.Name = 'Y'
+          YValues.Name = 'Bar'
           YValues.Order = loNone
-          YValues.ValueSource = 'summ'
-          Data = {
-            0019000000000000000014844000000000002483400000000000588640000000
-            0000648440000000000038834000000000007082400000000000F07E40000000
-            0000E07A400000000000D07B400000000000A87B400000000000287940000000
-            00000876400000000000C06C4000000000008061400000000000C04240000000
-            0000003E400000000000C05C4000000000004040400000000000C04C40000000
-            0000E060400000000000F06E4000000000006063400000000000C05740000000
-            00000054400000000000605840}
-          Detail = {0000000000}
         end
+        object Series2: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series3: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series4: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series5: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series6: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series7: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series8: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series9: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series10: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series11: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+        object Series12: TBarSeries
+          DataSource = ADOQuery1
+          BarWidthPercent = 100
+          SideMargins = False
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+        end
+      end
+      object ComboBox1: TComboBox
+        Left = 404
+        Top = 13
+        Width = 145
+        Height = 21
+        TabOrder = 1
+        Text = #1042#1077#1089#1100' '#1087#1077#1088#1080#1086#1076
+        OnChange = ComboBox1Change
+        Items.Strings = (
+          '2015'
+          '2016'
+          '2017'
+          '2018'
+          #1042#1077#1089#1100' '#1087#1077#1088#1080#1086#1076)
       end
     end
   end
   object DBGrid1: TDBGrid
-    Left = 80
-    Top = 187
-    Width = 53
-    Height = 60
+    Left = 69
+    Top = 141
+    Width = 47
+    Height = 42
     DataSource = DataSource1
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
@@ -1783,7 +1716,7 @@ object Form2: TForm2
     ParamCheck = False
     Parameters = <>
     SQL.Strings = (
-      'select * from diagramm')
+      'select * from diagramm where id=5')
     Left = 16
     Top = 201
   end

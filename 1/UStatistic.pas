@@ -9,7 +9,7 @@ uses
   Data.DB, Data.Win.ADODB, RegExpr, UMessengge, ComObj, Vcl.Grids,
   Data.DBXMySQL, Data.SqlExpr, Vcl.ComCtrls, Vcl.Samples.Gauges, Vcl.DBGrids,
   Vcl.Imaging.pngimage, VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series,
-  VclTee.TeeProcs, VclTee.Chart, VclTee.DBChart;
+  VclTee.TeeProcs, VclTee.Chart, VclTee.DBChart, Vcl.DBCtrls;
 
 type
   TForm2 = class(TForm)
@@ -48,23 +48,23 @@ type
     IValue3: TLabel;
     Diagrammpanel: TPanel;
     Label3: TLabel;
-    January: TLabel;
-    February: TLabel;
-    March: TLabel;
-    April: TLabel;
-    May: TLabel;
-    June: TLabel;
-    Jule: TLabel;
-    August: TLabel;
-    September: TLabel;
-    October: TLabel;
-    November: TLabel;
-    December: TLabel;
     DBChart1: TDBChart;
     Updatediagram: TLabel;
     DBGrid1: TDBGrid;
-    Series1: TAreaSeries;
     ADOQuery1: TADOQuery;
+    ComboBox1: TComboBox;
+    Series1: TBarSeries;
+    Series2: TBarSeries;
+    Series3: TBarSeries;
+    Series4: TBarSeries;
+    Series5: TBarSeries;
+    Series6: TBarSeries;
+    Series7: TBarSeries;
+    Series8: TBarSeries;
+    Series9: TBarSeries;
+    Series10: TBarSeries;
+    Series11: TBarSeries;
+    Series12: TBarSeries;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure UpdatebaseClick(Sender: TObject);
@@ -81,26 +81,15 @@ type
       X, Y: Integer);
     procedure StatisticMouseLeave(Sender: TObject);
     procedure UpdatediagramClick(Sender: TObject);
-    procedure JanuaryClick(Sender: TObject);
-    procedure FebruaryClick(Sender: TObject);
-    procedure MarchClick(Sender: TObject);
-    procedure AprilClick(Sender: TObject);
-    procedure MayClick(Sender: TObject);
-    procedure JuneClick(Sender: TObject);
-    procedure JuleClick(Sender: TObject);
-    procedure AugustClick(Sender: TObject);
-    procedure SeptemberClick(Sender: TObject);
-    procedure OctoberClick(Sender: TObject);
-    procedure NovemberClick(Sender: TObject);
-    procedure DecemberClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
 
   private
     { Private declarations }
   public
     { Public declarations }
     f1: TextFile;
-    day, month, year, day1, month1, year1, variable, variable1, endyear: string;
-    i, yearexcel: Integer;
+    day, month, year, day1, month1, year1, variable, variable1: string;
+    i: Integer;
     ExlApp: Variant;
     openexcel: boolean;
   end;
@@ -127,21 +116,22 @@ begin
   ADOConnection1.ConnectionString :=
     'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306;";Initial Catalog=statistic';
   ADOConnection1.Connected := true;
-  ADOQuery1.close;
+  ADOQuery1.active := true;
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
 begin
-   Parametrs.visible := true;
+  Parametrs.visible := true;
   Query.visible := false;
   Diagrammpanel.visible := false;
-
+  Deletevalue;
 end;
 
 procedure TForm2.CountbuttonClick(Sender: TObject);
 begin
-   Query.visible := true;
-  endyear := '' + year + '-12-31';
+  Deletevalue;
+  Query.visible := true;
+
   if year = '2015' then
     year := 'year2015'
   else if year = '2016' then
@@ -166,7 +156,8 @@ begin
     begin
       ADOQuery1.SQL.Clear;
       ADOQuery1.SQL.Add('select count(*) from  ' + year +
-        ' WHERE date between "' + variable + '" and "' + variable1 + '";');
+        ' WHERE (date between "' + variable + '" and "' + variable1 +
+        '") and code=200 ;');
       ADOQuery1.open;
       IValue.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
     end;
@@ -177,8 +168,8 @@ begin
       begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add('select count(*) from ' + year +
-          ' WHERE url like ''%pdf%'' and (date between "' + variable + '" and "'
-          + variable1 + '");');
+          ' WHERE (url like ''%pdf%'') and (date between "' + variable +
+          '" and "' + variable1 + '") and code=200;');
         ADOQuery1.open;
         IValue1.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
       end;
@@ -190,7 +181,8 @@ begin
       begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add('select count(DISTINCT (ip)) from ' + year +
-          ' WHERE date between "' + variable + '" and "' + variable1 + '";');
+          ' WHERE (date between "' + variable + '" and "' + variable1 +
+          '") and code=200;');
         ADOQuery1.open;
         IValue2.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
       end;
@@ -202,8 +194,8 @@ begin
       begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add('select count(DISTINCT (ip)) from ' + year +
-          ' WHERE url like ''%pdf%'' and (date between "' + variable + '" and "'
-          + variable1 + '");');
+          ' WHERE (url like ''%pdf%'') and (date between "' + variable +
+          '" and "' + variable1 + '") and (code=200);');
         ADOQuery1.open;
         IValue3.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
       end;
@@ -213,6 +205,7 @@ end;
 
 procedure TForm2.CalendarChange(Sender: TObject);
 begin
+  Deletevalue;
   IValue.Caption := '0';
   IValue1.Caption := '0';
   IValue2.Caption := '0';
@@ -245,92 +238,105 @@ begin
   Parametrs.visible := false;
   Query.visible := false;
   Diagrammpanel.visible := true;
+  Deletevalue;
+  DBChart1.visible := false;
+end;
+
+procedure TForm2.ComboBox1Change(Sender: TObject);
+var
+cl:integer;
+begin
+  DBChart1.visible := true;
   ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from diagramm');
-  ADOQuery1.active:=true;
-  DBChart1.Series[0].DataSource:=adoquery1;
-  DBChart1.Series[0].XValues.ValueSource := 'year';
-  DBChart1.Series[0].YValues.ValueSource := 'summ';
-end;
+  ADOQuery1.SQL.Add('select * from diagramm;');
+  DBChart1.Series[0].YValues.ValueSource := 'january';
+  DBChart1.Series[0].Title := 'Январь';
+  DBChart1.Series[1].YValues.ValueSource := 'february';
+  DBChart1.Series[1].Title := 'Февраль';
+  DBChart1.Series[2].YValues.ValueSource := 'march';
+  DBChart1.Series[2].Title := 'Март';
+  DBChart1.Series[3].YValues.ValueSource := 'april';
+  DBChart1.Series[3].Title := 'Апрель';
+  DBChart1.Series[4].YValues.ValueSource := 'may';
+  DBChart1.Series[4].Title := 'Май';
+  DBChart1.Series[5].YValues.ValueSource := 'june';
+  DBChart1.Series[5].Title := 'Июнь';
+  DBChart1.Series[6].YValues.ValueSource := 'jule';
+  DBChart1.Series[6].Title := 'Июль';
+  DBChart1.Series[7].YValues.ValueSource := 'august';
+  DBChart1.Series[7].Title := 'Август';
+  DBChart1.Series[8].YValues.ValueSource := 'september';
+  DBChart1.Series[8].Title := 'Сентябрь';
+  DBChart1.Series[9].YValues.ValueSource := 'october';
+  DBChart1.Series[9].Title := 'Октябрь';
+  DBChart1.Series[10].YValues.ValueSource := 'november';
+  DBChart1.Series[10].Title := 'Ноябрь';
+  DBChart1.Series[11].YValues.ValueSource := 'december';
+  DBChart1.Series[11].Title := 'Декабрь';
 
-procedure TForm2.JanuaryClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'January';
-end;
+  case ComboBox1.ItemIndex of
+    0:
+      begin
 
-procedure TForm2.FebruaryClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'February';
-end;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select * from diagramm where id=1;');
+        ADOQuery1.open;
+        DBChart1.Title.Text.Clear;
+        DBChart1.Title.Text.Add('Статистика посещений за 2015 год');
+        Updatediagram.visible := false;
+      end;
+    1:
+      begin
 
-procedure TForm2.MarchClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'March';
-end;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select * from diagramm where id=2;');
+        ADOQuery1.open;
+        DBChart1.Title.Text.Clear;
+        DBChart1.Title.Text.Add('Статистика посещений за 2016 год');
+        Updatediagram.visible := false;
+      end;
+    2:
+      begin
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select * from diagramm where id=3;');
+        ADOQuery1.open;
+        DBChart1.Title.Text.Clear;
+        DBChart1.Title.Text.Add('Статистика посещений за 2017 год');
+        Updatediagram.visible := false;
+      end;
+    3:
+      begin
 
-procedure TForm2.AprilClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'April';
-end;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select * from diagramm where id=4;');
+        ADOQuery1.open;
+        DBChart1.Title.Text.Clear;
+        DBChart1.Title.Text.Add('Статистика посещений за 2018 год');
+        Updatediagram.visible := true;
+      end;
+    4:
+      begin
 
-procedure TForm2.MayClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'May';
-end;
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select * from diagramm where id=5;');
+        ADOQuery1.open;
+        DBChart1.Title.Text.Clear;
+        DBChart1.Title.Text.Add
+          ('Статистика посещений по месяцам за весь период');
+        Updatediagram.visible := false;
 
-procedure TForm2.JuneClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'June';
-end;
+      end;
+  end;
 
-procedure TForm2.JuleClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'Jule';
-end;
-
-procedure TForm2.AugustClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'August';
-end;
-
-procedure TForm2.SeptemberClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'September';
-end;
-
-procedure TForm2.OctoberClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'October';
-end;
-
-procedure TForm2.NovemberClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'November';
-end;
-
-procedure TForm2.DecemberClick(Sender: TObject);
-begin
-  Font_style(Sender);
-  DBChart1.Series[0].YValues.ValueSource := 'December';
 end;
 
 // обновления
 procedure TForm2.UpdatediagramClick(Sender: TObject);
 var
   jan, feb, mar, apr, May, jun, jul, aug, sep, oct, nov, dec, summ1: string;
-  summ, row, col: Integer;
+  summ, row, col, b: Integer;
 begin
+  Deletevalue;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select count(*) from year2018 where date like ''%2018-01-%'';');
@@ -432,6 +438,103 @@ begin
     '",December), summ ="' + summ1 + '" where id = 4;');
   ADOQuery1.execsql;
 
+  // сумма по месяцам
+  summ := 0;
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(january) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  jan := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(february) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  feb := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(march) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  mar := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(april) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  apr := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(may) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  May := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(june) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  jun := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(jule) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  jul := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(august) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  aug := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(september) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  sep := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(october) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  oct := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(november) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  nov := inttostr(ADOQuery1.Fields[0].AsInteger);
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select SUM(december) FROM diagramm where year<>0;');
+  ADOQuery1.open;
+  summ := summ + ADOQuery1.Fields[0].AsInteger;
+  summ1 := inttostr(summ);
+  dec := inttostr(ADOQuery1.Fields[0].AsInteger);
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('update diagramm set January = if(January <> "' + jan +
+    '", January + "' + jan + '",January),February = if(February <> "' + feb +
+    '", February + "' + feb + '",February),March = if(March <> "' + mar +
+    '", March + "' + mar + '",March),April = if(April <> "' + apr +
+    '", April + "' + apr + '",April),May = if(May <> "' + May + '", May + "' +
+    May + '",May),June = if(June <> "' + jun + '", June + "' + jun +
+    '",June),Jule = if(Jule <> "' + jul + '", Jule + "' + jul +
+    '",Jule),August = if(August <> "' + aug + '", August + "' + aug +
+    '",August),September = if(September <> "' + sep + '", September + "' + sep +
+    '",September),October = if(October <> "' + oct + '", October + "' + oct +
+    '",October),November = if(November <> "' + nov + '", November + "' + nov +
+    '",November),December = if(December <> "' + dec + '", December + "' + dec +
+    '",December), summ ="' + summ1 + '" where id = 5;');
+  ADOQuery1.execsql;
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select * from diagramm');
+  ADOQuery1.active := true;
+  DBGrid1.Columns[0].Width := 210;
+  for b := 1 to 12 do
+    DBGrid1.Columns.Items[b].Width := 55;
+
   if openexcel = false then
   begin
     ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
@@ -446,10 +549,8 @@ begin
     ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
     openexcel := true;
   end;
+
   ExlApp.Workbooks[1].Sheets.Item[1].Activate;
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.text := 'select *from diagramm;';
-  ADOQuery1.execsql;
   for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
   begin
     for col := 0 to DBGrid1.Columns.Count - 1 do
@@ -467,6 +568,7 @@ procedure TForm2.UpdatebaseClick(Sender: TObject);
 var
   Date, a, a1, a2, a21, a22, a23, a3, a4, a5, year: string;
 begin
+  Deletevalue;
   Parametrs.visible := false;
   Query.visible := false;
   Diagrammpanel.visible := false;
@@ -557,7 +659,7 @@ end;
 
 procedure TForm2.ExitClick(Sender: TObject);
 var
-  Active: boolean;
+  active: boolean;
 begin
   Form1.close;
   ADOConnection1.Connected := false;
