@@ -8,10 +8,12 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, JPEG;
 
 procedure FakeButton_MouseMove(Sender: TObject);
-procedure FakeButton_MouseLeave(Sender: TObject);
 procedure ButtonAuthorizationMove;
 procedure ButtonAuthorizationLeave;
 procedure Deletevalue;
+procedure FakeButton_Mouseclick(Sender: TObject);
+procedure Fontstyle1(Sender: TObject);
+procedure FakeButton_Mouseleave(Sender: TObject);
 
 implementation
 
@@ -21,32 +23,148 @@ procedure FakeButton_MouseMove(Sender: TObject);
 begin
   case TComponent(Sender).Tag of
     1:
-      form2.Statistic.Font.Color := RGB(255, 255, 255);
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        // form2.Label9.Font.Color := RGB(62,65,114);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
     2:
-      form2.Diagramm.Font.Color := RGB(255, 255, 255);
+      begin
+        form2.Statistic.Font.Color := RGB(179, 182, 203);
+        form2.Diagramm.Font.Color := RGB(255, 255, 255);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        // form2.Label9.Font.Color := RGB(62,65,114);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
     3:
-      form2.Updatebase.Font.Color := RGB(255, 255, 255);
+      begin
+        form2.Statistic.Font.Color := RGB(179, 182, 203);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(255, 255, 255);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        // form2.Label9.Font.Color := RGB(62,65,114);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
     4:
-      form2.Exit.Font.Color := RGB(255, 255, 255);
-    5:
-      form2.Updatediagram.Font.Color := RGB(179, 182, 203);
+      begin
+        form2.Statistic.Font.Color := RGB(179, 182, 203);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(255, 255, 255);
+        // form2.Label9.Font.Color := RGB(62,65,114);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
 
+    6:
+      begin
+        form2.Statistic.Font.Color := RGB(179, 182, 203);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        // form2.Label9.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(255, 255, 255);
+      end;
+    7:
+      begin
+        form2.Label9.Font.Color := RGB(179, 182, 203);
+      end;
   end;
 end;
 
-procedure FakeButton_MouseLeave(Sender: TObject);
+procedure FakeButton_Mouseleave(Sender: TObject);
+begin
+  case TComponent(Sender).Tag of
+    7:
+      begin
+        form2.Label9.Font.Color := RGB(62, 65, 114);
+      end;
+  end;
+end;
+
+procedure Fontstyle1(Sender: TObject);
 begin
   case TComponent(Sender).Tag of
     1:
-      form2.Statistic.Font.Color := RGB(179, 182, 203);
+      begin
+        form2.label4.Font.style := [fsBold] + [fsUnderline];
+        form2.Label5.Font.style := [fsBold];
+        form2.Label6.Font.style := [fsBold];
+        form2.Label7.Font.style := [fsBold];
+      end;
+
     2:
-      form2.Diagramm.Font.Color := RGB(179, 182, 203);
+      begin
+        form2.label4.Font.style := [fsBold];
+        form2.Label5.Font.style := [fsBold] + [fsUnderline];
+        form2.Label6.Font.style := [fsBold];
+        form2.Label7.Font.style := [fsBold];
+      end;
+
     3:
-      form2.Updatebase.Font.Color := RGB(179, 182, 203);
+      begin
+        form2.label4.Font.style := [fsBold];
+        form2.Label5.Font.style := [fsBold];
+        form2.Label6.Font.style := [fsBold] + [fsUnderline];
+        form2.Label7.Font.style := [fsBold];
+      end;
     4:
-      form2.Exit.Font.Color := RGB(179, 182, 203);
-    5:
-      form2.Updatediagram.Font.Color := RGB(62, 65, 104);
+      begin
+        form2.label4.Font.style := [fsBold];
+        form2.Label5.Font.style := [fsBold];
+        form2.Label6.Font.style := [fsBold];
+        form2.Label7.Font.style := [fsBold] + [fsUnderline];
+      end;
+  end;
+end;
+
+procedure FakeButton_Mouseclick(Sender: TObject);
+begin
+  case TComponent(Sender).Tag of
+    1:
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
+
+    2:
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
+    3:
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
+    4:
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
+    6:
+      begin
+        form2.Statistic.Font.Color := RGB(255, 255, 255);
+        form2.Diagramm.Font.Color := RGB(179, 182, 203);
+        form2.Updatebase.Font.Color := RGB(179, 182, 203);
+        form2.Exit.Font.Color := RGB(179, 182, 203);
+        form2.Dopdiagramm.Font.Color := RGB(179, 182, 203);
+      end;
 
   end;
 end;

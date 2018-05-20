@@ -22,7 +22,7 @@ type
     Updatebase: TLabel;
     Exit: TLabel;
     Icon1_Statistic: TImage;
-    Icon2_Diag: TImage;
+    Icon3_Diag: TImage;
     Icon3_Update: TImage;
     Icon4_Exit: TImage;
     ADOConnection1: TADOConnection;
@@ -49,11 +49,9 @@ type
     Diagrammpanel: TPanel;
     Label3: TLabel;
     DBChart1: TDBChart;
-    Updatediagram: TLabel;
     DBGrid1: TDBGrid;
     ADOQuery1: TADOQuery;
     ComboBox1: TComboBox;
-    Series1: TBarSeries;
     Series2: TBarSeries;
     Series3: TBarSeries;
     Series4: TBarSeries;
@@ -65,6 +63,18 @@ type
     Series10: TBarSeries;
     Series11: TBarSeries;
     Series12: TBarSeries;
+    IQuery4: TLabel;
+    IValue4: TLabel;
+    Dopdiagramm: TLabel;
+    Icon2_Diag: TImage;
+    Table1: TPanel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Series1: TBarSeries;
     procedure FormActivate(Sender: TObject);
     procedure ExitClick(Sender: TObject);
     procedure UpdatebaseClick(Sender: TObject);
@@ -77,21 +87,27 @@ type
     procedure CountbuttonMouseLeave(Sender: TObject);
     procedure CountbuttonClick(Sender: TObject);
     procedure DiagrammClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure DopdiagrammClick(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
+    procedure Label5Click(Sender: TObject);
+    procedure Label6Click(Sender: TObject);
+    procedure Label7Click(Sender: TObject);
+    procedure Label9Click(Sender: TObject);
     procedure StatisticMouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: Integer);
-    procedure StatisticMouseLeave(Sender: TObject);
-    procedure UpdatediagramClick(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
+    procedure Label9MouseLeave(Sender: TObject);
 
   private
     { Private declarations }
   public
     { Public declarations }
     f1: TextFile;
-    day, month, year, day1, month1, year1, variable, variable1: string;
+    day, month, year, day1, month1, year1, variable, variable1, year2,
+      year3: string;
     i: Integer;
     ExlApp: Variant;
-    openexcel: boolean;
+    openexcel, dop: boolean;
   end;
 
 const
@@ -114,32 +130,74 @@ begin
   Messengge := TMessengge.Create;
   ADOConnection1.Connected := false;
   ADOConnection1.ConnectionString :=
-    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306;";Initial Catalog=statistic';
+    'Provider=MSDASQL.1;Password=1234;Persist Security Info=True;User ID=root;Extended Properties="DSN=statistic;UID=root;PWD=1234;DATABASE=statistic;PORT=3306";Initial Catalog=statistic';
   ADOConnection1.Connected := true;
-  ADOQuery1.active := true;
+  Calendar.Date := now;
+  Calendar1.Date := now;
 end;
 
 procedure TForm2.StatisticClick(Sender: TObject);
 begin
+  FakeButton_Mouseclick(Sender);
   Parametrs.visible := true;
   Query.visible := false;
   Diagrammpanel.visible := false;
   Deletevalue;
+  Table1.visible := false;
+end;
+
+procedure TForm2.StatisticMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+  FakeButton_MouseMove(Sender);
 end;
 
 procedure TForm2.CountbuttonClick(Sender: TObject);
 begin
   Deletevalue;
-  Query.visible := true;
-
-  if year = '2015' then
-    year := 'year2015'
-  else if year = '2016' then
-    year := 'year2016'
-  else if year = '2017' then
-    year := 'year2017'
+  day := formatdatetime('dd', (Calendar.Date));
+  month := formatdatetime('mm', (Calendar.Date));
+  year := formatdatetime('yyyy', (Calendar.Date));
+  variable := year + '-' + month + '-' + day;
+  if Calendar1.Checked = false then
+  begin
+    if Length(inttostr(strtoint(day))) = 1 then
+      day1 := '0' + inttostr(strtoint(day) + 1)
+    else
+      day1 := inttostr(strtoint(day) + 1);
+    month1 := month;
+    year1 := year;
+    variable1 := year1 + '-' + month1 + '-' + day1;
+  end
   else
+  begin
+    day1 := formatdatetime('dd', (Calendar1.Date));
+    month1 := formatdatetime('mm', (Calendar1.Date));
+    year1 := formatdatetime('yyyy', (Calendar1.Date));
+    variable1 := year1 + '-' + month1 + '-' + day1;
+  end;
+  if year = '2015' then
+  begin
+    year := 'year2015';
+    year2 := 'statistic2015'
+  end
+  else if year = '2016' then
+  begin
+    year := 'year2016';
+    year2 := 'statistic2016'
+  end
+  else if year = '2017' then
+  begin
+    year := 'year2017';
+    year2 := 'statistic2017'
+  end
+  else if year = '2018' then
+  begin
     year := 'year2018';
+    year2 := 'statistic2018'
+  end
+  else
+    year := '';
 
   if year1 = '2015' then
     year1 := 'year2015'
@@ -147,11 +205,14 @@ begin
     year1 := 'year2016'
   else if year1 = '2017' then
     year1 := 'year2017'
+  else if year1 = '2018' then
+    year1 := 'year2018'
   else
-    year1 := 'year2018';
+    year1 := '';
 
   if year = year1 then
   begin
+    Query.visible := true;
     if IValue.Caption = '0' then
     begin
       ADOQuery1.SQL.Clear;
@@ -160,6 +221,13 @@ begin
         '") and code=200 ;');
       ADOQuery1.open;
       IValue.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
+      ///
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add('select count(DISTINCT (iduser)) from  ' + year2 +
+        ' WHERE (date between "' + variable + '" and "' + variable1 +
+        '") and iduser<>0;');
+      ADOQuery1.open;
+      IValue4.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
     end;
 
     if (Uniq.Checked = false) and (PDF.Checked = true) then
@@ -199,8 +267,29 @@ begin
         ADOQuery1.open;
         IValue3.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
       end;
+      if IValue2.Caption = '0' then
+      begin
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select count(DISTINCT (ip)) from ' + year +
+          ' WHERE (date between "' + variable + '" and "' + variable1 +
+          '") and code=200;');
+        ADOQuery1.open;
+        IValue2.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
+      end;
+      if IValue1.Caption = '0' then
+      begin
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add('select count(*) from ' + year +
+          ' WHERE (url like ''%pdf%'') and (date between "' + variable +
+          '" and "' + variable1 + '") and code=200;');
+        ADOQuery1.open;
+        IValue1.Caption := inttostr(ADOQuery1.Fields[0].AsInteger);
+      end;
     end;
-  end;
+
+  end
+  else
+    showmessage('Неверно указан диапазон')
 end;
 
 procedure TForm2.CalendarChange(Sender: TObject);
@@ -210,27 +299,8 @@ begin
   IValue1.Caption := '0';
   IValue2.Caption := '0';
   IValue3.Caption := '0';
-  day := formatdatetime('dd', (Calendar.Date));
-  month := formatdatetime('mm', (Calendar.Date));
-  year := formatdatetime('yyyy', (Calendar.Date));
-  variable := year + '-' + month + '-' + day;
-  if Calendar1.Checked = false then
-  begin
-    if Length(inttostr(strtoint(day))) = 1 then
-      day1 := '0' + inttostr(strtoint(day) + 1)
-    else
-      day1 := inttostr(strtoint(day) + 1);
-    month1 := month;
-    year1 := year;
-    variable1 := year1 + '-' + month1 + '-' + day1;
-  end
-  else
-  begin
-    day1 := formatdatetime('dd', (Calendar1.Date));
-    month1 := formatdatetime('mm', (Calendar1.Date));
-    year1 := formatdatetime('yyyy', (Calendar1.Date));
-    variable1 := year1 + '-' + month1 + '-' + day1;
-  end;
+  IValue4.Caption := '0';
+
 end;
 
 procedure TForm2.DiagrammClick(Sender: TObject);
@@ -240,13 +310,30 @@ begin
   Diagrammpanel.visible := true;
   Deletevalue;
   DBChart1.visible := false;
+  Table1.visible := false;
+end;
+
+procedure TForm2.DopdiagrammClick(Sender: TObject);
+begin
+  Parametrs.visible := false;
+  Query.visible := false;
+  Deletevalue;
+  Diagrammpanel.visible := false;
+  DBChart1.visible := false;
+  Table1.visible := true;
+  ADOQuery1.SQL.Clear;
+  DBGrid1.visible := true;
+
 end;
 
 procedure TForm2.ComboBox1Change(Sender: TObject);
-var
-cl:integer;
+
 begin
+  Deletevalue;
   DBChart1.visible := true;
+
+  DBChart1.Legend.visible := true;
+  DBChart1.AxisVisible := true;
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add('select * from diagramm;');
   DBChart1.Series[0].YValues.ValueSource := 'january';
@@ -273,6 +360,7 @@ begin
   DBChart1.Series[10].Title := 'Ноябрь';
   DBChart1.Series[11].YValues.ValueSource := 'december';
   DBChart1.Series[11].Title := 'Декабрь';
+  DBChart1.Series[11].YValues.ValueSource := 'december';
 
   case ComboBox1.ItemIndex of
     0:
@@ -283,7 +371,7 @@ begin
         ADOQuery1.open;
         DBChart1.Title.Text.Clear;
         DBChart1.Title.Text.Add('Статистика посещений за 2015 год');
-        Updatediagram.visible := false;
+
       end;
     1:
       begin
@@ -293,26 +381,29 @@ begin
         ADOQuery1.open;
         DBChart1.Title.Text.Clear;
         DBChart1.Title.Text.Add('Статистика посещений за 2016 год');
-        Updatediagram.visible := false;
+
       end;
+
     2:
       begin
+
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add('select * from diagramm where id=3;');
         ADOQuery1.open;
         DBChart1.Title.Text.Clear;
         DBChart1.Title.Text.Add('Статистика посещений за 2017 год');
-        Updatediagram.visible := false;
-      end;
-    3:
-      begin
 
+      end;
+
+    3:
+
+      begin
         ADOQuery1.SQL.Clear;
         ADOQuery1.SQL.Add('select * from diagramm where id=4;');
         ADOQuery1.open;
         DBChart1.Title.Text.Clear;
         DBChart1.Title.Text.Add('Статистика посещений за 2018 год');
-        Updatediagram.visible := true;
+
       end;
     4:
       begin
@@ -323,20 +414,278 @@ begin
         DBChart1.Title.Text.Clear;
         DBChart1.Title.Text.Add
           ('Статистика посещений по месяцам за весь период');
-        Updatediagram.visible := false;
 
       end;
   end;
 
 end;
 
-// обновления
-procedure TForm2.UpdatediagramClick(Sender: TObject);
+procedure TForm2.Label4Click(Sender: TObject);
+begin
+  Fontstyle1(Sender);
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('SELECT dbn,  COUNT(dbn)  FROM statistic2015 GROUP BY DBN  ORDER BY COUNT(dbn) DESC;');
+  ADOQuery1.open;
+
+  DBGrid1.Columns[0].Title.Caption := 'База данных';
+  DBGrid1.Columns[1].Title.Caption := 'Количество запросов';
+end;
+
+procedure TForm2.Label5Click(Sender: TObject);
+begin
+  Fontstyle1(Sender);
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('SELECT dbn, COUNT(dbn) FROM statistic2016 GROUP BY DBN  ORDER BY COUNT(dbn) DESC;');
+  ADOQuery1.open;
+
+  DBGrid1.Columns[0].Title.Caption := 'База данных';
+  DBGrid1.Columns[1].Title.Caption := 'Количество запросов';
+end;
+
+procedure TForm2.Label6Click(Sender: TObject);
+begin
+  Fontstyle1(Sender);
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('SELECT dbn, COUNT(dbn) FROM statistic2017 GROUP BY DBN  ORDER BY COUNT(dbn) DESC;');
+  ADOQuery1.open;
+
+  DBGrid1.Columns[0].Title.Caption := 'База данных';
+  DBGrid1.Columns[1].Title.Caption := 'Количество запросов';
+end;
+
+procedure TForm2.Label7Click(Sender: TObject);
+begin
+  Fontstyle1(Sender);
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add
+    ('SELECT dbn, COUNT(dbn) FROM statistic2018 GROUP BY DBN  ORDER BY COUNT(dbn) DESC;');
+  ADOQuery1.open;
+
+  DBGrid1.Columns[0].Title.Caption := 'База данных';
+  DBGrid1.Columns[1].Title.Caption := 'Количество запросов';
+end;
+
+procedure TForm2.Label9Click(Sender: TObject);
 var
-  jan, feb, mar, apr, May, jun, jul, aug, sep, oct, nov, dec, summ1: string;
-  summ, row, col, b: Integer;
+  row, col, b: Integer;
+begin
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('select * from diagramm');
+  ADOQuery1.active := true;
+
+  if openexcel = false then
+  begin
+    ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
+    ExlApp.visible := false; // делаем окно Excel невидимым
+    if FileExists('Statistic.xls') then
+      ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls')
+    else
+    begin
+      ExlApp.Workbooks.Add;
+      // создаем книгу для экспорта
+      ExlApp.Worksheets[1].Name := 'Данные за период';
+    end;
+    ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
+    openexcel := true;
+
+  end;
+
+  ExlApp.Workbooks[1].Sheets.Item[1].Activate;
+  ExlApp.Cells[1, 1].Value := 'Статистика с '+variable+' по '+variable1;
+  ExlApp.Cells[3,1].Value :=  IQuery.Caption;
+  ExlApp.Cells[3,2].Value :=  IValue.Caption;
+  ExlApp.Cells[4,1].Value :=  IQuery1.Caption;
+  ExlApp.Cells[4,2].Value :=  IValue1.Caption;
+  ExlApp.Cells[5,1].Value :=  IQuery2.Caption;
+  ExlApp.Cells[5,2].Value :=  IValue2.Caption;
+  ExlApp.Cells[6,1].Value :=  IQuery3.Caption;
+  ExlApp.Cells[6,2].Value :=  IValue3.Caption;
+  ExlApp.Cells[7,1].Value :=  IQuery4.Caption;
+  ExlApp.Cells[7,2].Value :=  IValue4.Caption;
+  For b:= 1 To 8 do
+  begin
+      ExlApp.Columns[1].ColumnWidth:= 40 ;
+      ExlApp.Columns[2].ColumnWidth:= 16 ;
+  end;
+
+
+end;
+
+// обновления
+
+procedure TForm2.UpdatebaseClick(Sender: TObject);
+var
+  jan, feb, mar, apr, May, jun, jul, aug, sep, oct, nov, dec, summ1, Date, a,
+    a1, a2, a21, a22, a23, a3, a4, a5, a11, a12, a13, year, sName: string;
+  summ, FindRes, i: Integer;
+  searchResult: TSearchRec;
+  // поисковая переменная
 begin
   Deletevalue;
+  Table1.visible := false;
+  Parametrs.visible := false;
+  Query.visible := false;
+  Diagrammpanel.visible := false;
+
+    ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('truncate table year2018;');
+  ADOQuery1.execsql;
+  ProgressBar1.Position := 0;
+  ProgressBar1.Max := 3;
+  AssignFile(f1, '\\SVETYXA-ПК\log\Apache-2.4_queriesa.log');
+  reset(f1);
+  ProgressBar1.visible := true;
+  repeat
+    readln(f1, a);
+    a23 := Messengge.MyAddIp('\w{3}\/(\d{4}.*?)', a);
+    if a23 = '2018' then
+    begin
+      a1 := Messengge.MyAddIp('alias: (.*?) ', a);
+      a21 := Messengge.MyAddIp('\[(.*?)\/\w{3}\/', a);
+      a22 := Messengge.MyAddIp('\/(\w{3}.*?)\/\d{4}', a);
+      if a22 = 'Jan' then
+        a22 := '01'
+      else if a22 = 'Feb' then
+        a22 := '02'
+      else if a22 = 'Mar' then
+        a22 := '03'
+      else if a22 = 'Apr' then
+        a22 := '04'
+      else if a22 = 'May' then
+        a22 := '05'
+      else if a22 = 'Jun' then
+        a22 := '06'
+      else if a22 = 'Jul' then
+        a22 := '07'
+      else if a22 = 'Aug' then
+        a22 := '08'
+      else if a22 = 'Sep' then
+        a22 := '09'
+      else if a22 = 'Oct' then
+        a22 := '10'
+      else if a22 = 'Nov' then
+        a22 := '11'
+      else
+        a22 := '12';
+      a2 := a23 + '-' + a22 + '-' + a21;
+      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|40|206)', a);
+      a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a);
+      a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
+      ADOQuery1.SQL.Clear;
+      ADOQuery1.SQL.Add('insert into year2018(ip,date,url,code,size) values("' +
+        a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
+      ADOQuery1.execsql;
+    end;
+
+  until eof(f1);;
+  CloseFile(f1);
+  ProgressBar1.Position := ProgressBar1.Position + 1;
+
+  ADOQuery1.SQL.Clear;
+  ADOQuery1.SQL.Add('truncate table statistic2018');
+  ADOQuery1.execsql;
+
+
+  setcurrentdir('C:\Users\EldarNikel\Desktop\Света\log');
+  if FindFirst('*2018.log', faAnyFile, searchResult) = 0 then
+  begin
+    repeat
+      AssignFile(f1, searchResult.Name);
+      reset(f1);
+
+      Repeat
+        readln(f1, a);
+        a11 := Messengge.MyAddIp('DateTime=(.*?)\.', a);
+        a12 := Messengge.MyAddIp('DateTime=.{2}\.(.*?)\.', a);
+        a13 := Messengge.MyAddIp('DateTime=.{2}\..{2}\.(.*?)( |&)', a);
+        a1 := a13 + '-' + a12 + '-' + a11;
+        a2 := Messengge.MyAddIp('DBN=(.*?)([& '#39'\d"_])', a);
+        if a2 = 'ATHRU' then
+          a2 := 'Алфавитно-предметный указатель УДК'
+        else if a2 = 'ATHRB' then
+          a2 := 'Алфавитно-предметные указатель ББК'
+        else if a2 = 'TEZ' then
+          a2 := 'Тезаурус'
+        else if a2 = 'URUB' then
+          a2 := 'Универсальный тематический навигатор'
+        else if a2 = 'HELP' then
+          a2 := 'Рубрикатор ГРНТИ'
+        else if a2 = 'POST' then
+          a2 := 'Каталог подписки периодики'
+        else if a2 = 'PODB' then
+          a2 := 'Каталог заказа книг'
+        else if a2 = 'VUZ' then
+          a2 := 'Учебные дисциплинвы'
+        else if a2 = 'WORK' then
+          a2 := 'Рабочая БД'
+        else if a2 = 'MESH' then
+          a2 := 'Предметные рубрики по медицине'
+        else if a2 = 'RSUDC' then
+          a2 := 'БД УДК'
+        else if a2 = 'RSBBK' then
+          a2 := 'БД ББК'
+        else if a2 = 'KZD' then
+          a2 := 'Календарь знаменательных дат'
+        else if a2 = 'ELCAT' then
+          a2 := 'Электронный каталог НТБ ЛФСибГТУ'
+        else if a2 = 'HLIT' then
+          a2 := 'Художественная литератула НТБ ЛфСибГУ'
+        else if a2 = 'PER' then
+          a2 := 'Периодические издания'
+        else if a2 = 'NAUKA' then
+          a2 := 'Научные издания'
+        else if a2 = 'UCHLI' then
+          a2 := 'Учебная литература'
+        else if a2 = 'UMKD' then
+          a2 := 'ЭУМКД'
+        else if a2 = 'UMKD2' then
+          a2 := 'УМКД ФГОС-3'
+        else if a2 = 'VKR' then
+          a2 := 'Выпускные квалификационные работы'
+        else if a2 = 'VKR2' then
+          a2 := 'ВКР 2017'
+        else if a2 = 'IBIS' then
+          a2 := 'Тестовая библиотечная БД'
+        else if a2 = 'CMPL' then
+          a2 := 'Комплектование в ИРБИС'
+        else if a2 = 'RDR' then
+          a2 := 'База данных читателей'
+        else if a2 = 'RQST' then
+          a2 := 'База данных заказов на выдачу литературы'
+        else if a2 = 'IMAGE' then
+          a2 := 'Имидж-каталог'
+        else if a2 = 'ATHRC' then
+          a2 := 'Авторитетный файл - "Коллективные авторы"'
+        else if a2 = 'ATHRA' then
+          a2 := 'Авторитетный файл - "Индивидуальные авторы"'
+        else if a2 = 'ATHRS' then
+          a2 := 'Авторитетный файл - "Предметные авторы"'
+        else if a2 = 'ATHRU' then
+          a2 := 'Алфавитно-предметный указатель УДК'
+        else
+          a2 := 'Другое';
+        a3 := Messengge.MyAddIp('ID=(.*?)&', a);
+        a4 := Messengge.MyAddIp('Host=(.*?)($|&)', a);
+
+        ADOQuery1.SQL.Clear;
+        ADOQuery1.SQL.Add
+          ('insert into statistic2018(date,DBN,IDuser,Host) values("' + a1 +
+          '", "' + a2 + '","' + a3 + '", "' + a4 + '")');
+        ADOQuery1.execsql;
+
+      until eof(f1);
+
+    until FindNext(searchResult) <> 0;
+  end;
+
+  ProgressBar1.Position := ProgressBar1.Position + 1;
+
+  CloseFile(f1);
+  FindClose(searchResult); // закрываем поиск
+
   ADOQuery1.SQL.Clear;
   ADOQuery1.SQL.Add
     ('select count(*) from year2018 where date like ''%2018-01-%'';');
@@ -528,116 +877,12 @@ begin
     '",December), summ ="' + summ1 + '" where id = 5;');
   ADOQuery1.execsql;
 
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add('select * from diagramm');
-  ADOQuery1.active := true;
-  DBGrid1.Columns[0].Width := 210;
-  for b := 1 to 12 do
-    DBGrid1.Columns.Items[b].Width := 55;
-
-  if openexcel = false then
-  begin
-    ExlApp := CreateOleObject('Excel.Application'); // создаем объект Excel
-    ExlApp.visible := false; // делаем окно Excel невидимым
-    if FileExists('Statistic.xls') then
-      ExlApp.Workbooks.open(getcurrentdir + '\Statistic.xls')
-    else
-    begin
-      ExlApp.Workbooks.Add; // создаем книгу для экспорта
-      ExlApp.Worksheets[1].Name := 'Количество запросов по годам';
-    end;
-    ExlApp.DisplayAlerts := false; // отключаем все предупреждения Excel
-    openexcel := true;
-  end;
-
-  ExlApp.Workbooks[1].Sheets.Item[1].Activate;
-  for row := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
-  begin
-    for col := 0 to DBGrid1.Columns.Count - 1 do
-    begin
-      ExlApp.Workbooks[1].Worksheets[1].cells[1, col + 1].value :=
-        DBGrid1.Columns[col].Title.Caption;
-      ExlApp.Workbooks[1].Worksheets[1].cells[row + 2, col + 1].value :=
-        DBGrid1.DataSource.DataSet.Fields[col].AsString;
-    end;
-    DBGrid1.DataSource.DataSet.Next;
-  end;
-end;
-
-procedure TForm2.UpdatebaseClick(Sender: TObject);
-var
-  Date, a, a1, a2, a21, a22, a23, a3, a4, a5, year: string;
-begin
-  Deletevalue;
-  Parametrs.visible := false;
-  Query.visible := false;
-  Diagrammpanel.visible := false;
-
-  ADOQuery1.SQL.Clear;
-  ADOQuery1.SQL.Add
-    (' delete from year2018 where date like where date >=''2018-01-01'' and date <=''2018-12-31'';');
-  ADOQuery1.execsql;
-
-  AssignFile(f1, 'C:\Users\EldarNikel\Desktop\Света\Apache-2.4_queriesa.log');
-  reset(f1);
-  a23 := Messengge.MyAddIp('\w{3}\/(\d{4}.*?)', a);
-  if a23 = '2018' then
-  begin
-    repeat
-      readln(f1, a);
-      a1 := Messengge.MyAddIp('alias: (.*?) ', a);
-      a21 := Messengge.MyAddIp('\[(.*?)\/\w{3}\/', a);
-      a22 := Messengge.MyAddIp('\/(\w{3}.*?)\/\d{4}', a);
-      if a22 = 'Jan' then
-        a22 := '01'
-      else if a22 = 'Feb' then
-        a22 := '02'
-      else if a22 = 'Mar' then
-        a22 := '03'
-      else if a22 = 'Apr' then
-        a22 := '04'
-      else if a22 = 'May' then
-        a22 := '05'
-      else if a22 = 'Jun' then
-        a22 := '06'
-      else if a22 = 'Jul' then
-        a22 := '07'
-      else if a22 = 'Aug' then
-        a22 := '08'
-      else if a22 = 'Sep' then
-        a22 := '09'
-      else if a22 = 'Oct' then
-        a22 := '10'
-      else if a22 = 'Nov' then
-        a22 := '11'
-      else
-        a22 := '12';
-      a2 := a23 + '-' + a22 + '-' + a21;
-      a3 := Messengge.MyAddIp('"(.*?)" (200|400|403|501|40|206)', a);
-      a4 := Messengge.MyAddIp('\w" (.*?) (\w|-)', a);
-      a5 := Messengge.MyAddIp('" \d{3} (.*?) "', a);
-      ADOQuery1.SQL.Clear;
-      ADOQuery1.SQL.Add('insert into year2018(ip,date,url,code,size) values("' +
-        a1 + '", "' + a2 + '", "' + a3 + '", "' + a4 + '", "' + a5 + '")');
-      ADOQuery1.execsql;
-    until eof(f1);
-  end;
+  ProgressBar1.Position := ProgressBar1.Position + 1;
+  ProgressBar1.visible := false;
   showmessage('Обновление завершено');
-  CloseFile(f1);
-  // insert into year2018(ip,date,url,code,size) select ip,date,url,code,size from stable1 where date >='2018-01-01' and date <='2018-12-31'
 end;
 
 // интерфейс
-procedure TForm2.StatisticMouseLeave(Sender: TObject);
-begin
-  FakeButton_MouseLeave(Sender);
-end;
-
-procedure TForm2.StatisticMouseMove(Sender: TObject; Shift: TShiftState;
-  X, Y: Integer);
-begin
-  FakeButton_MouseMove(Sender);
-end;
 
 procedure TForm2.HeadMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -655,6 +900,11 @@ procedure TForm2.CountbuttonMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   ButtonAuthorizationMove;
+end;
+
+procedure TForm2.Label9MouseLeave(Sender: TObject);
+begin
+  FakeButton_Mouseleave(Sender);
 end;
 
 procedure TForm2.ExitClick(Sender: TObject);

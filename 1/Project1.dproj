@@ -108,6 +108,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="UInterface.pas"/>
+        <DCCReference Include="UMessengge.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

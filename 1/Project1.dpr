@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   UAuthorization in 'UAuthorization.pas' {Form1},
   UStatistic in 'UStatistic.pas' {Form2},
-  UInterface in 'UInterface.pas';
+  UInterface in 'UInterface.pas',
+  UMessengge in 'UMessengge.pas';
 
 {$R *.res}
 
