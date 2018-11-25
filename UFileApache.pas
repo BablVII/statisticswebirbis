@@ -41,7 +41,7 @@ end;
 
 procedure FileApache.Send;
 begin
-    self.Log('FileApache.Update');
+    self.Log(FILE_APACHE_UPDATE);
 end;
 
 procedure FileApache.Update;

@@ -3,10 +3,10 @@ unit Unit1;
 interface
 
 uses
+  UMainController, UMainConstant, UFileApache,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  UMainController, UFileApache,
+  System.Classes,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Graphics,
   Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage,
   Vcl.Imaging.jpeg;
 
@@ -56,12 +56,12 @@ procedure TForm1.HeaderMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   ReleaseCapture;
-  SendMessage(Form1.Handle, WM_SYSCOMMAND, 61458, 0);
+  SendMessage(Form1.Handle, WM_SYSCOMMAND, HEADER_MOUSE_DOWN, 0);
 end;
 
 procedure TForm1.UpdateDownloadLogClick(Sender: TObject);
 begin
-  Download:= FileApache.create;
+  Download := FileApache.create;
 end;
 
 end.

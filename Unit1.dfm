@@ -99,6 +99,7 @@ object Form1: TForm1
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object UpdateDownloadLog: TLabel
       Tag = 3
@@ -685,6 +686,7 @@ object Form1: TForm1
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       WordWrap = True
     end
     object Icon2_Diag: TImage
@@ -708,6 +710,7 @@ object Form1: TForm1
         002574455874646174653A6D6F6469667900323031382D30352D31365431363A
         33353A33362B30323A30305DAD87D20000001974455874536F66747761726500
         7777772E696E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+      Visible = False
     end
     object Icon1_Statistic: TImage
       Left = 16
@@ -989,6 +992,7 @@ object Form1: TForm1
         8BC06D193EC63CA4395DCB16DFA2C7E5AB60C556E45B1389C3350CD532B54980
         CCD178A12D23FA4BF96360BD8E698DC2010B14C8A9145D55E20549A818EAF733
         A305D35A8AF5FFD9}
+      Visible = False
     end
     object Icon3_Diag: TImage
       Left = 16
@@ -1014,6 +1018,7 @@ object Form1: TForm1
         365431343A33373A30362B30323A3030B78BE5470000001974455874536F6674
         77617265007777772E696E6B73636170652E6F72679BEE3C1A0000000049454E
         44AE426082}
+      Visible = False
     end
     object Diagramm: TLabel
       Tag = 2
@@ -1028,6 +1033,7 @@ object Form1: TForm1
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       WordWrap = True
     end
   end
