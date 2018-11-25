@@ -15,7 +15,6 @@ type
   private
     /// <link>aggregation</link>
     Dest: MainLog;
-    procedure Send;
     procedure Update;
     procedure Log(const Msg: string);
   published
@@ -27,8 +26,8 @@ implementation
 { FileApache }
 
 constructor FileApache.create;
-
 begin
+  self.Log(FILE_APACHE_UPDATE);
   self.Update;
 end;
 
@@ -39,14 +38,8 @@ begin
   CodeSite.Send(Msg, self);
 end;
 
-procedure FileApache.Send;
-begin
-    self.Log(FILE_APACHE_UPDATE);
-end;
-
 procedure FileApache.Update;
 begin
-  self.Send;
   //TODO
 end;
 
