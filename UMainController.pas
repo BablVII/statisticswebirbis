@@ -3,9 +3,16 @@ unit UMainController;
 interface
 
 type
-  IMainController = interface
-    procedure UpdateDownloadLog;
-    procedure ChangeSettings;
+  MainController = interface(IInterface)
+
+  end;
+
+  DownloadLog = interface(MainController)
+    procedure Update;
+  end;
+
+  Settings = interface(MainController)
+    procedure Change;
   end;
 
 implementation

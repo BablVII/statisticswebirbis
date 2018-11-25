@@ -3,7 +3,7 @@
 			<ProjectGuid>{D9D871F0-62A1-4726-8953-35B762080BEB}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="Project1.dproj">
+			<Projects Include="SWIRBIS.dproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="Test\Project1Tests.dproj">
@@ -17,14 +17,14 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="Project1">
-			<MSBuild Projects="Project1.dproj"/>
+		<Target Name="SWIRBIS">
+			<MSBuild Projects="SWIRBIS.dproj"/>
 		</Target>
-		<Target Name="Project1:Clean">
-			<MSBuild Projects="Project1.dproj" Targets="Clean"/>
+		<Target Name="SWIRBIS:Clean">
+			<MSBuild Projects="SWIRBIS.dproj" Targets="Clean"/>
 		</Target>
-		<Target Name="Project1:Make">
-			<MSBuild Projects="Project1.dproj" Targets="Make"/>
+		<Target Name="SWIRBIS:Make">
+			<MSBuild Projects="SWIRBIS.dproj" Targets="Make"/>
 		</Target>
 		<Target Name="Project1Tests">
 			<MSBuild Projects="Test\Project1Tests.dproj"/>
@@ -36,13 +36,13 @@
 			<MSBuild Projects="Test\Project1Tests.dproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="Project1;Project1Tests"/>
+			<CallTarget Targets="SWIRBIS;Project1Tests"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="Project1:Clean;Project1Tests:Clean"/>
+			<CallTarget Targets="SWIRBIS:Clean;Project1Tests:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="Project1:Make;Project1Tests:Make"/>
+			<CallTarget Targets="SWIRBIS:Make;Project1Tests:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

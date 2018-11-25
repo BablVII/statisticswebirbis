@@ -3,7 +3,7 @@
 			<ProjectGuid>{67ADD2ED-4699-4D5E-839F-0F3D760A4EE9}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
 			<FrameworkType>VCL</FrameworkType>
-			<MainSource>Project1.dpr</MainSource>
+			<MainSource>SWIRBIS.dpr</MainSource>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -87,6 +87,25 @@
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="UMainController.pas"/>
+			<DCCReference Include="UFileApache.pas"/>
+			<DCCReference Include="UMainConstant.pas"/>
+			<DCCReference Include="UMainLog.pas"/>
+			<None Include="ModelSupport_SWIRBIS\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\Unit1\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\Unit1\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\UMainController\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\UMainConstant\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\UFileApache\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\Project1\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\UMainConstant\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\Project1\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\SWIRBIS\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\UMainController\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\UFileApache\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\SWIRBIS\default.txvpck"/>
+			<None Include="ModelSupport_SWIRBIS\UMainLog\default.txaPackage"/>
+			<None Include="ModelSupport_SWIRBIS\UMainLog\default.txvpck"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -132,7 +151,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Source>
-						<Source Name="MainSource">Project1.dpr</Source>
+						<Source Name="MainSource">SWIRBIS.dpr</Source>
 					</Source>
 				</Delphi.Personality>
 				<Deployment/>
@@ -143,6 +162,7 @@
 				<UnitTesting>
 					<TestProjectName>D:\_GIT\statisticswebirbis\Test\Project1Tests.dproj</TestProjectName>
 				</UnitTesting>
+				<ModelSupport>True</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>
