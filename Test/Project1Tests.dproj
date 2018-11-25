@@ -2,7 +2,7 @@
 		<PropertyGroup>
 			<ProjectGuid>{0F775AFF-B61B-4472-99AA-E7D5B5F71F1A}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
-			<FrameworkType>None</FrameworkType>
+			<FrameworkType>VCL</FrameworkType>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -84,6 +84,10 @@
 			<DCCReference Include="TestUnit1.pas"/>
 			<DCCReference Include="..\Unit1.pas"/>
 			<DCCReference Include="..\UMainController.pas"/>
+			<DCCReference Include="..\UMainConstant.pas"/>
+			<DCCReference Include="..\UFileApache.pas"/>
+			<DCCReference Include="..\UMainLog.pas"/>
+			<DCCReference Include="TestUMainLog.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -142,6 +146,7 @@
 					<TestFramework>DUnit / Delphi Win32</TestFramework>
 					<TestRunner>GUI</TestRunner>
 					<SourceProjectName>D:\_GIT\statisticswebirbis\Project1.dproj</SourceProjectName>
+					<TestProjectName/>
 				</UnitTesting>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>

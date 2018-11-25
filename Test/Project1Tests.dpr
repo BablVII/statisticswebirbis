@@ -18,7 +18,11 @@ uses
   TestUnit1 in 'TestUnit1.pas',
   DUnitTestRunner,
   Unit1 in '..\Unit1.pas',
-  UMainController in '..\UMainController.pas';
+  UMainController in '..\UMainController.pas',
+  UMainConstant in '..\UMainConstant.pas',
+  UFileApache in '..\UFileApache.pas',
+  UMainLog in '..\UMainLog.pas',
+  TestUMainLog in 'TestUMainLog.pas';
 
 {R *.RES}
 

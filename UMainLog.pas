@@ -32,7 +32,7 @@ end;
 constructor MainLog.create;
 begin
   try
-    self.DestCreate;
+    self.DestCreate;   //TODO LOG_FILE_PATH; LOG_FILE_NAME; LOG_FILE_ACTIVE;
   except
     on Exception do
       ShowMessage(EMainLog.ClassName + ERROR)
