@@ -18,7 +18,6 @@ implementation
 function ip.Load(oneLineLog: string): string;
 var
   RegExp: TRegExpr;
-  return: string;
 begin
   RegExp := TRegExpr.Create;
   RegExp.InputString := oneLineLog;
