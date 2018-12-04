@@ -18,11 +18,14 @@ implementation
 function ip.Load(oneLineLog: string): string;
 var
   RegExp: TRegExpr;
+  return: string;
 begin
   RegExp := TRegExpr.Create;
   RegExp.InputString := oneLineLog;
-  RegExp.Expression := '/([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/';
-  result:=RegExp.Match[1];
+  RegExp.Expression := '([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})';
+  RegExp.Exec;
+  result := RegExp.Match[1];
+  RegExp.Free;
 end;
 
 end.
