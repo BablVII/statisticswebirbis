@@ -90,6 +90,9 @@
 			<DCCReference Include="UFileApache.pas"/>
 			<DCCReference Include="UMainConstant.pas"/>
 			<DCCReference Include="UMainLog.pas"/>
+			<DCCReference Include="UFormInterface.pas"/>
+			<DCCReference Include="UIp.pas"/>
+			<DCCReference Include="regexpr.pas"/>
 			<None Include="ModelSupport_SWIRBIS\default.txaPackage"/>
 			<None Include="ModelSupport_SWIRBIS\default.txvpck"/>
 			<None Include="ModelSupport_SWIRBIS\Unit1\default.txaPackage"/>

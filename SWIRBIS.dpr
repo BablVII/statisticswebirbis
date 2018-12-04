@@ -6,7 +6,10 @@ uses
   UMainController in 'UMainController.pas',
   UFileApache in 'UFileApache.pas',
   UMainConstant in 'UMainConstant.pas',
-  UMainLog in 'UMainLog.pas';
+  UMainLog in 'UMainLog.pas',
+  UFormInterface in 'UFormInterface.pas',
+  UIp in 'UIp.pas',
+  regexpr in 'regexpr.pas';
 
 {$R *.res}
 

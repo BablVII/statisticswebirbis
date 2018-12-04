@@ -8,10 +8,10 @@ uses
   System.Classes,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Graphics,
   Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage,
-  Vcl.Imaging.jpeg;
+  Vcl.Imaging.jpeg, UFormInterface;
 
 type
-  TForm1 = class(TForm)
+  TForm1 = class(TForm, FormInterface)
     Header: TPanel;
     Nav: TPanel;
     Article: TPanel;
@@ -36,6 +36,7 @@ type
   private
     /// <link>aggregation</link>
     Download: DownloadLog;
+    procedure Event(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -46,6 +47,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Event(Sender: TObject);
+begin
+  // ...
+end;
 
 procedure TForm1.ExitClick(Sender: TObject);
 begin

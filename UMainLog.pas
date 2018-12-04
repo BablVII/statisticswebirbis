@@ -17,9 +17,6 @@ type
     constructor create;
   end;
 
-type
-  EMainLog = class(Exception);
-
 implementation
 
 { Log }
@@ -35,7 +32,7 @@ begin
     self.DestCreate;   //TODO LOG_FILE_PATH; LOG_FILE_NAME; LOG_FILE_ACTIVE;
   except
     on Exception do
-      ShowMessage(EMainLog.ClassName + ERROR)
+      ShowMessage(MainLog.ClassName + ERROR)
   end;
 
 end;

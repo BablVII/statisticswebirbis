@@ -27,7 +27,6 @@ implementation
 
 constructor FileApache.create;
 begin
-  self.Log(FILE_APACHE_UPDATE);
   self.Update;
 end;
 
@@ -41,6 +40,7 @@ end;
 procedure FileApache.Update;
 begin
   //TODO
+  self.Log(FILE_APACHE_UPDATE);
 end;
 
 end.

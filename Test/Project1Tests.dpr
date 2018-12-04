@@ -22,7 +22,11 @@ uses
   UMainConstant in '..\UMainConstant.pas',
   UFileApache in '..\UFileApache.pas',
   UMainLog in '..\UMainLog.pas',
-  TestUMainLog in 'TestUMainLog.pas';
+  TestUMainLog in 'TestUMainLog.pas',
+  UFormInterface in '..\UFormInterface.pas',
+  TestUIp in 'TestUIp.pas',
+  UIp in '..\UIp.pas',
+  regexpr in '..\regexpr.pas';
 
 {R *.RES}
 
